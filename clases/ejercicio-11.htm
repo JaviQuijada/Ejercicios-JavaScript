@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicios con Clases en Javascript Ejercicio 11</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <a href="../clases.html" class="btn-volver">← Volver al índice</a>
+
+        <h1>Ejercicio 11 Twitter con Tweets y Usuarios</h1>
+        <p>
+          Crear las siguientes clases con sus respectivos métodos y propiedades.
+          Usar propiedades privadas. Cuando se devuelvan valores, si son objetos
+          y arrays de las propiedades, devolver copias de los mismo, para evitar
+          que puedan ser modificados.
+        </p>
+        <p style="color: var(--secondary-color); margin-top: 0.5rem">
+          ### Usuario <br />
+          - **Propiedades** <br />
+          - handle (string) <br />
+          - siguiendo (array de `Usuario`), inicializa vacío <br />
+          - **Constructor** <br />
+          - pide `handle` como argumento y lo agrega a su respectiva <br />
+          propiedad <br />
+          - **Métodos** <br />
+          - **`seguir(usuario)`** agrega `usuario` a `siguiendo`, *s <br />i no
+          se encuentra <br />
+          ya en dicho array* y *si <br />
+          no es el propio u <br />suario* (no se puede seguir a sí mismo) <br />
+          - getters para obtener los valores de todas las propiedade <br />s
+          <br />
+          <br />
+          ### Tweet <br />
+          - **Propiedades** <br />
+          - id (string) <br />
+          - handle (`string`) <br />
+          - texto (string) <br />
+          - likes (array de `Usuario`), inicializa en 0 <br />
+          - retweets (array de `Usuario), inicializa en 0 <br />
+          - **Constructor** <br />
+          - genera un `id` automático y lo asigna a su propiedad <br />
+          - pide `handle` y `texto` como argumentos y los agrega a s <br />us
+          respectivas pr <br />opiedades <br />
+          - **Métodos** <br />
+          - getters para obtener los valores de todas las propiedade <br />s
+          <br />
+          - **`darLike(usuario)`** agrega `usuario` a `likes`, *si y <br />a se
+          encuentra en <br />
+          dicho array, debe remove <br />rlo de mismo* <br />
+          - **`retweetear(usuario)`** agrega `usuario` a `retweets`, <br />
+          *si ya se encuen <br />tra en dicho array, debe <br />removerlo de
+          mismo* <br />
+          <br />
+          ### Twitter <br />
+          - **Propiedades** <br />
+          - tweets (array de `Tweet`), inicializa vacío <br />
+          - **Métodos** <br />
+          - **`twittear(tweet)`** agrega `tweet` a `tweets`, *si dic <br />ho
+          `tweet` no se <br />encuentra actualmente en <br />el array* <br />
+          - **`obtenerTimeline(usuario)`** devuelve un array de twee <br />ts
+          del `usuario`. <br />
+          Este array se compone de <br />
+          - todos los tweets publicados por los usuarios que sigue <br />
+          - todos los tweets likeados por los usuarios que sigue <br />
+          - todos los tweets retweeteados por los usuarios que sigue <br />
+          - no debe haber tweets repetidos <br />
+          - deben estar ordenados de más nuevos a más viejos <br />
+          - **Observaciones** <br />
+          - Es recomendable crear métodos privados para simplificar
+          `obtenerTimeline` <br />
+        </p>
+      </header>
+
+      <main></main>
+    </div>
+    <script src="../js/script.js"></script>
+  </body>
+</html>

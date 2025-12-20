@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicios con Clases en Javascript Ejercicio 9</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <a href="../clases.html" class="btn-volver">← Volver al índice</a>
+
+        <h1>Ejercicio 9 Librería con Libros con Autor</h1>
+        <p>
+          Crear las siguientes clases con sus respectivos métodos y propiedades.
+          Usar propiedades privadas. Cuando se devuelvan valores, si son objetos
+          y arrays de las propiedades, devolver copias de los mismo, para evitar
+          que puedan ser modificados.
+        </p>
+        <p style="color: var(--secondary-color); margin-top: 0.5rem">
+          ### Autor <br />
+          - **Propiedades** <br />
+          - nombre (string) <br />
+          - nacionalidad (string) <br />
+          - **Constructor** <br />
+          - pide como argumentos `nombre` y `nacionalidad` y los asigna a sus
+          respectivas propiedades <br />
+          - **Métodos** <br />
+          - getters para obtener los valores de todas las propiedades <br />
+          <br />
+          ### Libro <br />
+          - **Propiedades** <br />
+          - id (string) <br />
+          - titulo (string) <br />
+          - autor (`Autor`) <br />
+          - precio (número) <br />
+          - genero (string) <br />
+          - stock (número) <br />
+          - **Constructor** <br />
+          - genera un `id` automático y lo asigna a su propiedad <br />
+          - el resto de propiedades las pide como argumentos y las asigna según
+          corresponda <br />
+          - **Métodos** <br />
+          - **`tieneStock()`** devuelve `true` si `stock` es mayor a 0, `false`
+          sino <br />
+          - getters para obtener los valores de todas las propiedades, menos
+          `stock` <br />
+          - setter para modificar los valores de `precio` y `stock` <br />
+          - **Observaciones** <br />
+          - `stock` y `precio` tienen como valor mínimo 0 <br />
+          <br />
+          ### Libreria <br />
+          - **Propiedades** <br />
+          - libros (array de `Libro), inicializa vacío <br />
+          - ganancias (número), inicializa en 0 <br />
+          - **Métodos** <br />
+          - **`agregar(libro)`** agrega `libro` a `libros` <br />
+          - **`eliminar(id)`** elimina de `libros` el libro con `id` <br />
+          - **`buscarPorId(id)`** devuelve la información de un libro con `id`
+          <br />
+          - **`buscarPorTitulo(titulo)`** devuelve la información de un libro
+          con `titulo` <br />
+          - **`filtrarPorAutor(autor)`** devuelve un array de libros escritos
+          por `autor` <br />
+          - **`filtrarPorGenero(genero)`** devuelve un array de libros con
+          `genero` <br />
+          - **`comprarLibros(idLibros)`** toma un array de ids de libros, si
+          tienen stock, reduce el stock de dichos libros en 1 y suma a ganancias
+          el precio de cada libro comprado <br />
+          - **`obtenerGanancias`** devuelve `ganancias` <br />
+        </p>
+      </header>
+
+      <main></main>
+    </div>
+    <script src="../js/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicios con Clases en Javascript Ejercicio 3</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <a href="../clases.html" class="btn-volver">← Volver al índice</a>
+
+        <h1>Ejercicio 3 Televisor</h1>
+        <p>
+          Crear las siguientes clases con sus respectivos métodos y propiedades.
+          Usar propiedades privadas. Cuando se devuelvan valores, si son objetos
+          y arrays de las propiedades, devolver copias de los mismo, para evitar
+          que puedan ser modificados.
+        </p>
+        <p style="color: var(--secondary-color); margin-top: 0.5rem">
+          - **Propiedades** <br />
+          - `encendido` (booleano), inicializa en `false` <br />
+          - `canal` (número), inicializa en 0 <br />
+          - `canales` (número) <br />
+          - `volumen` (número), inicializa en 0 <br />
+          - `marca` (string) <br />
+          - **Constructor** <br />
+          - pide como argumentos `marca` y `canales` y los asigna a sus
+          respectivas propiedades <br />
+          - **Métodos** <br />
+          - **`prender()`** pone `encendido` en `true` <br />
+          - **`apagar()`** pone `encendido` en `false` <br />
+          - **`verCanalSiguiente()`** suma 1 a `canal` y actualiza dicha
+          propiedad <br />
+          - **`verCanalAnterior()`** resta 1 a `canal` y actualiza dicha
+          propiedad <br />
+          - **`cambiarCanal(canal)`** actualiza la propiedad `canal` con el
+          valor del parámetro `canal` <br />
+          - **`subirVolumen()`** suma 1 a `volumen` y actualiza dicha propiedad
+          <br />
+          - **`bajarVolumen()`** resta 1 a `volumen` y actualiza dicha propiedad
+          <br />
+          - **`toString()`** devuelve un *string* como el siguiente ejemplo:
+          <br />
+          <br />
+
+          ``` <br />
+          Televisor Samsung <br />
+          - Canales: 100 <br />
+          - Canal actual: 23 <br />
+          - Volumen actual: 34 <br />
+          ``` <br />
+          - **Observaciones** <br />
+          - solo se puede modificar el canal y el volumen si el televisor se
+          encuentra prendido <br />
+          - `canales` representa el máximo de canales posibles. Si se está en el
+          canal máximo o mínimo (0), y se avanza o retrocede, debe dar toda la
+          vuelta. P. ej.: si el canal máximo es 100, se está en el canal 100, y
+          se avanza de canal, debe volver al 0 <br />
+          - solo se puede cambiar a un canal que exista <br />
+          - el volumen mínimo es 0 y el máximo 100 <br />
+        </p>
+      </header>
+
+      <main></main>
+    </div>
+    <script src="../js/script.js"></script>
+  </body>
+</html>

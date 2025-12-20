@@ -1,0 +1,171 @@
+/* Base Reset & Variables */
+:root {
+  --bg-color: #0f172a;
+  --text-color: #e2e8f0;
+  --primary-color: #3b82f6;
+  --secondary-color: #64748b;
+  --card-bg: rgba(30, 41, 59, 0.7);
+  --card-border: rgba(255, 255, 255, 0.1);
+  --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  min-height: 100vh;
+  background-image: radial-gradient(
+      circle at 10% 20%,
+      rgba(59, 130, 246, 0.15) 0%,
+      transparent 20%
+    ),
+    radial-gradient(
+      circle at 90% 80%,
+      rgba(139, 92, 246, 0.15) 0%,
+      transparent 20%
+    );
+}
+
+/* Typography */
+h1,
+h2,
+h3 {
+  margin-bottom: 1rem;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+h1 {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-top: 2rem;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+}
+
+/* Layout */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Grid for Exercises */
+.exercise-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+/* Glassmorphism Cards */
+.card {
+  background: var(--card-bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--card-border);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: var(--glass-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 180px;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(59, 130, 246, 0.5);
+  box-shadow: 0 12px 40px 0 rgba(59, 130, 246, 0.25);
+}
+
+.card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.card p {
+  color: var(--secondary-color);
+  font-size: 0.9rem;
+}
+
+/* Header & Nav */
+header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 0.5rem;
+  margin-bottom: 2rem;
+  color: var(--secondary-color);
+}
+
+.back-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+/* Exercise Content Area */
+.exercise-container {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 1rem;
+  padding: 2rem;
+  min-height: 400px;
+}
+
+/* Estilo para el botón de volver */
+.btn-volver {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #ffffff;
+
+  /* Gradiente inicial */
+  background-image: linear-gradient(to right, #84a59d, #152646);
+
+  /* Bordes suaves */
+  border-radius: 5px;
+
+  /* Espaciado respecto al título */
+  margin-bottom: 1.5rem;
+
+  /* Transición suave para el cambio de color */
+  transition: background-image 0.3s ease-in-out;
+}
+
+/* Efecto al pasar el ratón (Hover) */
+.btn-volver:hover {
+  /* Invertimos el orden de los colores del gradiente */
+  background-image: linear-gradient(to right, #5f70f6, #84a59d);
+
+  /* Opcional: una sombra muy sutil para que resalte un poco */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}

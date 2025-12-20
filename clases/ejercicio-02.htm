@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicios con Clases en Javascript Ejercicio 2</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <a href="../clases.html" class="btn-volver">← Volver al índice</a>
+
+        <h1>Ejercicio 2 Auto</h1>
+        <p>
+          Crear las siguientes clases con sus respectivos métodos y propiedades.
+          Usar propiedades privadas. Cuando se devuelvan valores, si son objetos
+          y arrays de las propiedades, devolver copias de los mismo, para evitar
+          que puedan ser modificados.
+        </p>
+        <p style="color: var(--secondary-color); margin-top: 0.5rem">
+          - **Propiedades** <br />
+          - `encendido` (booleano), inicializa en `false` <br />
+          - `velocidad` (número), inicializa en 0 <br />
+          - `marca` (string) <br />
+          - `modelo` (número) <br />
+          - `patente` (string) <br />
+          - **Constructor** <br />
+          - pide como argumentos `marca`, `modelo`, `patente` y los asigna a sus
+          respectivas propiedades <br />
+          - **Métodos** <br />
+          - **`arrancar()`** pone `encendido` en `true` <br />
+          - **`apagar()`** pone `encendido` en `false` <br />
+          - **`acelerar()`** suma 10 a `velocidad` y actualiza dicha propiedad
+          <br />
+          - **`desacelerar()`** resta 10 a `velocidad` y actualiza dicha
+          propiedad <br />
+          - **`toString()`** devuelve un *string* con la siguiente plantilla
+          `${marca} ${modelo}, patente ${patente}` <br />
+          - **Observaciones** <br />
+          - sólo se puede acelerar o desacelerar si el auto se encuentra
+          prendido <br />
+          - sólo se puede apagar el auto si la velocidad es 0 <br />
+          - la velocidad mínima es 0
+        </p>
+      </header>
+
+      <main></main>
+    </div>
+    <script src="../js/script.js"></script>
+  </body>
+</html>

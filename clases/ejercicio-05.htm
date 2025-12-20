@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicios con Clases en Javascript Ejercicio 5</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <a href="../clases.html" class="btn-volver">← Volver al índice</a>
+
+        <h1>Ejercicio 5 Celular</h1>
+        <p>
+          Crear las siguientes clases con sus respectivos métodos y propiedades.
+          Usar propiedades privadas. Cuando se devuelvan valores, si son objetos
+          y arrays de las propiedades, devolver copias de los mismo, para evitar
+          que puedan ser modificados.
+        </p>
+        <p style="color: var(--secondary-color); margin-top: 0.5rem">
+          - **Propiedades** <br />
+          - contactos (array de objetos), inicializa vacío <br />
+          - llamadas (array de strings), inicializa vacío <br />
+          - **Métodos** <br />
+          - **`agregarContacto(contacto)`** agrega `contacto` a `contactos`
+          <br />
+          - **`buscarPorNombre(nombre)`** devuelve el contacto con dicho nombre
+          en el array `contactos` o `undefined` si no lo encuentra <br />
+          - **`buscarPorNumero(numero)`** devuelve el contacto con dicho número
+          en el array `contactos` o `undefined` si no lo encuentra <br />
+          - **`eliminarContacto(nombre)`**` elimina el contacto con nombre
+          `nombre` de `contactos` <br />
+          - **`llamar(nombre)`** si existe un contacto con nombre `nombre` en la
+          lista `contactos`, agrega a `llamadas` un string que representa un
+          registro de la misma, usando la plantilla `Llamada a ${nombre} con
+          número ${numero} realizada <br />
+          - **`verContactos()`** devuelve un string listando todos los
+          contactos, con sus nombres y números <br />
+          - **`verHistorial()`** devuelve un string con la lista de llamadas
+          realizadas <br />
+          - **Observaciones** <br />
+          - `contacto` es un objeto con las propiedades `nombre` y `numero`
+          <br />
+          - no se puede agregar un contacto si ya existe en el celular alguno
+          con el mismo nombre o número <br />
+        </p>
+      </header>
+
+      <main></main>
+    </div>
+    <script src="../js/script.js"></script>
+  </body>
+</html>

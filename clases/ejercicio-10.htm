@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicios con Clases en Javascript Ejercicio 10</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <a href="../clases.html" class="btn-volver">← Volver al índice</a>
+
+        <h1>Ejercicio 10 Chat con Usuarios y Mensajes</h1>
+        <p>
+          Crear las siguientes clases con sus respectivos métodos y propiedades.
+          Usar propiedades privadas. Cuando se devuelvan valores, si son objetos
+          y arrays de las propiedades, devolver copias de los mismo, para evitar
+          que puedan ser modificados.
+        </p>
+        <p style="color: var(--secondary-color); margin-top: 0.5rem">
+          ### Usuario <br />
+          - **Propiedades** <br />
+          - id (string) <br />
+          - nombre (string) <br />
+          - **Constructor** <br />
+          - genera un `id` automático y lo asigna a su propiedad <br />
+          - el resto de propiedades las pide como argumentos y las asigna según
+          corresponda <br />
+          - **Métodos** <br />
+          - getters para obtener los valores de todas las propiedades <br />
+          <br />
+          ### Mensaje <br />
+          - **Propiedades** <br />
+          - remitente (Usuario) <br />
+          - destinatario (Usuario) <br />
+          - texto (string) <br />
+          - fecha (Date), inicializa con la fecha actual (`new Date()`) <br />
+          - **Constructor** <br />
+          - pide las propiedades no inicializadas como argumentos y las asigna
+          según corresponda <br />
+          - **Métodos** <br />
+          - getters para obtener los valores de todas las propiedades <br />
+          <br />
+          ### Chat <br />
+          - **Propiedades** <br />
+          - usuario (`Usuario`) <br />
+          - contactos (array de `Usuario`), inicializa vacío <br />
+          - mensajes (array de `Mensaje`), inicializa vacío <br />
+          - **Constructor** <br />
+          - pide `usuario` como argumento y lo agrega a su respectiva propiedad
+          <br />
+          - **Métodos** <br />
+          - **`agregarContacto(usuario)`** agregar `usuario` a `contactos`
+          <br />
+          - **`obtenerContactos()`** devuelve un array con la lista de
+          `contactos` <br />
+          - **`obtenerMensaje()`** devuelve un array con la lista de `mensajes`
+          <br />
+          - **`filtrarPorContacto(id)`** devuelve un array con la lista de
+          `mensajes` que tienen como `destinatario` un usuario <br />
+          con `id` <br />
+          - **`filtrarPorFecha(fecha)`** devuelve un array con la lista de
+          `mensajes` que tienen `fecha` (mismo día, mes y año) <br />
+          - **`mandarMensaje(mensaje)`** agrega `mensaje` a `mensajes`, si
+          `destinatario` es un usuario de la lista de contactos con y si
+          `mensaje` no se encuentra ya en el array de `mensajes` <br />
+          - **Observaciones** <br />
+          - solo se pueden mandar mensajes a usuarios de la lista de
+          `contactos`. En caso contrario, arrojar un error. <br />
+        </p>
+      </header>
+
+      <main></main>
+    </div>
+    <script src="../js/script.js"></script>
+  </body>
+</html>

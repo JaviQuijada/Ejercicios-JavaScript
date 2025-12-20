@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicios con Clases en Javascript Ejercicio 6</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <a href="../clases.html" class="btn-volver">← Volver al índice</a>
+
+        <h1>Ejercicio 6 BilleteraVirtual</h1>
+        <p>
+          Crear las siguientes clases con sus respectivos métodos y propiedades.
+          Usar propiedades privadas. Cuando se devuelvan valores, si son objetos
+          y arrays de las propiedades, devolver copias de los mismo, para evitar
+          que puedan ser modificados.
+        </p>
+        <p style="color: var(--secondary-color); margin-top: 0.5rem">
+          - **Propiedades** <br />
+          - monto <br />
+          - operaciones (array de objetos), inicializa vacío <br />
+          - **Constructor** <br />
+          - toma como argumento `montoInicial` y lo asigna a `monto` <br />
+          - **Métodos** <br />
+          - **`agregarGasto(gasto)`** agrega `gasto` a operaciones <br />
+          - **`agregarGanancia(ganancia)`** agrega `ganancia` a operaciones
+          <br />
+          - **`obtenerGastosPorMes(mes)`** devuelve un array con todos los
+          gastos hechos en `mes` <br />
+          - **`obtenerGanaciasPorMes(mes)`** devuelve un array con todas los
+          ganancias obtenidas en `mes` <br />
+          - **`obtenerGastosPorCategoria(categoria)`** devuelve un array con
+          todos los gastos de cierta `categoria` <br />
+          - **`obtenerGanaciasPorCategoria(categoria)`** devuelve un array con
+          todas las ganancias de cierta `categoria` <br />
+          - **`calcularTotalPorMes(mes)`** devuelve el total resultante de
+          restar todos los gastos hechos y sumar todas las ganancias obtenidas
+          en un cierto `mes` <br />
+          - **`calcularTotalPorCategoria(categoria)`** devuelve el total
+          resultante de restar todos los gastos hechos y sumar todas las
+          ganancias obtenidas en cierta `categoria <br />
+          - **`obtenerMonto()**` devuelve `monto` <br />
+          - **Observaciones** <br />
+          - los objetos `gasto` y `ganancia` contiene las propiedades: <br />
+          - `descripcion` (string) <br />
+          - `cantidad` (número) <br />
+          - `fecha` (Date) <br />
+          - `categoria` (string) <br />
+          - cuando se agrega `gasto` o `ganancia` al array operaciones, hay que
+          agregarle a dicha objeto la propiedad `tipo` con el valor `"GASTO"` o
+          `"GANANCIA"` según corresponda, para poder identificarlos en las
+          siguientes operaciones <br />
+          - cuando se devuelve un array con gastos o ganancias, hay que borrar
+          de los objetos que se devuelven la propiedad `tipo` <br />
+        </p>
+      </header>
+
+      <main></main>
+    </div>
+    <script src="../js/script.js"></script>
+  </body>
+</html>

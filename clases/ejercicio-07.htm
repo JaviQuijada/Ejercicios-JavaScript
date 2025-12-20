@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicios con Clases en Javascript Ejercicio 7</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <a href="../clases.html" class="btn-volver">← Volver al índice</a>
+
+        <h1>Ejercicio 7 Carrito con Producto</h1>
+        <p>
+          Crear las siguientes clases con sus respectivos métodos y propiedades.
+          Usar propiedades privadas. Cuando se devuelvan valores, si son objetos
+          y arrays de las propiedades, devolver copias de los mismo, para evitar
+          que puedan ser modificados.
+        </p>
+        <p style="color: var(--secondary-color); margin-top: 0.5rem">
+          ### Producto <br />
+          - **Propiedades** <br />
+          - id (string) <br />
+          - nombre (string) <br />
+          - precio (número) <br />
+          - cantidad (número) <br />
+          - tieneImpuesto (booleano) <br />
+          - **Constructor** <br />
+          - toma como argumentos `nombre`, `precio`, `cantidad` y
+          `tieneImpuesto` y los asigna a sus respectivas propiedades <br />
+          - genera un `id` automático y lo asigna a su propiedad <br />
+          - **Métodos** <br />
+          - getters para obteners los valores de todas las propiedades <br />
+          - setter para modificar el valor de `cantidad` <br />
+          - **Observaciones** <br />
+          - la cantidad nunca puede ser 0 <br />
+          - el precio no puede ser menor a 0 <br />
+          <br />
+          ### Carrito <br />
+          - **Propiedades** <br />
+          - productos (array de `Producto`), inicializa vacío <br />
+          - **Métodos** <br />
+          - **`agregarProducto(producto)`** agrega `producto` a `productos
+          <br />
+          - **`actualizarCantidadProducto(id, cantidad)`** actualiza la
+          `cantidad` del producto en `productos` con `id` <br />
+          - **`eliminarProducto(id)`** elimina de `productos` el producto con
+          `id` <br />
+          - **`calcularTotal()`** devuelve el total del carrito (con impuestos
+          incluidos) <br />
+          - **`calcularImpuestoTotal()`** devuelve el total de la suma de los
+          impuestos de cada producto que `tieneImpuesto` <br />
+          - **`obtenerCantidadTotal()`** devuelve la cantidad total de ítems en
+          el producto <br />
+          - **`toString()`** devuelve un string con <br />
+          - la lista de productos, detallando nombre, precio por unidad y
+          cantidad <br />
+          - subtotal de todos los productos sin sumar impuesto <br />
+          - subtotal de todos los impuestos sumados <br />
+          - total final (suma de los subtotales) <br />
+          - **Observaciones** - el impuesto es del 10% sobre el precio del
+          producto
+        </p>
+      </header>
+
+      <main></main>
+    </div>
+    <script src="../js/script.js"></script>
+  </body>
+</html>
