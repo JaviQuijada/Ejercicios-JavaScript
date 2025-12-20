@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Varibles y tipos de datos. Ejercicio 5</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      let calle = prompt("Intruduce el nombre de la calle");
+      let numero = prompt("Introduce el número de la calle");
+      let departamento = prompt("Introduce el departamento");
+      let codigoPostal = prompt("Introduce el codigo postal");
+      let ciudad = prompt("Introduce la ciudad");
+      let pais = prompt("Introduce el pais");
+      let direccionCompleta = `${calle} ${numero} ${departamento}, ${codigoPostal}, ${ciudad}, ${pais}`;
+
+      console.log("La dirección que ha ingresado es: " + direccionCompleta);
+
+      alert("La dirección que ha ingresado es: " + direccionCompleta);
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <a href="../variables.html" class="btn-volver">← Volver al índice</a>
+
+        <h1>Ejercicio 5 Dirección completa</h1>
+        <p style="color: var(--secondary-color); margin-top: 0.5rem">
+          Crear un programa que pida al usuario ingresar, por separado, la
+          calle, el número, el departamento, el código postal, la ciudad y el
+          país, y muestre un mensaje con toda la dirección completa, p.ej.: "La
+          dirección que ha ingresado es: Calle Falsa 123 3C, 1414, CABA,
+          Argentina".
+        </p>
+      </header>
+
+      <main></main>
+    </div>
+    <script src="../js/script.js"></script>
+  </body>
+</html>
