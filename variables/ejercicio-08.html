@@ -5,6 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Varibles y tipos de datos. Ejercicio 8</title>
     <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      const peliculas = [
+        "Naranja Mecanica",
+        "El Padrino",
+        "Interstellar",
+        "Taxi Driver",
+      ];
+      const cantantes = ["Rupatrupa", "Robe", "Kanka", "kaseO"];
+      const libros = [
+        "El nombre del viento",
+        "Hobbit",
+        "El Principito",
+        "Harry Potter",
+      ];
+
+      const mensaje = `MIS GUSTOS PERSONALES:
+
+🎬 PELÍCULAS:
+${peliculas.join(", ")}
+
+🎤 CANTANTES:
+${cantantes.join(", ")}
+
+📚 LIBROS:
+${libros.join(", ")}`;
+
+      console.log(mensaje);
+      alert(mensaje);
+    </script>
   </head>
   <body>
     <div class="container">
@@ -20,7 +49,11 @@
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
     <script src="../js/script.js"></script>
   </body>

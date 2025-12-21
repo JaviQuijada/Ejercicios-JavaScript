@@ -5,6 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Varibles y tipos de datos. Ejercicio 19</title>
     <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      // 1. Pedir al usuario la temperatura en Celsius
+      let celsius = prompt("Ingrese la temperatura en grados Celsius:");
+
+      // 2. Convertir a número decimal
+      celsius = parseFloat(celsius);
+
+      // 3. Aplicar la fórmula
+      const fahrenheit = celsius * 1.8 + 32;
+
+      // 4. Mostrar el resultado
+      console.log(
+        `${celsius} grados celius corresponden a ${fahrenheit} grados fahrenheit`
+      );
+      alert(
+        `${celsius} grados celius corresponden a ${fahrenheit} grados fahrenheit`
+      );
+    </script>
   </head>
   <body>
     <div class="container">
@@ -19,7 +37,11 @@
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
     <script src="../js/script.js"></script>
   </body>

@@ -195,3 +195,45 @@ h1 {
     h1 { font-size: 2.5rem; }
     .container { padding: 1rem; }
 }
+
+
+
+
+.btn-custom {
+    /* Reset de enlaces */
+    text-decoration: none;
+    display: inline-block;
+    
+    /* Colores y Fondo */
+    background: linear-gradient(135deg, #3e5171 0%, #2a3a50 100%);
+    color: #ffffff;
+    
+    /* Tipografía y Espaciado */
+    padding: 12px 28px;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    
+    /* Bordes */
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    
+    /* Animación */
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Efecto al pasar el ratón (Hover) */
+  .btn-custom:hover {
+    background: linear-gradient(135deg, #4e658a 0%, #3e5171 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+  
+  /* Efecto al hacer clic (Active) */
+  .btn-custom:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }

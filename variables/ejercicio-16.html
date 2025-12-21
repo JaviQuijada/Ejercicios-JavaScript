@@ -5,6 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Varibles y tipos de datos. Ejercicio 16</title>
     <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      // 1. Definimos las velocidades (km/h) como constantes
+      const VELOCIDAD_PIE = 5;
+      const VELOCIDAD_BICI = 15;
+      const VELOCIDAD_COCHE = 80;
+      const VELOCIDAD_AVION = 800;
+
+      // 2. Pedimos la distancia al usuario
+      let distancia = prompt("¿Cuántos kilómetros tiene tu recorrido?");
+      distancia = parseFloat(distancia);
+
+      // 3. Validamos que la entrada sea un número
+      if (!isNaN(distancia) && distancia > 0) {
+        // Calculamos los tiempos (distancia / velocidad)
+        const tiempoPie = (distancia / VELOCIDAD_PIE).toFixed(1);
+        const tiempoBici = (distancia / VELOCIDAD_BICI).toFixed(1);
+        const tiempoCoche = (distancia / VELOCIDAD_COCHE).toFixed(1);
+        const tiempoAvion = (distancia / VELOCIDAD_AVION).toFixed(1);
+
+        // 4. Mostramos el mensaje comparativo
+        const mensaje = `Para recorrer ${distancia} km tardarías:
+          
+      🚶 Caminando: ${tiempoPie} horas
+      🚲 En bicicleta: ${tiempoBici} horas
+      🚗 En coche: ${tiempoCoche} horas
+      ✈️ En avión: ${tiempoAvion} horas`;
+
+        alert(mensaje);
+        console.log(mensaje);
+      } else {
+        alert("Por favor, ingresa una distancia válida mayor a cero.");
+      }
+    </script>
   </head>
   <body>
     <div class="container">
@@ -21,7 +54,11 @@
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
     <script src="../js/script.js"></script>
   </body>

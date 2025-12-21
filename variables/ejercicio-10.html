@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Varibles y tipos de datos. Ejercicio 10</title>
     <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      let minutos = prompt(`Introduce la cantidad de minutos a convertir`);
+      let segundos = minutos * 60;
+      console.log(`${minutos} minutos son ${segundos} segundos`);
+      alert(`${minutos} minutos son ${segundos} segundos`);
+    </script>
   </head>
   <body>
     <div class="container">
@@ -14,11 +20,16 @@
         <h1>Ejercicio 10 Minutos a segundos</h1>
         <p style="color: var(--secondary-color); margin-top: 0.5rem">
           Crear un programa que pida ingresar una cantidad en minutos mediante
-          un y muestre un mensaje con el resultado de la conversión en segundos.
+          un mensaje y muestre un mensaje con el resultado de la conversión en
+          segundos.
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
     <script src="../js/script.js"></script>
   </body>

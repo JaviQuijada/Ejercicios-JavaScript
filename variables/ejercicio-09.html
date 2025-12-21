@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Varibles y tipos de datos. Ejercicio 9</title>
     <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      let edad = prompt("Introduce la edad ");
+      let edadPerro = edad * 7;
+      console.log(
+        `${edad} años, corresponde a ${edadPerro} años en la edad de los perros `
+      );
+      alert(
+        `${edad} años, corresponde a ${edadPerro} años en la edad de los perros `
+      );
+    </script>
   </head>
   <body>
     <div class="container">
@@ -13,11 +23,16 @@
 
         <h1>Ejercicio 9 Años perro</h1>
         <p style="color: var(--secondary-color); margin-top: 0.5rem">
-          Crear un programa que pida ingresar una edad y devuelva el equivalente de esas edad en años perro.
+          Crear un programa que pida ingresar una edad y devuelva el equivalente
+          de esas edad en años perro.
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
     <script src="../js/script.js"></script>
   </body>

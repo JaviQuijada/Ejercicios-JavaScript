@@ -5,6 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Varibles y tipos de datos. Ejercicio 20</title>
     <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      // 1. Pedir los dos números al usuario
+      let numero1 = parseInt(prompt("Ingrese el primer número:"));
+      let numero2 = parseInt(prompt("Ingrese el segundo número:"));
+
+      // 2. Validar que sean números y que el segundo no sea cero
+      if (!isNaN(numero1) && !isNaN(numero2)) {
+        if (numero2 === 0) {
+          alert("No se puede calcular múltiplos con el número cero.");
+        } else {
+          // 3. Usar el operador módulo (%) para ver el resto
+          if (numero1 % numero2 === 0) {
+            alert(`${numero1} SÍ es múltiplo de ${numero2}`);
+          } else {
+            alert(`${numero1} NO es múltiplo de ${numero2}`);
+          }
+        }
+      } else {
+        alert("Por favor, ingrese números válidos.");
+      }
+    </script>
   </head>
   <body>
     <div class="container">
@@ -18,7 +39,11 @@
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
     <script src="../js/script.js"></script>
   </body>

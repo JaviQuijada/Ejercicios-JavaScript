@@ -5,6 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Varibles y tipos de datos. Ejercicio 17</title>
     <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      // 1. Pedir los nombres de los destinos
+      const destino1 = prompt("Ingrese el primer destino de escala:");
+      const destino2 = prompt("Ingrese el segundo destino de escala:");
+      const destino3 = prompt("Ingrese el tercer destino de escala:");
+
+      // 2. Pedir las duraciones (y convertirlas a números con parseFloat)
+      let duracion1 = parseFloat(
+        prompt(`Ingrese la duración (en horas) para ${destino1}:`)
+      );
+      let duracion2 = parseFloat(
+        prompt(`Ingrese la duración (en horas) para ${destino2}:`)
+      );
+      let duracion3 = parseFloat(
+        prompt(`Ingrese la duración (en horas) para ${destino3}:`)
+      );
+
+      // 3. Validar que las duraciones sean números válidos
+      if (!isNaN(duracion1) && !isNaN(duracion2) && !isNaN(duracion3)) {
+        // Calcular el total
+        const duracionTotal = duracion1 + duracion2 + duracion3;
+
+        // 4. Crear el mensaje final usando Template Literals
+        const mensaje = `ITINERARIO DE VUELO:
+
+📍 Escala 1: ${destino1} - Duración: ${duracion1} hs
+📍 Escala 2: ${destino2} - Duración: ${duracion2} hs
+📍 Escala 3: ${destino3} - Duración: ${duracion3} hs
+
+-----------------------------
+⏱️ DURACIÓN TOTAL DEL VUELO: ${duracionTotal} horas`;
+
+        // 5. Mostrar el resultado
+        alert(mensaje);
+        console.log(mensaje);
+      } else {
+        alert("Error: Por favor, ingrese números válidos para las duraciones.");
+      }
+    </script>
   </head>
   <body>
     <div class="container">
@@ -20,7 +59,11 @@
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
     <script src="../js/script.js"></script>
   </body>

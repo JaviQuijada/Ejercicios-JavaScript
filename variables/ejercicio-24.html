@@ -5,6 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Varibles y tipos de datos. Ejercicio 24</title>
     <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      // 1. Pedir las cantidades de cada tipo de habitación
+      let habPara2 = parseInt(
+        prompt("¿Cuántas habitaciones para 2 personas hay?")
+      );
+      let habPara3 = parseInt(
+        prompt("¿Cuántas habitaciones para 3 personas hay?")
+      );
+      let habPara4 = parseInt(
+        prompt("¿Cuántas habitaciones para 4 personas hay?")
+      );
+
+      // 2. Validar que los datos ingresados sean números válidos
+      if (!isNaN(habPara2) && !isNaN(habPara3) && !isNaN(habPara4)) {
+        // 3. Calcular la capacidad por categoría
+        const capacidad2 = habPara2 * 2;
+        const capacidad3 = habPara3 * 3;
+        const capacidad4 = habPara4 * 4;
+
+        // 4. Calcular el total general
+        const capacidadTotal = capacidad2 + capacidad3 + capacidad4;
+
+        // 5. Mostrar el mensaje con el resultado
+        const mensaje = `CAPACIDAD DEL HOTEL:
+    --------------------------
+    Hab. para 2: ${habPara2} (Albergan ${capacidad2} personas)
+    Hab. para 3: ${habPara3} (Albergan ${capacidad3} personas)
+    Hab. para 4: ${habPara4} (Albergan ${capacidad4} personas)
+    --------------------------
+    TOTAL MÁXIMO DE HUÉSPEDES: ${capacidadTotal}`;
+
+        alert(mensaje);
+        console.log(mensaje);
+      } else {
+        alert(
+          "Por favor, ingrese números enteros válidos en todos los campos."
+        );
+      }
+    </script>
   </head>
   <body>
     <div class="container">
@@ -19,7 +58,11 @@
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
     <script src="../js/script.js"></script>
   </body>

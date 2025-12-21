@@ -5,6 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Varibles y tipos de datos. Ejercicio 22</title>
     <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      // 1. Pedir al usuario que ingrese un texto
+      let mensajeUsuario = prompt("Escribe algo para contar sus caracteres:");
+
+      // 2. Verificar que el usuario no haya cancelado el prompt
+      if (mensajeUsuario !== null) {
+        // 3. Obtener la cantidad de caracteres usando .length
+        const cantidad = mensajeUsuario.length;
+
+        // 4. Mostrar el resultado
+        alert(`El texto que ingresaste tiene ${cantidad} caracteres.`);
+        console.log(`Texto: "${mensajeUsuario}" | Longitud: ${cantidad}`);
+      } else {
+        alert("No ingresaste ningún texto.");
+      }
+    </script>
   </head>
   <body>
     <div class="container">
@@ -18,7 +34,11 @@
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
     <script src="../js/script.js"></script>
   </body>

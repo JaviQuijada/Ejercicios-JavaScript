@@ -5,6 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Varibles y tipos de datos. Ejercicio 21</title>
     <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      // 1. Pedir la cantidad total de segundos
+      let segundosTotales = parseInt(
+        prompt("Ingrese la cantidad de segundos a convertir:")
+      );
+
+      if (!isNaN(segundosTotales) && segundosTotales >= 0) {
+        // 2. Calcular las horas (división entera)
+        const horas = Math.floor(segundosTotales / 3600);
+
+        // 3. Obtener los segundos que sobran después de sacar las horas
+        let restoSegundos = segundosTotales % 3600;
+
+        // 4. Calcular los minutos con ese resto
+        const minutos = Math.floor(restoSegundos / 60);
+
+        // 5. Los segundos finales son el resto de la división por 60
+        const segundosFinales = restoSegundos % 60;
+
+        // 6. Mostrar el resultado
+        console.log(`${segundosTotales} segundos equivalen a: 
+    ${horas} hora(s), ${minutos} minuto(s) y ${segundosFinales} segundo(s)`);
+        alert(`${segundosTotales} segundos equivalen a: 
+    ${horas} hora(s), ${minutos} minuto(s) y ${segundosFinales} segundo(s)`);
+      } else {
+        alert("Por favor, ingrese un número entero positivo.");
+      }
+    </script>
   </head>
   <body>
     <div class="container">
@@ -20,7 +48,11 @@
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
     <script src="../js/script.js"></script>
   </body>

@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Varibles y tipos de datos. Ejercicio 18</title>
     <link rel="stylesheet" href="css/styles.css" />
+
+    <script>
+      //Pedir al usuario el número inicial y el valor del incremento
+      let numInicial = Number(prompt(`Introduce un número de partida`));
+      let numIncremento = Number(prompt(`Introduce cantidad a incrementar`));
+
+      // Crear un bucle que haga el cálculo 5 veces
+      for (let i = 1; i <= 5; i++) {
+        numInicial = numInicial + numIncremento;
+        console.log(`Incremento: ${i}. Total acomulado: ${numInicial}`);
+        alert(`Incremento: ${i}. Total acomulado: ${numInicial}`);
+      }
+    </script>
   </head>
   <body>
     <div class="container">
@@ -16,13 +29,17 @@
           Crear un programa que pida ingresar una número de partida y una
           cantidad a ir incrementando y mostrar cinco mensajes seguidos que
           muestren el número del mensaje y el total incrementado hasta el
-          momento (p. ej.: empezando con 5 e incrementando 5, "Incremento 1)
-          Total: 10", "Incremento 2) Total: 15", "Incremento 3) Total: 20",
-          etc.).
+          momento p. ej.: empezando con 5 e incrementando 5, (Incremento 1)
+          "Total: 10",(Incremento 2) "Total: 15",(Incremento 3) "Total: 20",
+          etc..
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
     <script src="../js/script.js"></script>
   </body>

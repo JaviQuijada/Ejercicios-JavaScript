@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Varibles y tipos de datos. Ejercicio 13</title>
     <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      let base = prompt(`Introduce la base del triángulo`);
+      let altura = prompt(`Introduce la altura del triángulo`);
+      let area = (base * altura) / 2;
+
+      console.log(
+        `El area del triángulo con base: ${base} y altura: ${altura} es de: ${area}`
+      );
+      alert(
+        `El area del triángulo con base: ${base} y altura: ${altura} es de: ${area}`
+      );
+    </script>
   </head>
   <body>
     <div class="container">
@@ -19,7 +31,11 @@
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
     <script src="../js/script.js"></script>
   </body>

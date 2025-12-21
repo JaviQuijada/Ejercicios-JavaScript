@@ -5,7 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Varibles y tipos de datos. Ejercicio 7</title>
     <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      const familia = [
+        "Javi",
+        "Lorena",
+        "Nayara",
+        "Joana",
+        "Eidan",
+        "Manoli",
+        "Alba",
+        "Gregorio",
+      ];
+      const mensaje = familia.join("\n");
 
+      console.log("Lista de familia:" + mensaje);
+      alert("Los integrantes de la familia son:\n" + mensaje);
+    </script>
   </head>
   <body>
     <div class="container">
@@ -14,12 +29,17 @@
 
         <h1>Ejercicio 7 Miembros de la familia</h1>
         <p style="color: var(--secondary-color); margin-top: 0.5rem">
-          Crear una variable que contengan un `array` de `strings` con los nombres de integrantes de la familia 
-          y completarlo con todos o algunos nombres. Mostrarlos en un mensaje que los liste.        
+          Crear una variable que contengan un `array` de `strings` con los
+          nombres de integrantes de la familia y completarlo con todos o algunos
+          nombres. Mostrarlos en un mensaje que los liste.
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
     <script src="../js/script.js"></script>
   </body>

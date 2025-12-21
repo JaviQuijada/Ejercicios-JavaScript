@@ -5,7 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Varibles y tipos de datos. Ejercicio 6</title>
     <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      const meses31 = [
+        "Enero",
+        " Marzo",
+        " Mayo",
+        " Julio",
+        " Agosto",
+        " Octubre",
+        " Diciembre.",
+      ];
+      const meses30 = ["Abril", " Junio", " Septiembre", " Noviembre."];
+      const meses29 = ["Febrero."];
 
+      console.log("Los meses que contienen 31 dias son: " + meses31);
+      alert("Los meses que contienen 31 dias son: \n" + meses31);
+      console.log("Los meses que contienen 30 dias son: " + meses30);
+      alert("Los meses que contienen 30 dias son: \n" + meses30);
+      console.log("Los meses que contienen 29 dias son: " + meses29);
+      alert("Los meses que contienen 29 dias son: \n" + meses29);
+    </script>
   </head>
   <body>
     <div class="container">
@@ -14,13 +33,19 @@
 
         <h1>Ejercicio 6 Meses por día</h1>
         <p style="color: var(--secondary-color); margin-top: 0.5rem">
-          Crear variables que contengan `arrays` de `strings` con los nombres de meses, un array para 
-          meses de 31 días, uno para de 30, y otro para 29. Completar cada array con los nombres correspondientes. 
-          Mostrarlos en un mensaje indicando cuál es cuál, p.ej: "Meses con 31 días: Enero, Marzo, Mayo...".
+          Crear variables que contengan `arrays` de `strings` con los nombres de
+          meses, un array para meses de 31 días, uno para de 30, y otro para 29.
+          Completar cada array con los nombres correspondientes. Mostrarlos en
+          un mensaje indicando cuál es cuál, p.ej: "Meses con 31 días: Enero,
+          Marzo, Mayo...".
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
     <script src="../js/script.js"></script>
   </body>

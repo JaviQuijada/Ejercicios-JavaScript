@@ -5,6 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Varibles y tipos de datos. Ejercicio 23</title>
     <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      // 1. Pedir la antigüedad
+      let antiguedad = parseFloat(
+        prompt("¿Cuántos años llevas trabajando en la empresa?")
+      );
+
+      if (!isNaN(antiguedad) && antiguedad >= 0) {
+        let diasVacaciones;
+
+        // 2. Aplicar la regla de negocio
+        if (antiguedad <= 3) {
+          // Hasta 3 años, el valor es fijo
+          diasVacaciones = 15;
+        } else {
+          // Más de 3 años: 15 base + 2 por cada año extra
+          const añosExtra = Math.floor(antiguedad - 3);
+          diasVacaciones = 15 + añosExtra * 2;
+        }
+
+        const totalDias = diasVacaciones * antiguedad;
+
+        // 3. Mostrar el resultado
+        alert(
+          `Por tu antigüedad de ${antiguedad} años, te corresponden ${diasVacaciones} días de vacaciones al año. Lo que hace un total de ${totalDias} `
+        );
+        console.log(
+          `Antigüedad: ${antiguedad} | Vacaciones: ${diasVacaciones} | Total Dia Vacaciones: ${totalDias} `
+        );
+      } else {
+        alert("Por favor, ingresa un número de años válido.");
+      }
+    </script>
   </head>
   <body>
     <div class="container">
@@ -20,7 +52,11 @@
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
     <script src="../js/script.js"></script>
   </body>

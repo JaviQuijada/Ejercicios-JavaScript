@@ -5,6 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Varibles y tipos de datos. Ejercicio 25</title>
     <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      // Pedir saldo disponible al usuario
+      let saldoDisponible = Number(prompt(`Ingrese el saldo disponible`));
+      // Pedir diferentes pagos a servicios
+      let factura1 = prompt(`Introduzca nombre del servicio a pagar`);
+      let cantidad1 = Number(
+        prompt(`Introduce la cantidad a pagar para ${factura1}`)
+      );
+      let factura2 = prompt(`Introduzca nombre del servicio a pagar`);
+      let cantidad2 = Number(
+        prompt(`Introduce la cantidad a pagar para ${factura2}`)
+      );
+      let factura3 = prompt(`Introduzca nombre del servicio a pagar`);
+      let cantidad3 = Number(
+        prompt(`Introduce la cantidad a pagar para ${factura3}`)
+      );
+
+      // Restar el total de pagos al saldo disponible
+      const totalFactura = cantidad1 + cantidad2 + cantidad3;
+      const saldoRestante = saldoDisponible - totalFactura;
+
+      // Crear un mensaje con la resolucion
+      let mensaje = `
+      Tenias un saldo disponible de : 
+      ${saldoDisponible}. 
+      ------------------------------- 
+      Has pagado de ${factura1}:
+      ${cantidad1}. 
+      Has pagado de ${factura2}: 
+      ${cantidad2}. 
+      Has pagado de ${factura3}: 
+      ${cantidad3}.
+      ------------------------------- 
+      En total has pagado: 
+      ${totalFactura}. 
+      Y te queda un disponibe de : 
+      ${saldoRestante}
+      `;
+      // Imprimir mensaje en pantalla y consola
+      console.log(mensaje);
+      alert(mensaje);
+    </script>
   </head>
   <body>
     <div class="container">
@@ -24,7 +66,11 @@
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
     <script src="../js/script.js"></script>
   </body>

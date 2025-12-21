@@ -5,6 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Varibles y tipos de datos. Ejercicio 26</title>
     <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      // 1. Definir los precios de los productos (Precios fijos)
+      const PRECIO_PIZZA = 1200;
+      const PRECIO_HAMBURGUESA = 1500;
+      const PRECIO_BEBIDA = 500;
+
+      // 2. Pedir al usuario las cantidades
+      alert(
+        "Bienvenido a la Orden de Compra. Por favor, ingrese las cantidades:"
+      );
+
+      let cantPizza = parseInt(
+        prompt(`¿Cuántas Pizzas desea comprar? ($${PRECIO_PIZZA} c/u):`)
+      );
+      let cantHamburguesa = parseInt(
+        prompt(
+          `¿Cuántas Hamburguesas desea comprar? ($${PRECIO_HAMBURGUESA} c/u):`
+        )
+      );
+      let cantBebida = parseInt(
+        prompt(`¿Cuántas Bebidas desea comprar? ($${PRECIO_BEBIDA} c/u):`)
+      );
+
+      // 3. Validar entradas y calcular total
+      if (!isNaN(cantPizza) && !isNaN(cantHamburguesa) && !isNaN(cantBebida)) {
+        // Cálculo de subtotales y total
+        const totalCompra =
+          cantPizza * PRECIO_PIZZA +
+          cantHamburguesa * PRECIO_HAMBURGUESA +
+          cantBebida * PRECIO_BEBIDA;
+
+        alert(`El valor total de su compra es: $${totalCompra}`);
+
+        // 4. Gestionar las cuotas
+        let cuotas = parseInt(
+          prompt(
+            "¿En cuántas cuotas desea realizar el pago? (Ej: 1, 3, 6, 12):"
+          )
+        );
+
+        if (!isNaN(cuotas) && cuotas > 0) {
+          const valorCuota = totalCompra / cuotas;
+
+          // 5. Mensaje final con el detalle
+          const detalleFinal = `DETALLE DE SU ORDEN:
+      -----------------------------------
+      - ${cantPizza}x Pizza: $${cantPizza * PRECIO_PIZZA}
+      - ${cantHamburguesa}x Hamburguesa: $${
+            cantHamburguesa * PRECIO_HAMBURGUESA
+          }
+      - ${cantBebida}x Bebida: $${cantBebida * PRECIO_BEBIDA}
+      -----------------------------------
+      TOTAL A PAGAR: $${totalCompra}
+      PAGO EN: ${cuotas} cuota(s)
+      VALOR DE CADA CUOTA: $${valorCuota.toFixed(2)}`;
+
+          alert(detalleFinal);
+          console.log(detalleFinal);
+        } else {
+          alert("Cantidad de cuotas no válida.");
+        }
+      } else {
+        alert("Por favor, ingrese cantidades numéricas válidas.");
+      }
+    </script>
   </head>
   <body>
     <div class="container">
@@ -23,7 +88,11 @@
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
     <script src="../js/script.js"></script>
   </body>
