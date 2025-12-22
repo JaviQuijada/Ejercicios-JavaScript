@@ -5,6 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Operadores Lógicos y de Comparación. Ejercicio 1</title>
     <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      let num1 = Number(prompt("Ingresa un número"));
+      let num2 = Number(prompt("Ingresa un número"));
+      let num3 = Number(prompt("Ingresa un número"));
+      if (num1 > 100) {
+        console.log(`El número ${num1} es mayor que 100`);
+        alert(`El número ${num1} es mayor que 100`);
+      } else if (num2 > 100) {
+        console.log(`El número ${num2} es mayor que 100`);
+        alert(`El número ${num2} es mayor que 100`);
+      } else if (num3 > 100) {
+        console.log(`El número ${num3} es mayor que 100`);
+        alert(`El número ${num3} es mayor que 100`);
+      } else {
+        console.log("Ningúno de los numeros son mayor de 100");
+      }
+    </script>
   </head>
   <body>
     <div class="container">
@@ -18,8 +35,12 @@
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
-    <script src="../js/script.js"></script>
+    <script src="js/script.js"></script>
   </body>
 </html>
