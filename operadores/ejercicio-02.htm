@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Operadores Lógicos y de Comparación. Ejercicio 2</title>
     <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      let limiteInf = Number(prompt("Ingrese un número como rango inferior"));
+      let limiteSup = Number(prompt("Ingrese un número como rango superior"));
+      let num = Number(prompt("Introduce número a calcular"));
+
+      if (num > limiteInf && num < limiteSup) {
+        console.log(`Número ${num} esta entre ${limiteInf} y ${limiteSup}`);
+        alert(`Número ${num} esta entre ${limiteInf} y ${limiteSup}`);
+      } else {
+        console.log(`Número ${num} no esta entre ${limiteInf} y ${limiteSup}`);
+        alert(`Número ${num} no esta entre ${limiteInf} y ${limiteSup}`);
+      }
+    </script>
   </head>
   <body>
     <div class="container">
@@ -26,6 +39,6 @@
         </button>
       </main>
     </div>
-    <script src="../js/script.js"></script>
+    <script src="js/script.js"></script>
   </body>
 </html>

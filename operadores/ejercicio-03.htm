@@ -5,6 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Operadores Lógicos y de Comparación. Ejercicio 3</title>
     <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      let tatto = prompt("¿Tienes tatuajes? s/n");
+      while (tatto != "s" && tatto != "n") {
+        tatto = prompt(
+          "No has introducido una respuesta correcta. ¿Tienes tatuajes? s/n"
+        );
+      }
+      let hepatitis = prompt("¿Has tenido hepatitis? s/n");
+      while (hepatitis != "s" && hepatitis != "n") {
+        hepatitis = prompt(
+          "No has introducido una respuesta correcta. ¿Has tenido hepatitis? s/n"
+        );
+      }
+      let anemia = prompt("¿Tienes anemia? s/n");
+      while (anemia != "s" && anemia != "n") {
+        anemia = prompt(
+          "No has introducido una respuesta correcta. ¿Tienes anemia? s/n"
+        );
+      }
+
+      if (tatto === "n" && hepatitis === "n" && anemia === "n") {
+        console.log("Puedes donar sangre");
+        alert("Puedes donar sangre");
+      } else {
+        console.log("No puedes donar sangre");
+        alert("No puedes donar sangre");
+      }
+    </script>
   </head>
   <body>
     <div class="container">
@@ -26,6 +54,6 @@
         </button>
       </main>
     </div>
-    <script src="../js/script.js"></script>
+    <script src="/js/script.js"></script>
   </body>
 </html>
