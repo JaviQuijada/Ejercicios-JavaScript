@@ -5,6 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Operadores Lógicos y de Comparación. Ejercicio 4</title>
     <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      const usuarioOk = "javi";
+      const contraseñaOk = 261204;
+      let usuario = prompt("Intruduce nombre de usuario");
+
+      while (usuario !== usuarioOk) {
+        console.log("Error!!!. Usuario incorrecto");
+        alert("Error!!!. Usuario incorrecto");
+        usuario = prompt("Intentalo de nuevo, intruduce nombre de usuariol");
+      }
+
+      let contraseña = Number(prompt("Introduce contraseña"));
+
+      while (contraseña !== contraseñaOk) {
+        console.log("Error!!!. Contraseña incorrecta");
+        alert("Error!!!. Contraseña incorrecta");
+        contraseña = Number(
+          prompt("Intentalo de nuevo, introduce la contraseña")
+        );
+      }
+
+      alert("Acceso autorizado");
+      console.log("Acceso autorizado");
+    </script>
   </head>
   <body>
     <div class="container">
@@ -25,6 +49,6 @@
         </button>
       </main>
     </div>
-    <script src="/js/script.js"></script>
+    <script src="js/script.js"></script>
   </body>
 </html>
