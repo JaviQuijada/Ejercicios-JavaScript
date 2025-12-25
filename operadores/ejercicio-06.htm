@@ -5,6 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Operadores Lógicos y de Comparación. Ejercicio 6</title>
     <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      alert("Responde para saber si tienes acceso al club");
+      let cuota = prompt("¿Tienes la cuota al dia? s/n");
+      while (cuota !== "s" && cuota !== "n") {
+        cuota = prompt(
+          'Has introducido una respuesta incorrecta, respond "s" 0 "n".¿Tienes la cuota al dia?'
+        );
+      }
+      let agua = prompt("¿Tiene agua el vehiculo? s/n");
+      while (agua !== "s" && agua !== "n") {
+        agua = prompt(
+          'Has introducido una respuesta incorrecta, respond "s" 0 "n".¿Tiene agua el vehiculo? '
+        );
+      }
+      let presion = prompt("¿Tiene aceite presión el neumático? s/n");
+      while (presion !== "s" && presion !== "n") {
+        presion = prompt(
+          'Has introducido una respuesta incorrecta, respond "s" 0 "n".¿Tiene presion el neumático? '
+        );
+      }
+
+      if (aceite === "s" && agua === "s" && presion === "s") {
+        alert("El vehiculo no necesita ningun mantenimiento");
+      } else {
+
+        alert("Tu vehiculo necesita un mantenimiento");
+      }
+    </script>
   </head>
   <body>
     <div class="container">

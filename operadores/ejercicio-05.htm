@@ -8,10 +8,28 @@
     <script>
       alert("Responde para saber si su vehiculo necesita mantenimiento");
       let aceite = prompt("¿Tiene aceite el vehiculo? s/n");
-      while (aceite !== s && aceite !== n) {
-        let aceite = prompt(
+      while (aceite !== "s" && aceite !== "n") {
+        aceite = prompt(
           'Has introducido una respuesta incorrecta, respond "s" 0 "n".¿Tiene aceite el vehiculo? '
         );
+      }
+      let agua = prompt("¿Tiene agua el vehiculo? s/n");
+      while (agua !== "s" && agua !== "n") {
+        agua = prompt(
+          'Has introducido una respuesta incorrecta, respond "s" 0 "n".¿Tiene agua el vehiculo? '
+        );
+      }
+      let presion = prompt("¿Tiene aceite presión el neumático? s/n");
+      while (presion !== "s" && presion !== "n") {
+        presion = prompt(
+          'Has introducido una respuesta incorrecta, respond "s" 0 "n".¿Tiene presion el neumático? '
+        );
+      }
+
+      if (aceite === "s" && agua === "s" && presion === "s") {
+        alert("El vehiculo no necesita ningun mantenimiento");
+      } else {
+        alert("Tu vehiculo necesita un mantenimiento");
       }
     </script>
   </head>
