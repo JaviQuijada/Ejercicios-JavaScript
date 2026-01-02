@@ -5,6 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Operadores Lógicos y de Comparación. Ejercicio 9</title>
     <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      let num1 = Number(prompt("Ingresa el primer número"));
+      let num2 = Number(prompt("Ingresa el segundo número"));
+      let num3 = Number(prompt("Ingresa el tercero número"));
+
+      while (num1 === num2 || num1 === num3 || num2 === num3) {
+        alert("De los tres números almenos dos de ellos se repiten");
+        console.log("De los tres números almenos dos de ellos se repiten");
+        num1 = Number(prompt("Ingresa el primer número"));
+        num2 = Number(prompt("Ingresa el segundo número"));
+        num3 = Number(prompt("Ingresa el tercero número"));
+      }
+
+      if (num1 > num2 && num1 > num3) {
+        alert(`El número ${num1} es el mayor de los tres`);
+        console.log(`El número ${num1} es el mayor de los tres`);
+      } else if (num2 > num1 && num2 > num3) {
+        alert(`El número ${num2} es el mayor de los tres`);
+        console.log(`El número ${num2} es el mayor de los tres`);
+      } else {
+        alert(`El número ${num3} es el mayor de los tres`);
+        console.log(`El número ${num3} es el mayor de los tres`);
+      }
+    </script>
   </head>
   <body>
     <div class="container">

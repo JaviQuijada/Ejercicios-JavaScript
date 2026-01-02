@@ -6,31 +6,29 @@
     <title>Operadores Lógicos y de Comparación. Ejercicio 6</title>
     <link rel="stylesheet" href="css/styles.css" />
     <script>
-      alert("Responde para saber si tienes acceso al club");
-      let cuota = prompt("¿Tienes la cuota al dia? s/n");
+      let cuota = prompt("¿Tienes la cuota al díá? s/n");
       while (cuota !== "s" && cuota !== "n") {
         cuota = prompt(
-          'Has introducido una respuesta incorrecta, respond "s" 0 "n".¿Tienes la cuota al dia?'
+          "No has intoducido una respuesta correcta ¿Tienes la cuota al día?"
         );
       }
-      let agua = prompt("¿Tiene agua el vehiculo? s/n");
-      while (agua !== "s" && agua !== "n") {
-        agua = prompt(
-          'Has introducido una respuesta incorrecta, respond "s" 0 "n".¿Tiene agua el vehiculo? '
-        );
-      }
-      let presion = prompt("¿Tiene aceite presión el neumático? s/n");
-      while (presion !== "s" && presion !== "n") {
-        presion = prompt(
-          'Has introducido una respuesta incorrecta, respond "s" 0 "n".¿Tiene presion el neumático? '
-        );
-      }
-
-      if (aceite === "s" && agua === "s" && presion === "s") {
-        alert("El vehiculo no necesita ningun mantenimiento");
+      if (cuota === "s") {
+        alert("Tienes acceso");
+        console.log("Tienes acceso");
       } else {
-
-        alert("Tu vehiculo necesita un mantenimiento");
+        let autorizacion = prompt("¿Tienes autorización? s/n");
+        while (autorizacion !== "s" && autorizacion !== "n") {
+          cuota = prompt(
+            "No has intoducido una respuesta correcta ¿Tienes autorización?"
+          );
+        }
+        if (autorizacion === "s") {
+          alert("Tienes autorizción, acceso permitido");
+          console.log("Tienes autorizción, acceso permitido");
+        } else {
+          alert("No tienes acceso permitido");
+          console.log("No tienes acceso permitido");
+        }
       }
     </script>
   </head>

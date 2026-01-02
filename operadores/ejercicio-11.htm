@@ -5,6 +5,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Operadores Lógicos y de Comparación. Ejercicio 11</title>
     <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      let respuesta1 = "s";
+      let respuesta2 = "n";
+      let respuesta3 = "s";
+
+      let pregunta1 = prompt(
+        'Si o no ,s/n. ¿La canción "Bulería" es de David Bisbal?'
+      );
+      while (pregunta1 != "s" && pregunta1 != "n") {
+        pregunta1 = prompt(
+          'No has introducido una respuesta correcta. Si o no ,s/n. ¿La canción "Bulería" es de David Bisbal?'
+        );
+      }
+      if (pregunta1 === respuesta1) {
+        alert("Correcto");
+        console.log("Correcto");
+      } else {
+        alert("Incorrecto");
+        console.log("Incorrecto");
+      }
+      let pregunta2 = prompt(
+        "Si o no ,s/n. ¿Juan Carlos fue uno de los primeros presidente del gobierno de España?"
+      );
+      while (pregunta2 != "s" && pregunta2 != "n") {
+        pregunta2 = prompt(
+          "No has introducido una respuesta correcta. Si o no ,s/n. ¿Juan Carlos fue uno de los primeros presidente del gobierno de España?"
+        );
+      }
+      if (pregunta2 === respuesta2) {
+        alert("Correcto");
+        console.log("Correcto");
+      } else {
+        alert("Incorrecto");
+        console.log("Incorrecto");
+      }
+      let pregunta3 = prompt(
+        "Si o no ,s/n. ¿En el fútbol se puede hacer un cambio de jugador una vez empezado el parido?"
+      );
+      while (pregunta3 != "s" && pregunta3 != "n") {
+        pregunta3 = prompt(
+          "No has introducido una respuesta correcta. Si o no ,s/n. ¿En el fútbol se puede hacer un cambio de jugador una vez empezado el parido?"
+        );
+      }
+      if (pregunta3 === respuesta3) {
+        alert("Correcto");
+        console.log("Correcto");
+      } else {
+        alert("Incorrecto");
+        console.log("Incorrecto");
+      }
+      if (
+        pregunta1 === respuesta1 &&
+        pregunta2 === respuesta2 &&
+        pregunta3 === respuesta3
+      ) {
+        alert("Todas las respuestas son correctas. Ganaste!!!");
+        console.log("Todas las respuestas son correctas. Ganaste!!!");
+      } else {
+        alert(
+          "No respondiste a todas las preguntas de manera correcta. Perdite!!!"
+        );
+        console.log(
+          "No respondiste a todas las preguntas de manera correcta. Perdite!!!"
+        );
+      }
+    </script>
   </head>
   <body>
     <div class="container">

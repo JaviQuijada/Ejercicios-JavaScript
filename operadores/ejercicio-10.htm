@@ -5,6 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Operadores Lógicos y de Comparación. Ejercicio 10</title>
     <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      let terminos = prompt("¿Aceptas los terminos y condiciones de uso? s/n");
+      while (terminos != "s" && terminos != "n") {
+        terminos = prompt(
+          'La respuesta es incorrecta. Responde "s" o "n".¿Aceptas los terminos y condiciones de uso?'
+        );
+      }
+
+      if (terminos === "s") {
+        alert("Continuando con el proceso...");
+        console.log("Continuando con el proceso...");
+      } else {
+        alert(
+          "No se puede continuar con el proceso si no se aceptan los términos y condiciones de uso"
+        );
+        console.log(
+          "No se puede continuar con el proceso si no se aceptan los términos y condiciones de uso"
+        );
+      }
+    </script>
   </head>
   <body>
     <div class="container">

@@ -5,6 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Operadores Lógicos y de Comparación. Ejercicio 7</title>
     <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      let parcial1 = parseFloat(prompt("Introduce tu primera nota de parcial"));
+      let parcial2 = parseFloat(prompt("Introduce tu segunda nota de parcial"));
+      let parcial3 = parseFloat(prompt("Introduce tu tercera nota de parcial"));
+
+      let mayorOcho = 0;
+
+      if (parcial1 >= 8) {
+        mayorOcho++;
+      }
+      if (parcial2 >= 8) {
+        mayorOcho++;
+      }
+      if (parcial3 >= 8) {
+        mayorOcho++;
+      }
+
+      if (mayorOcho >= 2) {
+        alert("Felicidades si promociona");
+        console.log("Felicidades si promociona");
+      } else {
+        alert("No prmocina , necesitas almenos 2 aprobados por encima de 8");
+        console.log(
+          "No prmocina , necesitas almenos 2 aprobados por encima de 8"
+        );
+      }
+    </script>
   </head>
   <body>
     <div class="container">
