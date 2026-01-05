@@ -9,7 +9,9 @@
   <body>
     <div class="container">
       <header>
-        <a href="../condicionales.html" class="btn-volver">← Volver al índice</a>
+        <a href="../condicionales.html" class="btn-volver"
+          >← Volver al índice</a
+        >
 
         <h1>Ejercicio 8 Simón dice</h1>
         <p style="color: var(--secondary-color); margin-top: 0.5rem">
@@ -29,8 +31,59 @@
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
     <script src="../js/script.js"></script>
+    <script>
+      // 1. Configuración inicial
+      const coloresPosibles = ["rojo", "verde", "azul", "amarillo"];
+      let secuenciaSimon = [];
+      let secuenciaUsuario = [];
+
+      // 2. Generar la secuencia aleatoria de 5 colores
+      for (let i = 0; i < 5; i++) {
+        let indiceAleatorio = Math.floor(
+          Math.random() * coloresPosibles.length
+        );
+        secuenciaSimon.push(coloresPosibles[indiceAleatorio]);
+      }
+
+      // 3. Mostrar la secuencia al usuario (usamos join para que se vea bonito)
+      alert("Simón dice: " + secuenciaSimon.join(", "));
+
+      // 4. Pedir los 5 colores al usuario uno por uno
+      for (let i = 0; i < 5; i++) {
+        let colorIngresado = prompt(
+          `Ingrese el color número ${i + 1}:`
+        ).toLowerCase();
+        secuenciaUsuario.push(colorIngresado);
+      }
+
+      // 5. Comparar las secuencias
+      // En JS, no puedes comparar arrays directamente con ==, hay que comparar elemento por elemento
+      let acertoTodo = true;
+
+      for (let i = 0; i < 5; i++) {
+        if (secuenciaSimon[i] !== secuenciaUsuario[i]) {
+          acertoTodo = false;
+          break; // Si falla uno, ya no hace falta seguir revisando
+        }
+      }
+
+      // 6. Resultado final
+      if (acertoTodo) {
+        alert("¡Felicitaciones! ¡Has ganado! 🏆");
+      } else {
+        alert(
+          `Lo siento, perdiste. ❌\nLa secuencia era: ${secuenciaSimon.join(
+            ", "
+          )}\nTu dijiste: ${secuenciaUsuario.join(", ")}`
+        );
+      }
+    </script>
   </body>
 </html>

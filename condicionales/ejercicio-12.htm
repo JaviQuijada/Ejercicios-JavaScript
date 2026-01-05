@@ -36,8 +36,92 @@
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
     <script src="../js/script.js"></script>
+    <script>
+      // 1. Estado inicial del televisor
+      let encendido = prompt(
+        "¿Desea prender el televisor? (si/no)"
+      ).toLowerCase();
+      let canal = 1;
+      let volumen = 20;
+
+      if (encendido === "si") {
+        let continuar = true;
+
+        while (continuar) {
+          // Mostramos estado actual y pedimos operación
+          let operacion = prompt(
+            `📺 TV ENCENDIDA\nCanal actual: ${canal} | Volumen: ${volumen}\n\n` +
+              "Elija una operación:\n" +
+              "1. CAMBIAR CANAL (0-99)\n" +
+              "2. CANAL SIGUIENTE\n" +
+              "3. CANAL ANTERIOR\n" +
+              "4. SUBIR VOLUMEN (+5)\n" +
+              "5. BAJAR VOLUMEN (-5)\n" +
+              "6. MUTEAR\n" +
+              "7. APAGAR"
+          ).toUpperCase();
+
+          switch (operacion) {
+            case "1":
+            case "CAMBIAR CANAL":
+              let nuevoCanal = parseInt(prompt("Ingrese el canal (0-99):"));
+              if (nuevoCanal >= 0 && nuevoCanal <= 99) {
+                canal = nuevoCanal;
+              } else {
+                alert("Canal no válido.");
+              }
+              break;
+
+            case "2":
+            case "CANAL SIGUIENTE":
+              canal = canal === 99 ? 0 : canal + 1;
+              break;
+
+            case "3":
+            case "CANAL ANTERIOR":
+              canal = canal === 0 ? 99 : canal - 1;
+              break;
+
+            case "4":
+            case "SUBIR VOLUMEN":
+              if (volumen < 100) volumen += 5;
+              break;
+
+            case "5":
+            case "BAJAR VOLUMEN":
+              if (volumen > 0) volumen -= 5;
+              break;
+
+            case "6":
+            case "MUTEAR":
+              volumen = 0;
+              break;
+
+            case "7":
+            case "APAGAR":
+              continuar = false;
+              alert("Apagando televisor...");
+              break;
+
+            default:
+              alert("Opción no válida.");
+          }
+
+          // Si no se apagó, mostramos el nuevo estado después de la operación
+          if (continuar) {
+            alert(`Estado actualizado: Canal ${canal}, Volumen ${volumen}`);
+          }
+        }
+      } else {
+        alert("El televisor permanece apagado.");
+      }
+    </script>
   </body>
 </html>

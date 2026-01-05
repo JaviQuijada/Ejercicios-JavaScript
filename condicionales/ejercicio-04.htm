@@ -9,7 +9,9 @@
   <body>
     <div class="container">
       <header>
-        <a href="../condicionales.html" class="btn-volver">← Volver al índice</a>
+        <a href="../condicionales.html" class="btn-volver"
+          >← Volver al índice</a
+        >
 
         <h1>Ejercicio 4 Examen aprobado</h1>
         <p style="color: var(--secondary-color); margin-top: 0.5rem">
@@ -20,8 +22,33 @@
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
     <script src="../js/script.js"></script>
+    <script>
+      // 1. Pedimos la nota y la convertimos a número
+      let nota = parseFloat(prompt("Ingrese la nota del examen:"));
+
+      // 2. Validamos que sea un número válido
+      if (isNaN(nota) || nota < 1 || nota > 10) {
+        alert("⚠️ Por favor, ingrese una nota válida entre 1 y 10.");
+      } else {
+        // 3. Evaluamos la situación del alumno
+        if (nota > 7) {
+          // Notas: 7.1 hasta 10
+          alert(`Nota: ${nota}. ¡Aprobado! 🎉`);
+        } else if (nota >= 4) {
+          // Notas: 4 hasta 7 (inclusive)
+          alert(`Nota: ${nota}. Debe recuperar. 📝`);
+        } else {
+          // Notas: menores a 4
+          alert(`Nota: ${nota}. Es un aplazo. ❌`);
+        }
+      }
+    </script>
   </body>
 </html>

@@ -24,8 +24,46 @@
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
     <script src="../js/script.js"></script>
+    <script>
+      // 1. Pedimos la estación y la normalizamos a minúsculas
+      let estacion = prompt(
+        "Ingresa una estación (Primavera, Verano, Otoño, Invierno):"
+      ).toLowerCase();
+
+      // 2. Usamos switch para determinar las fechas
+      switch (estacion) {
+        case "primavera":
+          alert(
+            "La primavera comienza el 21 de septiembre y termina el 20 de diciembre."
+          );
+          break;
+        case "verano":
+          alert(
+            "El verano comienza el 21 de diciembre y termina el 20 de marzo."
+          );
+          break;
+        case "otoño":
+        case "otono": // Añadimos este caso por si el usuario no usa la "ñ"
+          alert("El otoño comienza el 21 de marzo y termina el 20 de junio.");
+          break;
+        case "invierno":
+          alert(
+            "El invierno comienza el 21 de junio y termina el 20 de septiembre."
+          );
+          break;
+        default:
+          alert(
+            "⚠️ Estación no reconocida. Por favor, ingresa: Primavera, Verano, Otoño o Invierno."
+          );
+          break;
+      }
+    </script>
   </body>
 </html>

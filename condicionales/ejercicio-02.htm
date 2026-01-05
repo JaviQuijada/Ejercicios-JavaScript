@@ -9,7 +9,9 @@
   <body>
     <div class="container">
       <header>
-        <a href="../condicionales.html" class="btn-volver">← Volver al índice</a>
+        <a href="../condicionales.html" class="btn-volver"
+          >← Volver al índice</a
+        >
 
         <h1>Ejercicio 2 Días del mes</h1>
         <p style="color: var(--secondary-color); margin-top: 0.5rem">
@@ -18,8 +20,41 @@
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
-    <script src="../js/script.js"></script>
+    <script src="/js/script.js"></script>
+    <script>
+function title(texto) {
+    if (!texto) return ""; 
+    return texto.charAt(0).toUpperCase() + texto.slice(1).toLowerCase();
+}
+
+// 1. Definimos las listas (Arrays)
+const meses31 = ['Enero', 'Marzo', 'Mayo', 'Julio', 'Agosto', 'Octubre', 'Diciembre'];
+const meses30 = ['Abril', 'Junio', 'Septiembre', 'Noviembre'];
+const mes29 = ['Febrero'];
+
+// 2. Pedimos el dato y lo formateamos con nuestra función title
+let entrada = prompt('Introduce el mes para saber cuántos días tiene');
+let mes = title(entrada);
+
+// 3. Lógica de identificación usando .includes()
+if (meses31.includes(mes)) {
+    alert(`${mes} tiene 31 días.`);
+} 
+else if (meses30.includes(mes)) {
+    alert(`${mes} tiene 30 días.`);
+} 
+else if (mes29.includes(mes)) {
+    alert(`${mes} tiene 28 días (o 29 si es bisiesto).`);
+} 
+else {
+    alert("⚠️ Ese mes no existe. Revisa si lo escribiste bien.");
+}
+    </script>
   </body>
 </html>

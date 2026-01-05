@@ -9,7 +9,9 @@
   <body>
     <div class="container">
       <header>
-        <a href="../condicionales.html" class="btn-volver">← Volver al índice</a>
+        <a href="../condicionales.html" class="btn-volver"
+          >← Volver al índice</a
+        >
 
         <h1>Ejercicio 3 Cambio de contraseña</h1>
         <p style="color: var(--secondary-color); margin-top: 0.5rem">
@@ -23,8 +25,51 @@
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
     <script src="../js/script.js"></script>
+    <script>
+      // 1. Hardcodeamos las preguntas y respuestas correctas
+      const p1 = "¿Cuál es el nombre de tu primera mascota?";
+      const r1_correcta = "Bulma";
+
+      const p2 = "¿En qué ciudad naciste?";
+      const r2_correcta = "Malaga";
+
+      const p3 = "¿Cuál es tu color favorito?";
+      const r3_correcta = "Azul";
+
+      // 2. Pedimos las respuestas al usuario
+      alert(
+        "Para cambiar tu contraseña, responde las siguientes preguntas de seguridad:"
+      );
+
+      let r1_usuario = prompt(p1);
+      let r2_usuario = prompt(p2);
+      let r3_usuario = prompt(p3);
+
+      // 3. Verificamos si las TRES son correctas (usando &&)
+      // Nota: Usamos .toLowerCase() para que no importe si escribe en mayúsculas o minúsculas
+      if (
+        r1_usuario.toLowerCase() === r1_correcta.toLowerCase() &&
+        r2_usuario.toLowerCase() === r2_correcta.toLowerCase() &&
+        r3_usuario.toLowerCase() === r3_correcta.toLowerCase()
+      ) {
+        // Si todo es correcto, pedimos la nueva contraseña
+        let nuevaPassword = prompt(
+          "✅ Identidad verificada. Introduce tu nueva contraseña:"
+        );
+        alert("¡Éxito! Tu contraseña ha sido cambiada correctamente.");
+      } else {
+        // Si falla al menos una
+        alert(
+          "❌ Error: Alguna de las respuestas es incorrecta. No puedes cambiar la contraseña."
+        );
+      }
+    </script>
   </body>
 </html>

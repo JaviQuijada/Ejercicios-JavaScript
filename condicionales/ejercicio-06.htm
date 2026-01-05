@@ -9,7 +9,9 @@
   <body>
     <div class="container">
       <header>
-        <a href="../condicionales.html" class="btn-volver">← Volver al índice</a>
+        <a href="../condicionales.html" class="btn-volver"
+          >← Volver al índice</a
+        >
 
         <h1>Ejercicio 6 Sandwich</h1>
         <p style="color: var(--secondary-color); margin-top: 0.5rem">
@@ -26,8 +28,90 @@
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
     <script src="../js/script.js"></script>
+    <script>
+      // Listas de opciones válidas (Arrays)
+      const panes = ["blanco", "negro", "integral"];
+      const ing1 = ["tomate", "lechuga", "pimiento"];
+      const ing2 = ["cebolla", "aceituna", "pepino"];
+      const aderezos = ["mostaza", "mayonesa", "picante"];
+      const gaseosas = ["coca cola", "pepsi", "sprite"];
+
+      let pedidoFinal = "Tu sándwich tiene: ";
+      let incompleto = false;
+
+      // PASO 1: PAN
+      let eleccionPan = prompt(
+        "Elija tipo de pan: blanco, negro, integral"
+      ).toLowerCase();
+      if (panes.includes(eleccionPan)) {
+        pedidoFinal += `\n- Pan: ${eleccionPan}`;
+      } else {
+        incompleto = true;
+        alert("Opción de pan no válida. El pedido saldrá incompleto.");
+      }
+
+      // PASO 2: INGREDIENTE 1
+      let eleccionIng1 = prompt(
+        "Elija Ingrediente 1: tomate, lechuga, pimiento"
+      ).toLowerCase();
+      if (ing1.includes(eleccionIng1)) {
+        pedidoFinal += `\n- Ingrediente 1: ${eleccionIng1}`;
+      } else {
+        incompleto = true;
+        alert(
+          "Opción de ingrediente 1 no válida. El pedido saldrá incompleto."
+        );
+      }
+
+      // PASO 3: INGREDIENTE 2
+      let eleccionIng2 = prompt(
+        "Elija Ingrediente 2: cebolla, aceituna, pepino"
+      ).toLowerCase();
+      if (ing2.includes(eleccionIng2)) {
+        pedidoFinal += `\n- Ingrediente 2: ${eleccionIng2}`;
+      } else {
+        incompleto = true;
+        alert(
+          "Opción de ingrediente 2 no válida. El pedido saldrá incompleto."
+        );
+      }
+
+      // PASO 4: ADEREZOS
+      let eleccionAderezo = prompt(
+        "Elija Aderezo: mostaza, mayonesa, picante"
+      ).toLowerCase();
+      if (aderezos.includes(eleccionAderezo)) {
+        pedidoFinal += `\n- Aderezo: ${eleccionAderezo}`;
+      } else {
+        incompleto = true;
+        alert("Opción de aderezo no válida. El pedido saldrá incompleto.");
+      }
+
+      // PASO 5: GASEOSA
+      let eleccionGaseosa = prompt(
+        "Elija Gaseosa: Coca Cola, Pepsi, Sprite"
+      ).toLowerCase();
+      if (gaseosas.includes(eleccionGaseosa)) {
+        pedidoFinal += `\n- Bebida: ${eleccionGaseosa}`;
+      } else {
+        incompleto = true;
+        alert("Opción de gaseosa no válida. El pedido saldrá incompleto.");
+      }
+
+      // RESULTADO FINAL
+      if (incompleto) {
+        alert(
+          "⚠️ ATENCIÓN: El pedido está incompleto debido a errores en la elección."
+        );
+      }
+      alert("RESUMEN DE TU PEDIDO:\n" + pedidoFinal);
+    </script>
   </body>
 </html>

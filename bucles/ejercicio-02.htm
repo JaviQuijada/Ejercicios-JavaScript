@@ -26,8 +26,52 @@
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
     <script src="../js/script.js"></script>
+    <script>
+      // 1. Pedimos los datos iniciales
+      let nombrePlaylist = prompt("Ingrese el nombre de su Playlist:");
+      let cantidadTotal = parseInt(prompt("¿Cuántas canciones desea agregar?"));
+
+      // Creamos un array vacío para guardar los nombres de las canciones
+      let canciones = [];
+
+      // 2. Iniciamos el bucle para pedir las canciones
+      for (let i = 0; i < cantidadTotal; i++) {
+        // Calculamos cuántas faltan
+        let restantes = cantidadTotal - i;
+
+        // Mostramos lo que hay hasta ahora (usamos join para que se vea como lista)
+        let listaActual =
+          canciones.length > 0 ? canciones.join(", ") : "Ninguna todavía";
+
+        // Pedimos la nueva canción informando el estado actual
+        let nuevaCancion = prompt(
+          `Playlist: ${nombrePlaylist}\n` +
+            `Canciones actuales: ${listaActual}\n\n` +
+            `Te quedan ${restantes} canciones por agregar.\n` +
+            `Ingrese el nombre de la canción número ${i + 1}:`
+        );
+
+        // Agregamos la canción al array
+        canciones.push(nuevaCancion);
+      }
+
+      // 3. Resultado final
+      let mensajeFinal = `🎧 Playlist: ${nombrePlaylist}\n\nLista de canciones:\n`;
+
+      // Usamos un bucle para numerar la lista final
+      for (let j = 0; j < canciones.length; j++) {
+        mensajeFinal += `${j + 1}. ${canciones[j]}\n`;
+      }
+
+      alert(mensajeFinal);
+      console.log("Playlist finalizada:", canciones);
+    </script>
   </body>
 </html>

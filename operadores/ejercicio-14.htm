@@ -28,6 +28,33 @@
         </button>
       </main>
     </div>
-    <script src="../js/script.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+      let evaluacion = parseFloat(prompt("Introduce tu evaluación final"));
+
+      if (isNaN(evaluacion)) {
+        console.log("Esto nisiquiera es un número");
+        alert("Esto nisiquiera es un número");
+        evaluacion = parseFloat(prompt("Introduce tu evaluación final"));
+      } else if (evaluacion >= 0 && evaluacion <= 10) {
+        if (evaluacion === 10) {
+          console.log("¡Excelente!");
+          alert("¡Excelente!");
+        } else if (evaluacion >= 8) {
+          console.log("¡Muy bien!");
+          alert("¡Muy bien!");
+        } else if (evaluacion >= 6) {
+          console.log("Aprobado");
+          alert("Aprobado");
+        } else if (evaluacion < 6) {
+          console.log("Reprobando");
+          alert("Reprobando");
+        }
+      } else {
+        console.log("No esta dentro de los valores permitidos de 0 a 10");
+        alert("No esta dentro de los valores permitidos de 0 a 10");
+        evaluacion = parseFloat(prompt("Introduce tu evaluación final"));
+      }
+    </script>
   </body>
 </html>

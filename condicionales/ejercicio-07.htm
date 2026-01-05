@@ -9,7 +9,9 @@
   <body>
     <div class="container">
       <header>
-        <a href="../condicionales.html" class="btn-volver">← Volver al índice</a>
+        <a href="../condicionales.html" class="btn-volver"
+          >← Volver al índice</a
+        >
 
         <h1>Ejercicio 7 Piedra, papel o tijera</h1>
         <p style="color: var(--secondary-color); margin-top: 0.5rem">
@@ -19,8 +21,50 @@
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
     <script src="../js/script.js"></script>
+    <script>
+      // 1. Opciones disponibles
+      const opciones = ["piedra", "papel", "tijera"];
+
+      // 2. Jugada del usuario
+      let jugadaUsuario = prompt("Elije: piedra, papel o tijera").toLowerCase();
+
+      // Validamos que la jugada sea válida
+      if (!opciones.includes(jugadaUsuario)) {
+        alert("Opción no válida. Debes escribir piedra, papel o tijera.");
+      } else {
+        // 3. Jugada de la computadora (Aleatoria)
+        // Math.random() genera un número entre 0 y 1.
+        // Al multiplicarlo por 3 y usar Math.floor, obtenemos 0, 1 o 2.
+        let indiceAleatorio = Math.floor(Math.random() * 3);
+        let jugadaPC = opciones[indiceAleatorio];
+
+        // 4. Lógica del juego
+        let resultado = "";
+
+        if (jugadaUsuario === jugadaPC) {
+          resultado = "¡Es un empate!";
+        } else if (
+          (jugadaUsuario === "piedra" && jugadaPC === "tijera") ||
+          (jugadaUsuario === "papel" && jugadaPC === "piedra") ||
+          (jugadaUsuario === "tijera" && jugadaPC === "papel")
+        ) {
+          resultado = "¡Ganaste tú! 🏆";
+        } else {
+          resultado = "Ganó la computadora 🤖";
+        }
+
+        // 5. Mostrar el mensaje final
+        alert(
+          `Tú elegiste: ${jugadaUsuario}\nLa PC eligió: ${jugadaPC}\n\n${resultado}`
+        );
+      }
+    </script>
   </body>
 </html>

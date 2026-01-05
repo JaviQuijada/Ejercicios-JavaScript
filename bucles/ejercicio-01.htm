@@ -21,8 +21,27 @@
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
     <script src="../js/script.js"></script>
+    <script>
+      console.log("Números impares entre 0 y 20:");
+
+      let mensaje = "Números impares entre 0 y 20:\n"; // Usamos \n para saltar de línea
+
+      for (let i = 0; i <= 20; i++) {
+        if (i % 2 !== 0) {
+          console.log(i); // Esto sigue saliendo en la consola uno por uno
+          mensaje += i + ", "; // Vamos guardando el número en nuestra bolsa (variable)
+        }
+      }
+
+      // Mostramos la bolsa llena una sola vez
+      alert(mensaje);
+    </script>
   </body>
 </html>

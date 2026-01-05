@@ -9,21 +9,62 @@
   <body>
     <div class="container">
       <header>
-        <a href="../condicionales.html" class="btn-volver">← Volver al índice</a>
+        <a href="../condicionales.html" class="btn-volver"
+          >← Volver al índice</a
+        >
 
         <h1>Ejercicio 5 Grupo de letras</h1>
         <p style="color: var(--secondary-color); margin-top: 0.5rem">
-          Crear un programa que pida al usuario ingresar una letra y mostrar en un mensaje a qué grupo pertenece. <br>
-          - grupo A = {a, e, i, o ,u} <br>             
-          - grupo B = {b, c, d, f, g} <br>
-          - grupo C = {h, j, k , l, m} <br>
-          - grupo D = {n, p, q, r} <br>
+          Crear un programa que pida al usuario ingresar una letra y mostrar en
+          un mensaje a qué grupo pertenece. <br />
+          - grupo A = {a, e, i, o ,u} <br />
+          - grupo B = {b, c, d, f, g} <br />
+          - grupo C = {h, j, k , l, m} <br />
+          - grupo D = {n, p, q, r} <br />
           - grupo E = {s, t, v, w, x, y, z}
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
     <script src="../js/script.js"></script>
+    <script>
+      // 1. Definimos los grupos (Arrays)
+      const grupoA = ["a", "e", "i", "o", "u"];
+      const grupoB = ["b", "c", "d", "f", "g"];
+      const grupoC = ["h", "j", "k", "l", "m"];
+      const grupoD = ["n", "p", "q", "r"];
+      const grupoE = ["s", "t", "v", "w", "x", "y", "z"];
+
+      // 2. Pedimos la letra y la convertimos a minúscula para evitar errores
+      let letra = prompt(
+        "Ingresa una letra para saber a qué grupo pertenece:"
+      ).toLowerCase();
+
+      // 3. Verificamos si la entrada es válida (que sea solo una letra)
+      if (letra.length !== 1) {
+        alert("Por favor, introduce solo un carácter.");
+      }
+      // 4. Identificamos el grupo
+      else if (grupoA.includes(letra)) {
+        alert(`La letra '${letra}' pertenece al Grupo A (Vocales).`);
+      } else if (grupoB.includes(letra)) {
+        alert(`La letra '${letra}' pertenece al Grupo B.`);
+      } else if (grupoC.includes(letra)) {
+        alert(`La letra '${letra}' pertenece al Grupo C.`);
+      } else if (grupoD.includes(letra)) {
+        alert(`La letra '${letra}' pertenece al Grupo D.`);
+      } else if (grupoE.includes(letra)) {
+        alert(`La letra '${letra}' pertenece al Grupo E.`);
+      } else {
+        alert(
+          "El carácter ingresado no pertenece a ningún grupo (puede ser un número o símbolo)."
+        );
+      }
+    </script>
   </body>
 </html>

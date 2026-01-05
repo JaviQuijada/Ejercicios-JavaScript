@@ -9,18 +9,77 @@
   <body>
     <div class="container">
       <header>
-        <a href="../condicionales.html" class="btn-volver">← Volver al índice</a>
+        <a href="../condicionales.html" class="btn-volver"
+          >← Volver al índice</a
+        >
 
         <h1>Ejercicio 9 Meses del año</h1>
-        <p>Para los siguientes ejercicios utilizar el condicional **switch** donde sea necesario.</p>
+        <p>
+          Para los siguientes ejercicios utilizar el condicional **switch**
+          donde sea necesario.
+        </p>
         <p style="color: var(--secondary-color); margin-top: 0.5rem">
           Crear un programa que pida al usuario un numero y mostrar en un
           mensaje el nombre del mes correspondiente.
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
     <script src="../js/script.js"></script>
+    <script>
+      // 1. Pedimos el número al usuario y lo convertimos a entero
+      let numeroMes = parseInt(
+        prompt("Introduce el número del mes (1 al 12):")
+      );
+
+      // 2. Usamos switch para evaluar la variable
+      switch (numeroMes) {
+        case 1:
+          alert("Enero");
+          break;
+        case 2:
+          alert("Febrero");
+          break;
+        case 3:
+          alert("Marzo");
+          break;
+        case 4:
+          alert("Abril");
+          break;
+        case 5:
+          alert("Mayo");
+          break;
+        case 6:
+          alert("Junio");
+          break;
+        case 7:
+          alert("Julio");
+          break;
+        case 8:
+          alert("Agosto");
+          break;
+        case 9:
+          alert("Septiembre");
+          break;
+        case 10:
+          alert("Octubre");
+          break;
+        case 11:
+          alert("Noviembre");
+          break;
+        case 12:
+          alert("Diciembre");
+          break;
+        default:
+          // El default se ejecuta si el número no es del 1 al 12
+          alert("❌ Error: Debes ingresar un número entre 1 y 12.");
+          break;
+      }
+    </script>
   </body>
 </html>

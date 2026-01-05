@@ -9,17 +9,37 @@
   <body>
     <div class="container">
       <header>
-        <a href="../condicionales.html" class="btn-volver">← Volver al índice</a>
+        <a href="../condicionales.html" class="btn-volver"
+          >← Volver al índice</a
+        >
 
         <h1>Ejercicio 1 Número par o impar</h1>
         <p style="color: var(--secondary-color); margin-top: 0.5rem">
-          Crear un programa que permita ingresar tres número y muestre si alguno
-          de ellos es mayor a 100
+          Crear un programa que pida al usuario ingresar un numero y mostrar en
+          un mensaje si el valor ingresado es par o impar.
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
-    <script src="../js/script.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+      let num = Number(prompt("Introduce un numero entero"));
+      while (isNaN(num)) {
+        num = Number(
+          prompt("Esto no es un número. Introduce un número entero")
+        );
+      }
+
+      if (num % 2 == 0) {
+        alert(`El número ${num} es par`);
+      } else {
+        alert(`El número ${num} es impar`);
+      }
+    </script>
   </body>
 </html>

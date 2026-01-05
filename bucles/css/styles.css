@@ -169,3 +169,60 @@ header {
   /* Opcional: una sombra muy sutil para que resalte un poco */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+/*-----------------------------------------------------------------------------------------------------*/
+/* Boton de refresh*/
+
+.btn-refresh {
+  padding: 18px 40px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+
+  /* CAMBIO: Colores más apagados y elegantes */
+  background: #2c3e50;
+  background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+
+  color: #ffffff;
+  border: none;
+  border-radius: 50px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  /* CAMBIO: Sombra más sutil (negra con poca opacidad) */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Efecto Hover menos agresivo */
+.btn-refresh:hover {
+  transform: scale(1.05);
+  background: #3e5871; /* Brillo muy ligero al pasar el mouse */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Icono rotando un poco */
+.icon {
+  font-size: 24px;
+}
+
+/* Efecto al pasar el mouse */
+.btn-refresh:hover {
+  transform: scale(1.05) translateY(-3px);
+  box-shadow: 0 15px 30px rgba(0, 210, 255, 0.5);
+  filter: brightness(1.1);
+}
+
+/* Efecto al hacer clic */
+.btn-refresh:active {
+  transform: scale(0.95);
+}
+
+.btn-refresh:hover .icon {
+  transform: rotate(180deg);
+  transition: transform 0.5s ease;
+}

@@ -25,8 +25,63 @@
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
     <script src="../js/script.js"></script>
+    <script>
+      // 1. Pedimos la operación
+      let operacion = prompt(
+        "Elija una operación: SUMA, RESTA, MULTIPLICACION o DIVISION"
+      ).toUpperCase();
+
+      // 2. Pedimos los dos números
+      let num1 = parseFloat(prompt("Ingrese el primer número:"));
+      let num2 = parseFloat(prompt("Ingrese el segundo número:"));
+
+      // 3. Validamos que los datos ingresados sean números
+      if (isNaN(num1) || isNaN(num2)) {
+        alert("Error: Uno de los valores ingresados no es un número.");
+      } else {
+        // 4. Procesamos la operación con switch
+        let resultado;
+
+        switch (operacion) {
+          case "SUMA":
+            resultado = num1 + num2;
+            alert(`El resultado de la suma es: ${resultado}`);
+            break;
+
+          case "RESTA":
+            resultado = num1 - num2;
+            alert(`El resultado de la resta es: ${resultado}`);
+            break;
+
+          case "MULTIPLICACION":
+            resultado = num1 * num2;
+            alert(`El resultado de la multiplicación es: ${resultado}`);
+            break;
+
+          case "DIVISION":
+            // Validación extra: no se puede dividir por cero
+            if (num2 === 0) {
+              alert("Error: No se puede dividir por cero.");
+            } else {
+              resultado = num1 / num2;
+              alert(`El resultado de la división es: ${resultado}`);
+            }
+            break;
+
+          default:
+            alert(
+              "Operación no válida. Por favor, escriba SUMA, RESTA, MULTIPLICACION o DIVISION."
+            );
+            break;
+        }
+      }
+    </script>
   </body>
 </html>

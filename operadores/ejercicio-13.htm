@@ -27,6 +27,53 @@
         </button>
       </main>
     </div>
-    <script src="../js/script.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+      // 1. Iniciamos la variable fuera para que el bucle pueda usarla
+      let nota;
+      let esValida = false;
+
+      // 2. Bucle de validación: Se repetirá mientras no sea un número entre 1 y 10
+      while (!esValida) {
+        nota = prompt("Del 1 al 10, ¿cuánto te gusta la Pizza?");
+
+        // Convertimos a número
+        nota = parseInt(nota);
+
+        if (nota >= 1 && nota <= 10) {
+          esValida = true; // Salimos del bucle
+        } else {
+          alert(
+            "⚠️ Advertencia: Debes introducir un número válido del 1 al 10."
+          );
+          console.log(
+            "⚠️ Advertencia: Debes introducir un número válido del 1 al 10."
+          );
+        }
+      }
+
+      // 3. Evaluamos los 4 casos posibles
+      if (nota <= 3) {
+        document.write(
+          "<h3>Resultado: Parece que no es lo tuyo. ¡Para gustos los colores! 🍕🚫</h3>"
+        );
+        console.log("Parece que no es lo tuyo. ¡Para gustos los colores!");
+      } else if (nota <= 6) {
+        document.write(
+          "<h3>Resultado: Te gusta, pero podrías vivir sin ella. Ni fu ni fa. 🍕😐</h3>"
+        );
+        console.log("Te gusta, pero podrías vivir sin ella. Ni fu ni fa.");
+      } else if (nota <= 8) {
+        document.write(
+          "<h3>Resultado: ¡Está muy buena! Es de tus comidas preferidas. 🍕😋</h3>"
+        );
+        console.log("¡Está muy buena! Es de tus comidas preferidas.");
+      } else {
+        document.write(
+          "<h3>Resultado: ¡Te apasiona! Podrías comer pizza todos los días. 🍕❤️</h3>"
+        );
+        console.log("¡Te apasiona! Podrías comer pizza todos los días.");
+      }
+    </script>
   </body>
 </html>
