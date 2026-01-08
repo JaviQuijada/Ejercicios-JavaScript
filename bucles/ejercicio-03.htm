@@ -9,9 +9,7 @@
   <body>
     <div class="container">
       <header>
-        <a href="../condicionales.html" class="btn-volver"
-          >← Volver al índice</a
-        >
+        <a href="../bucles.html" class="btn-volver">← Volver al índice</a>
 
         <h1>Ejercicio 3 Número mayor o menor</h1>
         <p>Bucle `for`</p>
@@ -28,7 +26,53 @@
         <button type="button" class="btn-refresh" onclick="location.reload()">
           <span class="icon">↻</span> Actualizar Página
         </button>
-      </main>    </div>
+      </main>
+    </div>
     <script src="../js/script.js"></script>
+    <script>
+      // 1. Preguntar el modo (Mayor o Menor)
+      let opcion = prompt(
+        "¿Deseas buscar el 'mayor' o el 'menor'?"
+      ).toLowerCase();
+
+      while (opcion !== "mayor" && opcion !== "menor") {
+        opcion = prompt(
+          "Opcion incorrecta. Introduzca 'mayor' o el 'menor'"
+        ).toLowerCase();
+      }
+
+      // 2. Preguntar la cantidad de números
+      let cantidad = parseInt(prompt("¿Entre cuántos números deseas buscar?"));
+
+      if (isNaN(cantidad) || cantidad <= 0) {
+        console.log("Por favor, ingresa un número válido.");
+      } else {
+        // 3. Pedir el primer número para inicializar la referencia
+        let resultado = parseFloat(
+          prompt(`Ingresa el número 1 de ${cantidad}:`)
+        );
+
+        // 4. Ciclo para comparar los números restantes
+        for (let i = 2; i <= cantidad; i++) {
+          let numeroActual = parseFloat(
+            prompt(`Ingresa el número ${i} de ${cantidad}:`)
+          );
+
+          if (opcion === "mayor") {
+            if (numeroActual > resultado) {
+              resultado = numeroActual;
+            }
+          } else if (opcion === "menor") {
+            if (numeroActual < resultado) {
+              resultado = numeroActual;
+            }
+          }
+        }
+
+        // 5. Mostrar el resultado final
+        alert(`El número ${opcion} es: ${resultado}`);
+        console.log(`El número ${opcion} es: ${resultado}`);
+      }
+    </script>
   </body>
 </html>

@@ -9,9 +9,7 @@
   <body>
     <div class="container">
       <header>
-        <a href="../condicionales.html" class="btn-volver"
-          >← Volver al índice</a
-        >
+        <a href="../bucles.html" class="btn-volver">← Volver al índice</a>
 
         <h1>Ejercicio 4 Factorial</h1>
         <p>Bucle `for`</p>
@@ -26,7 +24,32 @@
         <button type="button" class="btn-refresh" onclick="location.reload()">
           <span class="icon">↻</span> Actualizar Página
         </button>
-      </main>    </div>
+      </main>
+    </div>
     <script src="../js/script.js"></script>
+    <script>
+      // 1. Pedir el número y validar con un bucle while
+      let num = parseInt(prompt("Introduzca número a calcular"));
+
+      while (isNaN(num) || num < 0) {
+        // El factorial de 0 es 1, así que incluimos el 0
+        num = parseInt(
+          prompt(
+            "Opción no válida. Ingrese un número entero mayor o igual a cero:"
+          )
+        );
+      }
+
+      // 2. Calcular el factorial
+      let resultado = 1; // Empezamos en 1 porque es el elemento neutro de la multiplicación
+
+      // El bucle va desde el número hacia abajo hasta el 2
+      for (let i = num; i > 1; i--) {
+        resultado = resultado * i;
+      }
+
+      // 3. Mostrar resultado
+      alert(`El factorial de ${num} es: ${resultado}`);
+    </script>
   </body>
 </html>
