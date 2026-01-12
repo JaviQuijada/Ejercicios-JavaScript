@@ -33,5 +33,70 @@
       </main>
     </div>
     <script src="../js/script.js"></script>
+    <script>
+      // 1. Variables de estado
+      let rachaActual = 0;
+      let rachaMaxima = 0;
+      let continuar = true;
+
+      const opciones = ["cara", "cruz"];
+
+      alert(
+        "🪙 ¡Bienvenido al juego de Cara o Cruz!\nEscribe 'SALIR' para terminar."
+      );
+
+      // 2. Bucle principal
+      while (continuar) {
+        let eleccionUsuario = prompt(
+          `Racha actual: ${rachaActual}\nRacha máxima: ${rachaMaxima}\n\n` +
+            "¿Cara o Cruz? (o escribe SALIR):"
+        );
+
+        // Verificamos si el usuario quiere salir o si canceló el prompt
+        if (
+          eleccionUsuario === null ||
+          eleccionUsuario.toUpperCase() === "SALIR"
+        ) {
+          continuar = false;
+          break;
+        }
+
+        eleccionUsuario = eleccionUsuario.toLowerCase();
+
+        // Validamos que la opción sea correcta
+        if (!opciones.includes(eleccionUsuario)) {
+          alert("⚠️ Por favor, elige una opción válida: CARA, CRUZ o SALIR.");
+          continue; // Salta al inicio del bucle de nuevo
+        }
+
+        // 3. Generar resultado aleatorio (0 o 1)
+        let resultadoAleatorio = opciones[Math.floor(Math.random() * 2)];
+
+        // 4. Comparar y actualizar contadores
+        if (eleccionUsuario === resultadoAleatorio) {
+          rachaActual++;
+          alert(
+            `✨ ¡Acertaste! Salió ${resultadoAleatorio}.\nLlevas ${rachaActual} seguidas.`
+          );
+
+          // Actualizar el récord si la racha actual lo supera
+          if (rachaActual > rachaMaxima) {
+            rachaMaxima = rachaActual;
+          }
+        } else {
+          alert(
+            `❌ ¡Perdiste! Salió ${resultadoAleatorio}.\nTu racha se reinicia a 0.`
+          );
+          rachaActual = 0;
+        }
+      }
+
+      // 5. Mensaje de despedida
+      alert(
+        `👋 Gracias por jugar.\n` +
+          `Tu mayor racha de aciertos seguidos fue: ${rachaMaxima}.\n` +
+          `¡Hasta la próxima!`
+      );
+    </script>
   </body>
 </html>

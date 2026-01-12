@@ -37,10 +37,31 @@
     </div>
     <script src="../js/script.js"></script>
     <script>
-      let numVueltas = parseInt(prompt('Introduzca el número de vueltas del corredor'));
-      for (i = numVueltas; i > 0; i--) {
-        
+      let numVueltas = parseInt(
+        prompt("Introduzca el número de vueltas del corredor")
+      );
+
+      let tiempos = [];
+      let sumaTiempos = 0;
+
+      for (i = 1; i <= numVueltas; i++) {
+        let tiempo = parseFloat(prompt("Ingrese el tiempo de vuelta"));
+
+        tiempos.push(tiempo);
+        sumaTiempos += tiempo;
       }
+
+      let promedio = sumaTiempos / numVueltas;
+
+      let mensaje = `📊 Reporte de Entrenamiento:\n\n`;
+
+      for (let j = 0; j < tiempos.length; j++) {
+        mensaje += `Vuelta ${j + 1}: ${tiempos[j]}s\n`;
+      }
+
+      mensaje += `\n⏱ Promedio: ${promedio.toFixed(2)}s`;
+
+      alert(mensaje);
     </script>
   </body>
 </html>

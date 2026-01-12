@@ -40,5 +40,18 @@
       </main>
     </div>
     <script src="../js/script.js"></script>
+    <script>
+      let dibujoCompleto = ""; // Aquí guardaremos todo el triángulo
+
+      for (let i = 1; i <= 13; i++) {
+        // Agregamos los asteriscos correspondientes a la línea i
+        // y un salto de línea (\n) al final
+        dibujoCompleto += "*".repeat(i) + "\n";
+      }
+
+      // Mostramos el resultado final una sola vez
+      alert(dibujoCompleto);
+      console.log(dibujoCompleto);
+    </script>
   </body>
 </html>

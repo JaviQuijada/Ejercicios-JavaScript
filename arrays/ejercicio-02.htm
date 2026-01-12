@@ -9,9 +9,7 @@
   <body>
     <div class="container">
       <header>
-        <a href="../condicionales.html" class="btn-volver"
-          >← Volver al índice</a
-        >
+        <a href="../arrays.html" class="btn-volver">← Volver al índice</a>
 
         <h1>Ejercicio 2 Menor número</h1>
         <p>Estructuras de datos: Arrays</p>
@@ -27,8 +25,46 @@
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
     <script src="../js/script.js"></script>
+    <script>
+      let entrada = prompt("Ingrese números separados por espacios:");
+      let partes = entrada.split(" ");
+
+      let numeros = [];
+      // 1. Iniciamos el menor con el primer número que encontremos
+      let menor;
+
+      for (let i = 0; i < partes.length; i++) {
+        let num = Number(partes[i]);
+
+        if (!isNaN(num)) {
+          numeros.push(num);
+
+          // 2. Lógica para encontrar el menor
+          // Si es el primer número que procesamos (i === 0)
+          // o si el número actual es más pequeño que el que ya teníamos guardado
+          if (i === 0 || num < menor) {
+            menor = num;
+          }
+        }
+      }
+
+      // 3. Resultado
+      if (numeros.length > 0) {
+        alert(
+          `Números ingresados: ${numeros.join(
+            ", "
+          )}\nEl número más pequeño es: ${menor}`
+        );
+      } else {
+        alert("No se ingresaron números válidos.");
+      }
+    </script>
   </body>
 </html>

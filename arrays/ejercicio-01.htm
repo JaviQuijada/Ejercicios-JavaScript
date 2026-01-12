@@ -9,27 +9,59 @@
   <body>
     <div class="container">
       <header>
-        <a href="../condicionales.html" class="btn-volver"
-          >← Volver al índice</a
-        >
+        <a href="../arrays.html" class="btn-volver">← Volver al índice</a>
 
         <h1>Ejercicio 1 Saludos</h1>
         <p>Estructuras de datos: Arrays</p>
         <p style="color: var(--secondary-color); margin-top: 0.5rem">
-          Crear un programa que pida ingresar nombres separados por espacios y devuelva un mensaje que contenga un saludo a cada persona. Ejemplo: <br>
+          Crear un programa que pida ingresar nombres separados por espacios y
+          devuelva un mensaje que contenga un saludo a cada persona. Ejemplo:
+          <br />
 
-          ```javascript  <br>
-          // Ingrese nombres: Ada Greta Grace <br>
-          
-          // ¡Hola Ada! <br>
-          // ¡Hola Greta! <br>
-          // ¡Hola Grace! <br>
+          ```javascript <br />
+          // Ingrese nombres: Ada Greta Grace <br />
+
+          // ¡Hola Ada! <br />
+          // ¡Hola Greta! <br />
+          // ¡Hola Grace! <br />
           ```
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
     <script src="../js/script.js"></script>
+    <script>
+      // 1. Pedimos la cadena de nombres
+      let entrada = prompt(
+        "Ingrese nombres separados por espacios (Ej: Ada Greta Grace):"
+      );
+
+      if (entrada) {
+        // 2. Convertimos el texto en un Array
+        // .split(" ") corta el texto cada vez que encuentra un espacio
+        let nombres = entrada.split(" ");
+
+        let mensajeFinal = "";
+
+        // 3. Recorremos el array para construir los saludos
+        for (let i = 0; i < nombres.length; i++) {
+          // Validamos que no sea un espacio vacío (por si el usuario puso doble espacio)
+          if (nombres[i].trim() !== "") {
+            mensajeFinal += `¡Hola ${nombres[i]}!\n`;
+          }
+        }
+
+        // 4. Mostramos el resultado
+        alert(mensajeFinal);
+        console.log(mensajeFinal);
+      } else {
+        alert("No ingresaste ningún nombre.");
+      }
+    </script>
   </body>
 </html>

@@ -35,5 +35,67 @@
       </main>
     </div>
     <script src="../js/script.js"></script>
+    <script>// 1. Configuración inicial
+      const opciones = ["piedra", "papel", "tijera"];
+      let puntosUsuario = 0;
+      let puntosPC = 0;
+      
+      let totalRondas = parseInt(prompt("¿Cuántas rondas quieres jugar?"));
+      
+      // 2. Bucle principal de rondas
+      for (let i = 1; i <= totalRondas; i++) {
+          let rondasRestantes = totalRondas - i;
+          let jugadaUsuario = prompt(`Ronda ${i} de ${totalRondas}\nElije: piedra, papel o tijera`).toLowerCase();
+      
+          // Validamos entrada
+          if (!opciones.includes(jugadaUsuario)) {
+              alert("Opción no válida. Pierdes esta ronda por error de escritura.");
+              puntosPC++; // Penalización
+          } else {
+              // Jugada de la PC
+              let indiceAleatorio = Math.floor(Math.random() * 3);
+              let jugadaPC = opciones[indiceAleatorio];
+      
+              let resultadoRonda = "";
+      
+              // Lógica de quién gana la ronda
+              if (jugadaUsuario === jugadaPC) {
+                  resultadoRonda = "¡Es un empate!";
+              } else if (
+                  (jugadaUsuario === "piedra" && jugadaPC === "tijera") ||
+                  (jugadaUsuario === "papel" && jugadaPC === "piedra") ||
+                  (jugadaUsuario === "tijera" && jugadaPC === "papel")
+              ) {
+                  resultadoRonda = "Ganaste esta ronda 🎉";
+                  puntosUsuario++;
+              } else {
+                  resultadoRonda = "La PC ganó esta ronda 🤖";
+                  puntosPC++;
+              }
+      
+              // 3. Mostrar estado parcial (según el ejemplo solicitado)
+              alert(
+                  `Ronda: ${i} de ${totalRondas}\n` +
+                  `🙍‍♀️ Jugadora: ${jugadaUsuario}\n` +
+                  `👾 Computadora: ${jugadaPC}\n\n` +
+                  `${resultadoRonda}\n` +
+                  `Puntaje: ${puntosUsuario} (Jugadora) - ${puntosPC} (Computadora)\n` +
+                  `Rondas restantes: ${rondasRestantes}`
+              );
+          }
+      }
+      
+      // 4. Resultado final del torneo
+      let veredictoFinal = "";
+      if (puntosUsuario > puntosPC) {
+          veredictoFinal = "¡FELICITACIONES! Ganaste el torneo 🏆";
+      } else if (puntosPC > puntosUsuario) {
+          veredictoFinal = "LA COMPUTADORA GANA EL TORNEO 🤖";
+      } else {
+          veredictoFinal = "EL TORNEO TERMINÓ EN EMPATE 🤝";
+      }
+      
+      alert(`FIN DEL JUEGO\nResultado Final: ${puntosUsuario} - ${puntosPC}\n${veredictoFinal}`);
+    </script>
   </body>
 </html>

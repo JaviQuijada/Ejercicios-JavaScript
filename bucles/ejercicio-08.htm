@@ -31,5 +31,38 @@
       </main>
     </div>
     <script src="../js/script.js"></script>
+    <script>
+      // 1. Datos guardados (Credenciales correctas)
+      const usuarioCorrecto = "admin";
+      const passCorrecta = "1234";
+
+      let logueado = false; // Esta variable nos dirá si logró entrar
+
+      // 2. Bucle de 3 intentos
+      for (let i = 1; i <= 3; i++) {
+        let userIngresado = prompt(`Intento ${i} de 3\nIngrese su usuario:`);
+        let passIngresada = prompt(`Intento ${i} de 3\nIngrese su contraseña:`);
+
+        // 3. Verificación
+        if (
+          userIngresado === usuarioCorrecto &&
+          passIngresada === passCorrecta
+        ) {
+          alert("✅ ¡Bienvenido al sistema!");
+          logueado = true;
+          break; // Salimos del bucle porque ya no necesita más intentos
+        } else {
+          // Si no es el último intento, avisamos que falló
+          if (i < 3) {
+            alert(`❌ Datos incorrectos. Te quedan ${3 - i} intentos.`);
+          }
+        }
+      }
+
+      // 4. Mensaje final si agotó los intentos y no logró entrar
+      if (!logueado) {
+        alert("🚫 Has agotado tus 3 intentos. El programa ha terminado.");
+      }
+    </script>
   </body>
 </html>
