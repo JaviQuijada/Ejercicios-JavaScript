@@ -9,7 +9,7 @@
   <body>
     <div class="container">
       <header>
-        <a href="../arrays.html" class="btn-volver">← Volver al índice</a>
+        <a href="../arrays.html" class="btn-volver">← Volver al índice</a>?>
 
         <h1>Ejercicio 4 Contiene elementos</h1>
         <p>Estructuras de datos: Arrays</p>
@@ -34,6 +34,34 @@
         </button>
       </main>
     </div>
-    <script src="../js/script.js"></script>
+    <script>
+      let usuarioValores = prompt(
+        "Ingrese los valores separados por un espacio"
+      );
+      let valores = usuarioValores.split(" ");
+      let usuarioBuscar = prompt("Introduce el valor a buscar");
+
+      let encontrado = false; // Esta es nuestra "bandera"
+
+      // Usamos "of" para obtener el número real, no el índice
+      for (let valor in valores) {
+        // Usamos "===" para comparar
+        if (valor === usuarioBuscar) {
+          encontrado = true;
+          break; // Si ya lo encontramos, dejamos de buscar
+        }
+      }
+
+      // Al terminar el bucle, damos una sola respuesta
+      if (encontrado) {
+        alert(
+          "El valor " +
+            usuarioBuscar +
+            " se encuentra entre los valores originales"
+        );
+      } else {
+        alert("El valor no se encuentra entre los valores originales");
+      }
+    </script>
   </body>
 </html>

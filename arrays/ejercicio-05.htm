@@ -9,9 +9,7 @@
   <body>
     <div class="container">
       <header>
-        <a href="../arrays.html" class="btn-volver"
-          >← Volver al índice</a
-        >
+        <a href="../arrays.html" class="btn-volver">← Volver al índice</a>
 
         <h1>Ejercicio 5 Encontrar índice</h1>
         <p>Estructuras de datos: Arrays</p>
@@ -39,5 +37,30 @@
       </main>
     </div>
     <script src="../js/script.js"></script>
+    <script>
+      let entrada = prompt("Ingrese valores separados por espacios:");
+      let valores = entrada.split(" ");
+      let buscado = prompt("Ingrese valor a buscar:");
+
+      let indiceEncontrado = -1;
+
+      for (let i = 0; i < valores.length; i++) {
+        if (valores[i] === buscado) {
+          indiceEncontrado = i;
+          break;
+        }
+      }
+
+      if (indiceEncontrado !== -1) {
+        alert(
+          "El valor " +
+            buscado +
+            " se encuentra en el índice " +
+            indiceEncontrado
+        );
+      } else {
+        alert("El valor no se ha encontrado.");
+      }
+    </script>
   </body>
 </html>

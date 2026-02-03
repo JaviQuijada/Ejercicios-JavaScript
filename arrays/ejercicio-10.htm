@@ -9,9 +9,7 @@
   <body>
     <div class="container">
       <header>
-        <a href="../arrays.html" class="btn-volver"
-          >← Volver al índice</a
-        >
+        <a href="../arrays.html" class="btn-volver">← Volver al índice</a>
 
         <h1>Ejercicio 10 Chat</h1>
         <p>Estructuras de datos: Arrays</p>
@@ -50,5 +48,36 @@
       </main>
     </div>
     <script src="../js/script.js"></script>
+    <script>
+      //Pedimos al usuario los nombres
+      let entrada = prompt(
+        "Introduce nombres de usuarios conectados separados por espacios"
+      );
+      while (entrada === "") {
+        entrada = prompt(
+          "No has introducido nada. Introduce nombres de usuarios conevtados separado por un espacio"
+        );
+      }
+
+      //Creamos una array partiendo de los nombres ingresados separados por espacios
+      let usuarios = entrada.split(" ");
+
+      //Creamos otra array con la cantidad de usuarios ingresados
+      let cantidad = usuarios.length;
+
+      //Condicionados por la cantidad de usuarios generamos un mensaje
+      if (cantidad === 1) {
+        alert(`Usuario ${usuarios[0]} esta conectado`);
+      } else if (cantidad === 2) {
+        alert(
+          `Usuaruio ${usuarios[0]} y usuario ${usuarios[1]} estan conectaodos`
+        );
+      } else if (cantidad > 2) {
+        let extras = cantidad - 2;
+        alert(
+          `Usuaruio ${usuarios[0]}, usuario ${usuarios[1]} y ${extras} mas estan conectaodos `
+        );
+      }
+    </script>
   </body>
 </html>

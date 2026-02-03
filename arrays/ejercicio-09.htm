@@ -9,9 +9,7 @@
   <body>
     <div class="container">
       <header>
-        <a href="../arrays.html" class="btn-volver"
-          >← Volver al índice</a
-        >
+        <a href="../arrays.html" class="btn-volver">← Volver al índice</a>
 
         <h1>Ejercicio 9 Perros y gatos</h1>
         <p>Estructuras de datos: Arrays</p>
@@ -34,5 +32,27 @@
       </main>
     </div>
     <script src="../js/script.js"></script>
+    <script>
+      //Pedimos al usuario que introduzca los datros
+      let entrada = prompt("Ingrese perros:🐶 y gatos:🐱 ");
+
+      //Convertimos la entrada del usuario en una array
+      let animales = Array.from(entrada);
+
+      //Creamos dos listas vacias, una para perros y otra para gatos
+      let perros = "";
+      let gatos = "";
+
+      //Recorremo la array para separar perros y gatos de ella
+      for (animal of animales) {
+        if (animal === "🐶") {
+          perros += "🐶";
+        } else if (animal === "🐱") {
+          gatos += "🐱";
+        }
+      }
+      //Mostramos por pantalla el contenido de cada lista unidos.
+      alert(`Perros: ${perros} gatos: ${gatos}`);
+    </script>
   </body>
 </html>

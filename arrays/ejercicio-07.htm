@@ -9,9 +9,7 @@
   <body>
     <div class="container">
       <header>
-        <a href="../arrays.html" class="btn-volver"
-          >← Volver al índice</a
-        >
+        <a href="../arrays.html" class="btn-volver">← Volver al índice</a>
 
         <h1>Ejercicio 7 Frutas</h1>
         <p>Estructuras de datos: Arrays</p>
@@ -34,5 +32,25 @@
       </main>
     </div>
     <script src="../js/script.js"></script>
+    <script>
+      let entrada = prompt("Ingrese frutas (🍎, 🍐, 🍑):");
+
+      let frutas = Array.from(entrada);
+      let manzanas = 0;
+      let peras = 0;
+      let duraznos = 0;
+
+      for (let fruta of frutas) {
+        if (fruta === "🍎") {
+          manzanas++;
+        } else if (fruta === "🍐") {
+          peras++;
+        } else if (fruta === "🍑") {
+          duraznos++;
+        }
+      }
+
+      alert(`Hay ${manzanas} 🍎, ${peras} 🍐 y ${duraznos} 🍑`);
+    </script>
   </body>
 </html>

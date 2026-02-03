@@ -9,9 +9,7 @@
   <body>
     <div class="container">
       <header>
-        <a href="../arrays.html" class="btn-volver"
-          >← Volver al índice</a
-        >
+        <a href="../arrays.html" class="btn-volver">← Volver al índice</a>
 
         <h1>Ejercicio 6 Sam y Frodo</h1>
         <p>Estructuras de datos: Arrays</p>
@@ -38,5 +36,26 @@
       </main>
     </div>
     <script src="../js/script.js"></script>
+    <script>
+      let entrada = prompt(
+        "Ingrese los nombres de la comunidad (separados por espacios):"
+      );
+      let nombres = entrada.toLowerCase().split(" ");
+
+      let posicionSam = nombres.indexOf("sam");
+      let posicionFrodo = nombres.indexOf("frodo");
+
+      if (posicionSam !== -1 && posicionFrodo !== -1) {
+        let diferencia = Math.abs(posicionSam - posicionFrodo);
+
+        if (diferencia === 1) {
+          alert("Sam y Frodo están juntos, ¡Frodo está a salvo!");
+        } else {
+          alert("Sam y Frodo están separados, ¡Frodo está en peligro!");
+        }
+      } else {
+        alert("Parece que Sam o Frodo (o ambos) no están en la lista.");
+      }
+    </script>
   </body>
 </html>

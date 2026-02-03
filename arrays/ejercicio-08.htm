@@ -9,9 +9,7 @@
   <body>
     <div class="container">
       <header>
-        <a href="../arrays.html" class="btn-volver"
-          >← Volver al índice</a
-        >
+        <a href="../arrays.html" class="btn-volver">← Volver al índice</a>
 
         <h1>Ejercicio 8 Comida para monos</h1>
         <p>Estructuras de datos: Arrays</p>
@@ -36,5 +34,41 @@
       </main>
     </div>
     <script src="../js/script.js"></script>
+    <script>
+      let entrada = prompt("Ingrese monos y bananas (🐵🍌):");
+
+      // Pedimos la cantidad y la convertimos a número
+      let porMonoInput = prompt("¿Cuántas bananas come cada mono?");
+      let porMono = Number(porMonoInput);
+      while (isNaN(Number(porMonoInput))) {
+        alert("Error: Por favor, introduce un número válido (ejemplo: 2).");
+        porMonoInput = prompt("¿Cuántas bananas come cada mono?");
+      }
+      // Si es un número, procedemos con la lógica normal
+      let lista = Array.from(entrada);
+      let cantidadMonos = 0;
+      let cantidadBananas = 0;
+
+      for (let item of lista) {
+        if (item === "🐵") {
+          cantidadMonos++;
+        } else if (item === "🍌") {
+          cantidadBananas++;
+        }
+      }
+
+      let bananasNecesarias = cantidadMonos * porMono;
+
+      if (cantidadBananas >= bananasNecesarias) {
+        alert(
+          `¡Genial! Con ${cantidadBananas} 🍌 hay suficiente para los ${cantidadMonos} 🐵.`
+        );
+      } else {
+        let faltan = bananasNecesarias - cantidadBananas;
+        alert(
+          `¡Oh no! Faltan ${faltan} 🍌 para que los monos estén satisfechos. 😭`
+        );
+      }
+    </script>
   </body>
 </html>
