@@ -9,9 +9,7 @@
   <body>
     <div class="container">
       <header>
-        <a href="../arrays.html" class="btn-volver"
-          >← Volver al índice</a
-        >
+        <a href="../arrays.html" class="btn-volver">← Volver al índice</a>
 
         <h1>Ejercicio 12 Plantas</h1>
         <p>Estructuras de datos: Arrays</p>
@@ -37,5 +35,45 @@
       </main>
     </div>
     <script src="../js/script.js"></script>
+
+    <script>
+      // 1. Pedimos la entrada al usuario
+      let entrada = prompt(
+        "Introduce tu jardin usando estos emoticonos(🌷🌻🌸🌺🌼🌱🐛💀). teniendo en cuenta que la oruga (🐛) mata a las plantas y la calavera (💀) mata a la oruga coloca los emogis como prefieras y a ver que tal queda tu jardin (Ej: 🌱🌻🌱🐛🌱🌸🌱🌱💀🌷)"
+      );
+
+      // 2. Convertimos el texto en un Array (usando el operador spread para no romper los emojis)
+      let jardin = [...entrada];
+
+      // 3. Buscamos las posiciones clave
+      let indiceOruga = jardin.indexOf("🐛");
+      let indiceVeneno = jardin.indexOf("💀");
+
+      // 4. Lógica de supervivencia
+      let sobrevivientes = [];
+
+      if (indiceOruga === -1) {
+        // Si no hay oruga, nadie come nada
+        sobrevivientes = jardin;
+      } else {
+        // A) Las que están a la IZQUIERDA de la oruga sobreviven
+        for (let i = 0; i < indiceOruga; i++) {
+          sobrevivientes.push(jardin[i]);
+        }
+
+        // B) Las que están a la DERECHA del veneno sobreviven
+        // Solo si hay veneno y este está después de la oruga
+        if (indiceVeneno !== -1 && indiceVeneno > indiceOruga) {
+          for (let i = indiceVeneno + 1; i < jardin.length; i++) {
+            sobrevivientes.push(jardin[i]);
+          }
+        }
+      }
+
+      // 5. Mostrar el resultado
+      let resultado = sobrevivientes.join("");
+      console.log("Plantas sobrevivientes: " + resultado);
+      alert("Plantas sobrevivientes: " + resultado);
+    </script>
   </body>
 </html>

@@ -9,18 +9,16 @@
   <body>
     <div class="container">
       <header>
-        <a href="../arrays.html" class="btn-volver"
-          >← Volver al índice</a
-        >
+        <a href="../arrays.html" class="btn-volver">← Volver al índice</a>
 
         <h1>Ejercicio 11 Germinación</h1>
         <p>Estructuras de datos: Arrays</p>
         <p style="color: var(--secondary-color); margin-top: 0.5rem">
-          Crear un programa que permita ingresar una lista de flores y plantines
-          (🌱). La lista debe comenzar con una flor, si no lo hace debe mostrar
-          un mensaje de error. El programa debe convertir los plantines en
-          flores, tomando como referencia la primera flor que encuentre a su
-          izquierda. Ejemplo: <br />
+          Crear un programa que permita ingresar una lista de flores (🌷) y
+          plantines (🌱). La lista debe comenzar con una flor, si no lo hace
+          debe mostrar un mensaje de error. El programa debe convertir los
+          plantines en flores, tomando como referencia la primera flor que
+          encuentre a su izquierda. Ejemplo: <br />
 
           ```javascro[t <br />
           // Ingrese flores y plantines: 🌷🌱🌱🌱🌻🌱🌱🌸🌱🌱🌱🌱 <br />
@@ -36,5 +34,70 @@
       </main>
     </div>
     <script src="../js/script.js"></script>
+    <script>
+      let entrada = "";
+      let esValido = false;
+
+      // Esta es nuestra "lista blanca" (un simple texto con lo permitido)
+      const permitidos = "🌷🌻🌸🌺🌼🌱";
+
+      while (!esValido) {
+        entrada = prompt(
+          "Introduce flores (🌷🌻🌸🌺🌼) y plantines (🌱), empezando siempre por una flor (Ej: 🌷🌱🌱🌻🌱):"
+        );
+
+        if (entrada === null) break;
+
+        const jardinArray = [...entrada]; // Convertimos a array para no romper emojis
+        let tieneError = false;
+
+        // 1. Validar que no esté vacío
+        if (jardinArray.length === 0) {
+          alert("¡No has escrito nada!");
+          continue;
+        }
+
+        // 2. Validar que empiece con una flor (cualquiera menos el plantín)
+        const primeraPosicion = jardinArray[0];
+        if (primeraPosicion === "🌱" || !permitidos.includes(primeraPosicion)) {
+          alert("❌ Error: Debe empezar con una flor (🌷🌻🌸🌺🌼).");
+          continue;
+        }
+
+        // 3. Validar carácter por carácter
+        for (let i = 0; i < jardinArray.length; i++) {
+          let caracterActual = jardinArray[i];
+
+          // Si el caracter actual NO está en nuestra lista de permitidos...
+          if (!permitidos.includes(caracterActual)) {
+            alert(
+              `❌ Error: El caracter "${caracterActual}" no está permitido.`
+            );
+            tieneError = true;
+            break; // Dejamos de revisar este intento
+          }
+        }
+
+        // Si pasamos todas las pruebas, salimos del while
+        if (!tieneError) {
+          esValido = true;
+        }
+      }
+
+      // Lógica de germinación (solo si es válido)
+      if (esValido) {
+        let jardin = [...entrada];
+        let florReferencia = jardin[0];
+
+        for (let i = 0; i < jardin.length; i++) {
+          if (jardin[i] === "🌱") {
+            jardin[i] = florReferencia;
+          } else {
+            florReferencia = jardin[i];
+          }
+        }
+        alert("¡Germinado!: " + jardin.join(""));
+      }
+    </script>
   </body>
 </html>
