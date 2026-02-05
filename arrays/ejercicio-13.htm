@@ -9,9 +9,7 @@
   <body>
     <div class="container">
       <header>
-        <a href="../arrays.html" class="btn-volver"
-          >← Volver al índice</a
-        >
+        <a href="../arrays.html" class="btn-volver">← Volver al índice</a>
 
         <h1>Ejercicio 13 Tragamonedas</h1>
         <p>Estructuras de datos: Arrays</p>
@@ -38,5 +36,24 @@
       </main>
     </div>
     <script src="../js/script.js"></script>
+    <script>
+      let entrada = prompt("Ingrese 5 símbolos (ej: ⭐️⭐️⭐️⭐️⭐️):");
+
+      if (entrada !== null && entrada.trim() !== "") {
+        // 1. Convertimos a array respetando emojis y tomamos solo los primeros 5
+        const simbolos = [...entrada].slice(0, 5);
+
+        // 2. Comprobamos si todos son iguales
+        // El método .every revisa si TODOS los elementos cumplen la condición
+        const todosIguales = simbolos.every((s) => s === simbolos[0]);
+
+        // 3. Mostramos el resultado
+        if (todosIguales && simbolos.length === 5) {
+          alert("¡Felicitaciones! Has ganado 🏆");
+        } else {
+          alert("¡Has perdido! Inténtalo nuevamente ❌");
+        }
+      }
+    </script>
   </body>
 </html>

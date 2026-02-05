@@ -9,9 +9,7 @@
   <body>
     <div class="container">
       <header>
-        <a href="../arrays.html" class="btn-volver"
-          >← Volver al índice</a
-        >
+        <a href="../arrays.html" class="btn-volver">← Volver al índice</a>
 
         <h1>Ejercicio 14 Revertir array</h1>
         <p>Estructuras de datos: Arrays</p>
@@ -34,5 +32,32 @@
       </main>
     </div>
     <script src="../js/script.js"></script>
+    <script>
+      let listaNumeros = prompt("Introduce una lista de números separados por espacios:");
+    
+      // 1. Manejo del "Cancelar" o vacío
+      if (listaNumeros && listaNumeros.trim()) {
+        
+        // 2. Usamos /\s+/ para que no importen los espacios extra
+        const partes = listaNumeros.trim().split(/\s+/);
+    
+        // 3. Validación más estricta
+        // Usamos Number.isNaN y Number(p) para asegurar que sea numérico real
+        const sonNumerosCorrectos = partes.every(p => p !== "" && !isNaN(Number(p)));
+    
+        if (sonNumerosCorrectos) {
+          const numeros = partes.map(Number);
+          
+          // --- TU LÓGICA AQUÍ ---
+          console.log("Array de números listo:", numeros);
+          alert("¡Éxito! Array creado: " + numeros.join(", "));
+          
+        } else {
+          alert("⚠️ Error: Solo se permiten números. Revisa que no hayas puesto letras.");
+        }
+      } else {
+        alert("❌ Operación cancelada o entrada vacía.");
+      }
+    </script>
   </body>
 </html>
