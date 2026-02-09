@@ -9,9 +9,7 @@
   <body>
     <div class="container">
       <header>
-        <a href="../arrays.html" class="btn-volver"
-          >← Volver al índice</a
-        >
+        <a href="../arrays.html" class="btn-volver">← Volver al índice</a>
 
         <h1>Ejercicio 15 Multiplicar números individuales</h1>
         <p>Estructuras de datos: Arrays</p>
@@ -37,6 +35,41 @@
         </button>
       </main>
     </div>
-    <script src="../js/script.js"></script>
+    <script src="./js/script.js"></script>
+    <script>
+      //Pedir datos al usuario. Lista de números y número a multiplicar
+      let entrada = prompt(
+        "Introduce una lista de numeros separados por espacios"
+      );
+      let multiplo = parseInt(prompt("Introduce la cantidad a multiplicar"));
+
+      //Comprobar si el multiplo es o no un numero y de no serlo volver a pedirlo.
+      if (isNaN(multiplo)) {
+        multiplo = parseInt(
+          prompt(
+            "No has introducido un número. Introduce la cantidad a multiplicar"
+          )
+        );
+      }
+
+      //Convertir lista de usuario en array
+      let lista = entrada.trim().split(/\s+/); //.trim() elimina los espacoios al princioio y al final .split(/\s+/) elimina los espacios seguidos como y tabulaciones.
+      lista = lista.map(Number); //Convertir los strings introducidos por el usuario en numeros.
+      lista = lista.filter((n) => !isNaN(n)); //Eliminar todo aquello que no sea un número.
+      console.log(`Números introducidos ${lista}`);
+      alert(`Números introducidos ${lista}`);
+      //Crear un bucle donde cada elemento se multiplique por el número ingresado por el usuario
+      for (i = 0; i < lista.length; i++) {
+        lista[i] = lista[i] * multiplo; //Crear una nueva lista agregando los resultados de la multiplicación
+      }
+
+      //Mostrar por pantalla el resultado
+      console.log(
+        `La lista resultante de los números introducidos multiplicdos por ${multiplo} es ${lista}`
+      );
+      alert(
+        `La lista resultante de los números introducidos multiplicdos por ${multiplo} es ${lista}`
+      );
+    </script>
   </body>
 </html>

@@ -9,9 +9,7 @@
   <body>
     <div class="container">
       <header>
-        <a href="../arrays.html" class="btn-volver"
-          >← Volver al índice</a
-        >
+        <a href="../arrays.html" class="btn-volver">← Volver al índice</a>
 
         <h1>Ejercicio 16 Exterminador</h1>
         <p>Estructuras de datos: Arrays</p>
@@ -34,6 +32,21 @@
         </button>
       </main>
     </div>
-    <script src="../js/script.js"></script>
+    <script src="./js/script.js"></script>
+    <script>
+      const fauna = ["🐱", "🐭", "🐶", "🦊", "🦂", "🦟"];
+      const animales = ["🐱", "🐭", "🐶", "🦊"];
+      const insectos = ["🦂", "🦟"];
+      let entrada = prompt(
+        "introduce la fauna , puedes usar (🐱, 🐭, 🐶, 🦊,🦂,🦟)"
+      );
+      while (entrada === null || !fauna.includes(entrada.trim())) {
+        entrada = prompt(
+          "Has introducido animales no permitidos. Itruduce de nuevo la fauna solo uasando" +
+            fauna.join(" ")
+        );
+      }
+      alert(entrada);
+    </script>
   </body>
 </html>
