@@ -9,9 +9,7 @@
   <body>
     <div class="container">
       <header>
-        <a href="../arrays.html" class="btn-volver"
-          >← Volver al índice</a
-        >
+        <a href="../arrays.html" class="btn-volver">← Volver al índice</a>
 
         <h1>Ejercicio 20 Recortar palabras</h1>
         <p>Estructuras de datos: Arrays</p>
@@ -36,6 +34,33 @@
         </button>
       </main>
     </div>
-    <script src="../js/script.js"></script>
+    <script src="./js/script.js"></script>
+    <script>
+      // --- 1. Pedir los datos al usuario ---
+      let entrada = prompt("Ingrese palabras separadas por espacios:");
+      // ¡Ojo! El prompt siempre devuelve texto, así que el número lo convierto con Number()
+      let limite = Number(prompt("¿A cuántos caracteres quieres recortar?"));
+
+      // --- 2. Convertir la frase en una lista de palabras ---
+      let listaPalabras = entrada.split(" ");
+
+      // --- 3. Usar .map() para recortar cada una ---
+      // El método .map() es perfecto aquí porque quiero transformar TODA la lista
+      let listaRecortada = listaPalabras.map((palabra) => {
+        // El truco está en .slice(). Le digo:
+        // "Empieza en la posición 0 y corta hasta la posición del límite"
+        return palabra.slice(0, limite);
+      });
+
+      // --- 4. Mostrar el resultado final ---
+      // Uso .join(" ") para que la lista vuelva a ser una frase bonita con espacios
+      alert("Las palabras recortadas son: " + listaRecortada.join(" "));
+
+      // Para ver cómo quedó en la consola también:
+      console.log("Original:", listaPalabras);
+      console.log("Recortada:", listaRecortada);
+      alert(`Original: ${listaPalabras}`);
+      alert(`Recortada: ${listaRecortada}`);
+    </script>
   </body>
 </html>

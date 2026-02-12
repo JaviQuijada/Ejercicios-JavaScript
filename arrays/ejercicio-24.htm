@@ -9,9 +9,7 @@
   <body>
     <div class="container">
       <header>
-        <a href="../arrays.html" class="btn-volver"
-          >← Volver al índice</a
-        >
+        <a href="../arrays.html" class="btn-volver">← Volver al índice</a>
 
         <h1>Ejercicio 24 Sudoku</h1>
         <p>Arrays 2D</p>
@@ -44,5 +42,62 @@
       </main>
     </div>
     <script src="../js/script.js"></script>
+    <script>
+      // --- 1. Pedir los 9 números ---
+      let entrada = prompt("Ingresa 9 números separados por espacios:");
+
+      if (entrada !== null) {
+        let numeros = entrada.split(" ").map(Number);
+
+        if (numeros.length !== 9) {
+          alert("¡Error! Tienen que ser exactamente 9 números.");
+        } else {
+          // --- 2. Distribuir en grilla 3x3 ---
+          // Tomo pedazos de 3 en 3 de la lista original
+          let grilla = [
+            numeros.slice(0, 3),
+            numeros.slice(3, 6),
+            numeros.slice(6, 9),
+          ];
+
+          console.log("Grilla generada:", grilla);
+          alert(`Grilla generada ${grilla}`);
+
+          // --- 3. Buscar repetidos ---
+          // Para que sea fácil, voy a meter todas las líneas (filas, columnas y diagonales)
+          // en una sola "gran lista" de listas.
+          let lineas = [];
+
+          // Agregar Filas
+          for (let i = 0; i < 3; i++) lineas.push(grilla[i]);
+
+          // Agregar Columnas
+          for (let j = 0; j < 3; j++) {
+            lineas.push([grilla[0][j], grilla[1][j], grilla[2][j]]);
+          }
+
+          // Agregar Diagonales
+          lineas.push([grilla[0][0], grilla[1][1], grilla[2][2]]); // Diagonal principal
+          lineas.push([grilla[0][2], grilla[1][1], grilla[2][0]]); // Diagonal inversa
+
+          // --- 4. Comprobar si alguna línea tiene repetidos ---
+          // Uso una función "ayudante" para no repetir código
+          let hayRepetidos = lineas.some((linea) => {
+            // Un truco de pro: el Set elimina duplicados automáticamente.
+            // Si el tamaño del Set es menor que el de la línea, ¡hay repetidos!
+            return new Set(linea).size !== linea.length;
+          });
+
+          // --- 5. Resultado ---
+          if (hayRepetidos) {
+            alert(
+              "🚫 Hay números repetidos en alguna fila, columna o diagonal."
+            );
+          } else {
+            alert("✅ ¡Perfecto! No hay repetidos en ninguna línea.");
+          }
+        }
+      }
+    </script>
   </body>
 </html>

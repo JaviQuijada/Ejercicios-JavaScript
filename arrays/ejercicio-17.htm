@@ -9,9 +9,7 @@
   <body>
     <div class="container">
       <header>
-        <a href="../arrays.html" class="btn-volver"
-          >← Volver al índice</a
-        >
+        <a href="../arrays.html" class="btn-volver">← Volver al índice</a>
 
         <h1>Ejercicio 17 Arrays iguales</h1>
         <p>Estructuras de datos: Arrays</p>
@@ -36,5 +34,42 @@
       </main>
     </div>
     <script src="../js/script.js"></script>
+    <script>
+      // ¡A ver! Primero necesito que el usuario me dé las dos listas.
+      // Uso prompt() para que salte la ventanita.
+      let lista1Raw = prompt(
+        "Dime la primera lista de números (con espacios):"
+      );
+      let lista2Raw = prompt("Ahora la segunda lista (con espacios):");
+
+      // Como lo que me dan es un texto largo, lo corto por los espacios para tener arrays.
+      let array1 = lista1Raw.split(" ");
+      let array2 = lista2Raw.split(" ");
+
+      // Ojo aquí: Si las listas no tienen el mismo tamaño, ¡imposible que sean iguales!
+      if (array1.length !== array2.length) {
+        alert(
+          "Las listas no son iguales (tienen distinta cantidad de números)"
+        );
+      } else {
+        // Si tienen el mismo tamaño, tengo que revisar número por número.
+        // El método .every() me sirve genial porque revisa si TODOS cumplen la regla.
+
+        const sonIguales = array1.every((valor, posicion) => {
+          // Comparo el valor de la lista 1 con el que está en la misma posición de la lista 2.
+          console.log(`Revisando: ¿Es ${valor} igual a ${array2[posicion]}?`);
+          return valor === array2[posicion];
+        });
+
+        // Si al final 'sonIguales' es true, es que no falló ninguna comparación.
+        if (sonIguales) {
+          alert("¡Genial! Las listas son exactamente iguales.");
+        } else {
+          alert(
+            "Las listas no son iguales (algún número no coincide o el orden está mal)."
+          );
+        }
+      }
+    </script>
   </body>
 </html>

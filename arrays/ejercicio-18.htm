@@ -9,9 +9,7 @@
   <body>
     <div class="container">
       <header>
-        <a href="../arrays.html" class="btn-volver"
-          >← Volver al índice</a
-        >
+        <a href="../arrays.html" class="btn-volver">← Volver al índice</a>
 
         <h1>Ejercicio 18 Puntajes</h1>
         <p>Estructuras de datos: Arrays</p>
@@ -45,5 +43,59 @@
       </main>
     </div>
     <script src="../js/script.js"></script>
+    <script>
+      // --- PASO 1: Pedir los datos ---
+      // Primero guardo los nombres para que el programa sea personalizado
+      let nombre1 = prompt("Ingrese nombre jugadora 1:");
+      let puntos1Raw = prompt(
+        `Ingrese puntajes de ${nombre1} separados por espacio:`
+      );
+
+      let nombre2 = prompt("Ingrese nombre jugadora 2:");
+      let puntos2Raw = prompt(
+        `Ingrese puntajes de ${nombre2} separados por espacio:`
+      );
+
+      // --- PASO 2: Convertir los textos en listas de verdad ---
+      // Uso .split(" ") para separar y .map(Number) para que la compu sepa que son números y no letras
+      let lista1 = puntos1Raw.split(" ").map(Number);
+      let lista2 = puntos2Raw.split(" ").map(Number);
+
+      // --- PASO 3: Preparar el marcador ---
+      // Estas variables van a ir subiendo de 1 en 1, como un marcador real
+      let victorias1 = 0;
+      let victorias2 = 0;
+
+      // --- PASO 4: ¡A comparar ronda por ronda! ---
+      // Uso un bucle 'for' para ir posición por posición (ronda 0, ronda 1, ronda 2...)
+      for (let i = 0; i < lista1.length; i++) {
+        // Comparo el puntaje de la misma ronda para ambas
+        if (lista1[i] > lista2[i]) {
+          // Gana la jugadora 1 en esta ronda
+          victorias1++;
+          console.log(`Ronda ${i + 1}: Gana ${nombre1}`);
+        } else if (lista2[i] > lista1[i]) {
+          // Gana la jugadora 2 en esta ronda
+          victorias2++;
+          console.log(`Ronda ${i + 1}: Gana ${nombre2}`);
+        } else {
+          // Si son iguales, ¡nadie suma puntos!
+          console.log(`Ronda ${i + 1}: Empate`);
+        }
+      }
+
+      // --- PASO 5: Ver quién ganó el trofeo ---
+      let mensajeFinal = `Resultado: ${victorias1} (${nombre1}) vs ${victorias2} (${nombre2})\n`;
+
+      if (victorias1 > victorias2) {
+        mensajeFinal += `Ganadora: ${nombre1} 🏆`;
+      } else if (victorias2 > victorias1) {
+        mensajeFinal += `Ganadora: ${nombre2} 🏆`;
+      } else {
+        mensajeFinal += "Es un empate final 🤝";
+      }
+
+      alert(mensajeFinal);
+    </script>
   </body>
 </html>

@@ -9,9 +9,7 @@
   <body>
     <div class="container">
       <header>
-        <a href="../arrays.html" class="btn-volver"
-          >← Volver al índice</a
-        >
+        <a href="../arrays.html" class="btn-volver">← Volver al índice</a>
 
         <h1>Ejercicio 23 Cantidad</h1>
         <p>Arrays 2D</p>
@@ -40,5 +38,44 @@
       </main>
     </div>
     <script src="../js/script.js"></script>
+    <script>
+      // --- 1. El usuario introduce la matriz de frutas (o palabras) ---
+      // Formato: manzana pera, manzana, pera uva
+      let entradaMatriz = prompt(
+        "Ingresa la matriz.\nSepara los ítems con ESPACIOS y las filas con COMAS:\n(Ejemplo: 🍎 🍏 🍌, 🍌 🍎, 🍎 🍏)"
+      );
+
+      if (entradaMatriz !== null) {
+        // --- 2. Convertimos el texto en un Array 2D de Strings ---
+        let filas = entradaMatriz.split(",");
+        let matriz = filas.map((fila) => fila.trim().split(" "));
+
+        // --- 3. Preguntamos qué queremos buscar ---
+        let itemABuscar = prompt(
+          "¿Qué ítem quieres contar? (Ejemplo: 🍎 o manzana)"
+        );
+
+        if (itemABuscar !== null) {
+          let contador = 0;
+
+          // --- 4. Recorremos toda la matriz ---
+          // Necesitamos dos bucles porque queremos revisar TODO el contenido
+          for (let i = 0; i < matriz.length; i++) {
+            for (let j = 0; j < matriz[i].length; j++) {
+              // Si el ítem actual es igual al que buscamos, sumamos 1
+              if (matriz[i][j] === itemABuscar) {
+                contador++;
+              }
+            }
+          }
+
+          // --- 5. Resultado final ---
+          alert(`En la matriz hay ${contador} unidad(es) de: ${itemABuscar}`);
+          console.log("Matriz procesada:", matriz);
+        }
+      } else {
+        alert("Operación cancelada.");
+      }
+    </script>
   </body>
 </html>

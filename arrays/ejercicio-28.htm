@@ -9,9 +9,7 @@
   <body>
     <div class="container">
       <header>
-        <a href="../arrays.html" class="btn-volver"
-          >← Volver al índice</a
-        >
+        <a href="../arrays.html" class="btn-volver">← Volver al índice</a>
 
         <h1>Ejercicio 28 Canciones y Artistas</h1>
         <p>Arrays 2D</p>
@@ -37,5 +35,92 @@
       </main>
     </div>
     <script src="../js/script.js"></script>
+    <script>
+      // --- 1. Nuestra base de datos de música ---
+      let biblioteca = {};
+
+      let ejecutar = true;
+
+      while (ejecutar) {
+        // Definimos el menú de opciones
+        let menu = `🎵 SPOTIFY MINI - MENÚ
+--------------------------
+1. AGREGAR CANCION
+2. BUSCAR CANCIONES
+3. LISTAR ARTISTAS
+4. SALIR
+
+Elija una opción (escriba el nombre o el número):`;
+
+        let opcion = prompt(menu);
+
+        if (
+          opcion === null ||
+          opcion === "4" ||
+          opcion.toUpperCase() === "SALIR"
+        ) {
+          alert("¡Gracias por usar Spotify Mini! 👋");
+          ejecutar = false;
+          break;
+        }
+
+        // --- 2. Lógica de las opciones ---
+        switch (opcion.toUpperCase()) {
+          case "1":
+          case "AGREGAR CANCION":
+            let entrada = prompt(
+              "Ingrese la canción y el artista (Ejemplo: Africa, Toto)"
+            );
+            if (entrada && entrada.includes(",")) {
+              // Separamos por la coma y limpiamos espacios
+              let partes = entrada.split(",");
+              let cancion = partes[0].trim();
+              let artista = partes[1].trim();
+
+              // Si el artista no existe en la biblioteca, creamos su lista vacía
+              if (!biblioteca[artista]) {
+                biblioteca[artista] = [];
+              }
+
+              // Agregamos la canción a ese artista
+              biblioteca[artista].push(cancion);
+              alert(`✅ ¡"${cancion}" de ${artista} agregada con éxito!`);
+            } else {
+              alert(
+                "❌ Formato incorrecto. Recuerda usar la coma (Canción, Artista)"
+              );
+            }
+            break;
+
+          case "2":
+          case "BUSCAR CANCIONES":
+            let artistaABuscar = prompt(
+              "¿De qué artista quieres ver las canciones?"
+            );
+            if (biblioteca[artistaABuscar]) {
+              let lista = biblioteca[artistaABuscar].join("\n👉 ");
+              alert(`Canciones de ${artistaABuscar}:\n👉 ${lista}`);
+            } else {
+              alert("❌ No se encontró ese artista o no tiene canciones.");
+            }
+            break;
+
+          case "3":
+          case "LISTAR ARTISTAS":
+            // Obtenemos solo los nombres (las llaves del objeto)
+            let artistas = Object.keys(biblioteca);
+            if (artistas.length > 0) {
+              alert("Artistas en tu biblioteca:\n• " + artistas.join("\n• "));
+            } else {
+              alert("La biblioteca está vacía.");
+            }
+            break;
+
+          default:
+            alert("Opción no válida. Intenta de nuevo.");
+            break;
+        }
+      }
+    </script>
   </body>
 </html>

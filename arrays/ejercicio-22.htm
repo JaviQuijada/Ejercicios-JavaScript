@@ -9,9 +9,7 @@
   <body>
     <div class="container">
       <header>
-        <a href="../arrays.html" class="btn-volver"
-          >← Volver al índice</a
-        >
+        <a href="../arrays.html" class="btn-volver">← Volver al índice</a>
 
         <h1>Ejercicio 22 Columnas</h1>
         <p>Arrays 2D</p>
@@ -41,5 +39,48 @@
       </main>
     </div>
     <script src="../js/script.js"></script>
+    <script>
+      // --- 1. Pedir la matriz completa ---
+      // Formato esperado: 1 2 3, 4 5 6, 7 8 9
+      let entradaMatriz = prompt(
+        "Ingresa la matriz.\nUsa ESPACIOS para números y COMAS para filas\n(Ejemplo: 2 7 12 1, 8 23, 9 45 7, 22 3 24 4)"
+      );
+
+      if (entradaMatriz !== null) {
+        // --- 2. Convertir el texto en un Array 2D (Matriz) ---
+        // Primero separamos por comas para obtener las filas
+        let filasRaw = entradaMatriz.split(",");
+
+        // Luego, cada fila la limpiamos, la separamos por espacios y convertimos a Números
+        let matriz = filasRaw.map((fila) => fila.trim().split(" ").map(Number));
+
+        // --- 3. Pedir la columna a sumar ---
+        let columnaDeseada = prompt(
+          "¿Qué columna quieres sumar? (La primera es la 0)"
+        );
+
+        if (columnaDeseada !== null) {
+          let j = Number(columnaDeseada);
+          let suma = 0;
+          let filasSumadas = 0;
+
+          // --- 4. Recorrer la columna elegida ---
+          for (let i = 0; i < matriz.length; i++) {
+            // Verificamos si la fila actual tiene esa columna
+            if (matriz[i][j] !== undefined && !isNaN(matriz[i][j])) {
+              suma += matriz[i][j];
+              filasSumadas++;
+            }
+          }
+
+          // --- 5. Resultado final ---
+          alert(
+            `Analizamos la matriz que ingresaste.\n\nEn la columna ${j}, sumamos ${filasSumadas} números.\nEl total es: ${suma}`
+          );
+        }
+      } else {
+        alert("Operación cancelada.");
+      }
+    </script>
   </body>
 </html>

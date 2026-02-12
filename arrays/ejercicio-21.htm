@@ -9,9 +9,7 @@
   <body>
     <div class="container">
       <header>
-        <a href="../arrays.html" class="btn-volver"
-          >← Volver al índice</a
-        >
+        <a href="../arrays.html" class="btn-volver">← Volver al índice</a>
 
         <h1>Ejercicio 21 Mayor número</h1>
         <p>Arrays 2D</p>
@@ -38,5 +36,52 @@
       </main>
     </div>
     <script src="../js/script.js"></script>
+    <script>
+      // --- 1. Pedir los datos con un formato claro ---
+      // Le pedimos algo como: 1 2 3, 4 5 6, 7 8 9
+      let entrada = prompt(
+        "Ingrese los números. Use ESPACIOS para separar números y COMAS para separar filas:\nEjemplo: 1 2, 3 4"
+      );
+
+      if (entrada !== null) {
+        // --- 2. El proceso de "Desarmado" (Split doble) ---
+
+        // Primero corto por las COMAS para tener cada fila como un texto
+        let filasTexto = entrada.split(",");
+
+        // Ahora convierto ese array de textos en un Array 2D de números de verdad
+        let matriz = filasTexto.map((fila) => {
+          // A cada fila le quito los espacios de los lados y la corto por los espacios internos
+          return fila.trim().split(" ").map(Number);
+        });
+
+        console.log("Tu matriz quedó así:", matriz);
+
+        // --- 3. Buscar el mayor (como hicimos antes) ---
+        // Empezamos con el primer número que exista
+        let numeroMayor = matriz[0][0];
+
+        for (let i = 0; i < matriz.length; i++) {
+          for (let j = 0; j < matriz[i].length; j++) {
+            // Verificamos si es un número válido (por si el usuario puso espacios de más)
+            if (!isNaN(matriz[i][j])) {
+              if (matriz[i][j] > numeroMayor) {
+                numeroMayor = matriz[i][j];
+              }
+            }
+          }
+        }
+
+        // --- 4. Resultado ---
+        alert(
+          "Analizamos tu matriz:\n" +
+            JSON.stringify(matriz) +
+            "\n\nEl número mayor es: " +
+            numeroMayor
+        );
+      } else {
+        alert("Operación cancelada.");
+      }
+    </script>
   </body>
 </html>

@@ -9,9 +9,7 @@
   <body>
     <div class="container">
       <header>
-        <a href="../arrays.html" class="btn-volver"
-          >← Volver al índice</a
-        >
+        <a href="../arrays.html" class="btn-volver">← Volver al índice</a>
 
         <h1>Ejercicio 25 Buscaminas</h1>
         <p>Arrays 2D</p>
@@ -60,5 +58,62 @@
       </main>
     </div>
     <script src="../js/script.js"></script>
+    <script>
+      // 1. El tablero oculto con las minas (lo que el programa sabe)
+      const tablero = [
+        ["📦", "💣", "💣"],
+        ["📦", "📦", "📦"],
+        ["💣", "📦", "📦"],
+      ];
+
+      // 2. Necesitamos saber cuántas cajas vacías ('📦') hay para saber cuándo ganar
+      // Usamos .flat() para aplanar la matriz y contar fácilmente
+      let cajasTotales = tablero
+        .flat()
+        .filter((casilla) => casilla === "📦").length;
+
+      let juegoTerminado = false;
+      let cajasAbiertas = 0;
+
+      // 3. ¡Empieza el bucle del juego!
+      while (!juegoTerminado) {
+        let coordenada = prompt(
+          `Cajas abiertas: ${cajasAbiertas}/${cajasTotales}\nIngrese coordenada (fila,columna) ejemplo: 0,1`
+        );
+
+        if (coordenada === null) {
+          alert("Juego cancelado.");
+          break;
+        }
+
+        // Convertimos "0,1" en los índices fila = 0 y columna = 1
+        let partes = coordenada.split(",");
+        let fila = Number(partes[0]);
+        let col = Number(partes[1]);
+
+        // Revisamos qué hay en esa casilla
+        let resultado = tablero[fila][col];
+
+        if (resultado === "💣") {
+          alert("¡Oh no! 💥 ¡Has encontrado una bomba! PERDISTE.");
+          juegoTerminado = true;
+        } else if (resultado === "📦") {
+          alert("¡La caja está vacía! 💨");
+          // Marcamos la casilla como 'abierta' para que no la cuente dos veces
+          tablero[fila][col] = "💨";
+          cajasAbiertas++;
+
+          // ¿Ya abrimos todas las que no tenían bomba?
+          if (cajasAbiertas === cajasTotales) {
+            alert(
+              "¡FELICIDADES! 🎉 Has despejado todas las cajas sin explotar."
+            );
+            juegoTerminado = true;
+          }
+        } else if (resultado === "💨") {
+          alert("Esta casilla ya la habías abierto. ¡Prueba otra!");
+        }
+      }
+    </script>
   </body>
 </html>

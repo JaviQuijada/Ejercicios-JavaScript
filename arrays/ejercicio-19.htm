@@ -9,9 +9,7 @@
   <body>
     <div class="container">
       <header>
-        <a href="../arrays.html" class="btn-volver"
-          >← Volver al índice</a
-        >
+        <a href="../arrays.html" class="btn-volver">← Volver al índice</a>
 
         <h1>Ejercicio 19 Piedra, papel, tijera III</h1>
         <p>Estructuras de datos: Arrays</p>
@@ -45,5 +43,57 @@
       </main>
     </div>
     <script src="../js/script.js"></script>
+    <script>
+      // --- 1. Pedir los nombres y las jugadas ---
+      let nombre1 = prompt("Nombre de la jugadora 1:");
+      let jugadas1Raw = prompt(
+        `Jugadas de ${nombre1} (piedra, papel o tijera separados por espacio):`
+      );
+
+      let nombre2 = prompt("Nombre de la jugadora 2:");
+      let jugadas2Raw = prompt(`Jugadas de ${nombre2} (mismo formato):`);
+
+      // --- 2. Convertir los textos en listas (Arrays) ---
+      // Aquí solo usamos .split(" "), no necesitamos .map(Number) porque son palabras
+      let lista1 = jugadas1Raw.split(" ");
+      let lista2 = jugadas2Raw.split(" ");
+
+      // --- 3. Marcadores en cero ---
+      let puntos1 = 0;
+      let puntos2 = 0;
+
+      // --- 4. El bucle para comparar ronda por ronda ---
+      for (let i = 0; i < lista1.length; i++) {
+        let j1 = lista1[i].toLowerCase(); // Lo paso a minúsculas por si escriben "Piedra"
+        let j2 = lista2[i].toLowerCase();
+
+        // Si son iguales, es empate, no hago nada. Solo entro si son diferentes:
+        if (j1 !== j2) {
+          // Aplico la lógica: ¿Cuándo gana la Jugadora 1?
+          if (
+            (j1 === "piedra" && j2 === "tijera") ||
+            (j1 === "papel" && j2 === "piedra") ||
+            (j1 === "tijera" && j2 === "papel")
+          ) {
+            puntos1++; // Gana J1
+          } else {
+            puntos2++; // Si no empataron y no ganó J1, ¡fijo ganó J2!
+          }
+        }
+      }
+
+      // --- 5. Mostrar el resultado final ---
+      let mensaje = `Resultado: ${puntos1} (${nombre1}) vs ${puntos2} (${nombre2})\n`;
+
+      if (puntos1 > puntos2) {
+        mensaje += `Ganadora: ${nombre1} 🎉`;
+      } else if (puntos2 > puntos1) {
+        mensaje += `Ganadora: ${nombre2} 🎉`;
+      } else {
+        mensaje += "¡Increíble! Es un empate total 😮";
+      }
+
+      alert(mensaje);
+    </script>
   </body>
 </html>

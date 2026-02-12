@@ -9,9 +9,7 @@
   <body>
     <div class="container">
       <header>
-        <a href="../arrays.html" class="btn-volver"
-          >← Volver al índice</a
-        >
+        <a href="../arrays.html" class="btn-volver">← Volver al índice</a>
 
         <h1>Ejercicio 27 Viborita</h1>
         <p>Arrays 2D</p>
@@ -50,6 +48,87 @@
         </button>
       </main>
     </div>
-    <script src="../js/script.js"></script>
+    <script src="./js/script.js"></script>
+    <script>
+      // 1. Configuración del tablero inicial
+      const tablero = [
+        ["🌱", "🌱", "🍎", "🌱", "🌱"],
+        ["🍎", "🧱", "🌱", "🧱", "🍎"],
+        ["🌱", "🧱", "🐍", "🌱", "🌱"],
+        ["🌱", "🍎", "🌱", "🧱", "🌱"],
+        ["🍎", "🌱", "🌱", "🍎", "🧱"],
+        ["🌱", "🌱", "🌱", "🌱", "🍎"],
+      ];
+
+      // 2. Variables de estado (Coordenadas y contador)
+      let filaSnake = 2; // La '🐍' está en la fila índice 2
+      let colSnake = 2; // La '🐍' está en la columna índice 2
+      let manzanasRestantes = tablero
+        .flat()
+        .filter((casilla) => casilla === "🍎").length;
+
+      // Función auxiliar para convertir la matriz en un texto visible
+      function dibujarTablero() {
+        return tablero.map((fila) => fila.join(" ")).join("\n");
+      }
+
+      // 3. Bucle principal del juego
+      while (manzanasRestantes > 0) {
+        // Mostramos el tablero y pedimos dirección
+        let mensaje = `${dibujarTablero()}\n\n🍎 Manzanas restantes: ${manzanasRestantes}\n¿Hacia dónde mover? (ARRIBA, ABAJO, IZQUIERDA, DERECHA)`;
+        let direccion = prompt(mensaje);
+
+        // Si el usuario presiona "Cancelar" o Esc, salimos del bucle
+        if (direccion === null) break;
+
+        let nuevaFila = filaSnake;
+        let nuevaCol = colSnake;
+        let dirLimpia = direccion.toUpperCase().trim();
+
+        // 4. Lógica de movimiento con "Mundo Circular" (Módulo %)
+        if (dirLimpia === "ARRIBA") {
+          nuevaFila = (filaSnake - 1 + tablero.length) % tablero.length;
+        } else if (dirLimpia === "ABAJO") {
+          nuevaFila = (filaSnake + 1) % tablero.length;
+        } else if (dirLimpia === "IZQUIERDA") {
+          nuevaCol = (colSnake - 1 + tablero[0].length) % tablero[0].length;
+        } else if (dirLimpia === "DERECHA") {
+          nuevaCol = (colSnake + 1) % tablero[0].length;
+        } else {
+          alert(
+            "Dirección no válida. Intenta con: Arriba, Abajo, Izquierda o Derecha."
+          );
+          continue; // Salta al inicio del bucle sin mover nada
+        }
+
+        // 5. Gestión de Colisiones
+        let contenidoDestino = tablero[nuevaFila][nuevaCol];
+
+        if (contenidoDestino === "🧱") {
+          alert("¡BOOM! 🧱 Chocaste con un muro. Busca otro camino.");
+        } else {
+          // Si hay una manzana, la descontamos
+          if (contenidoDestino === "🍎") {
+            manzanasRestantes--;
+          }
+
+          // Actualizamos el tablero visualmente
+          tablero[filaSnake][colSnake] = "🌱"; // Donde estaba la víbora, ahora hay pasto
+          filaSnake = nuevaFila; // Actualizamos la posición lógica
+          colSnake = nuevaCol;
+          tablero[filaSnake][colSnake] = "🐍"; // Dibujamos la víbora en su nuevo lugar
+        }
+      }
+
+      // 6. Mensaje de victoria
+      if (manzanasRestantes === 0) {
+        alert(
+          dibujarTablero() +
+            "\n\n¡VICTORIA! 🎉 Has recolectado todas las manzanas."
+        );
+      } else {
+        alert("Juego terminado. ¡Vuelve pronto!");
+      }
+    </script>
   </body>
 </html>

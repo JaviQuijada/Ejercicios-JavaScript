@@ -9,9 +9,7 @@
   <body>
     <div class="container">
       <header>
-        <a href="../arrays.html" class="btn-volver"
-          >← Volver al índice</a
-        >
+        <a href="../arrays.html" class="btn-volver">← Volver al índice</a>
 
         <h1>Ejercicio 26 Sublistas</h1>
         <p>Arrays 2D</p>
@@ -60,5 +58,67 @@
       </main>
     </div>
     <script src="../js/script.js"></script>
+    <script>
+      // --- 1. Mi base de datos vacía ---
+      // Usamos un objeto {} porque nos permite guardar cosas por "nombre" (categoría)
+      let listaDeTareas = {};
+
+      // Esta función nos ayudará a "dibujar" la lista cada vez que la necesitemos
+      function mostrarLista() {
+        let dibujo = "📝 LISTA DE TAREAS\n\n";
+
+        // Recorremos las categorías del objeto
+        for (let categoria in listaDeTareas) {
+          dibujo += `${categoria.toUpperCase()}\n`;
+          dibujo += "----------------------\n";
+
+          // Recorremos las tareas de esa categoría
+          listaDeTareas[categoria].forEach((tarea) => {
+            dibujo += `👉 ${tarea}\n`;
+          });
+          dibujo += "\n";
+        }
+        return dibujo;
+      }
+
+      // --- 2. Bucle principal del programa ---
+      let quiereOtraCategoria = true;
+
+      while (quiereOtraCategoria) {
+        // 1. Pedir nombre de categoría
+        let nombreCat = prompt(
+          mostrarLista() + "Ingrese el nombre de la nueva categoría:"
+        );
+
+        if (nombreCat) {
+          // Inicializamos la categoría como un array vacío si no existe
+          listaDeTareas[nombreCat] = [];
+
+          let quiereOtraTarea = true;
+          while (quiereOtraTarea) {
+            // 2. Pedir tarea
+            let nuevaTarea = prompt(
+              mostrarLista() + `Categoría [${nombreCat}]\nIngrese una tarea:`
+            );
+
+            if (nuevaTarea) {
+              listaDeTareas[nombreCat].push(nuevaTarea);
+            }
+
+            // 3 y 4. ¿Otra tarea?
+            quiereOtraTarea = confirm(
+              "¿Desea ingresar otra tarea en esta categoría?"
+            );
+          }
+        }
+
+        // 5 y 6. ¿Otra categoría?
+        quiereOtraCategoria = confirm("¿Desea ingresar otra categoría?");
+      }
+
+      // --- 3. Resultado Final ---
+      alert(mostrarLista() + "¡Programa terminado!");
+      console.log(listaDeTareas);
+    </script>
   </body>
 </html>

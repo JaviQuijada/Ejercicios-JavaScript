@@ -34,19 +34,49 @@
     </div>
     <script src="./js/script.js"></script>
     <script>
-      const fauna = ["🐱", "🐭", "🐶", "🦊", "🦂", "🦟"];
-      const animales = ["🐱", "🐭", "🐶", "🦊"];
-      const insectos = ["🦂", "🦟"];
-      let entrada = prompt(
-        "introduce la fauna , puedes usar (🐱, 🐭, 🐶, 🦊,🦂,🦟)"
+      // 1. Definimos nuestro "zoo" permitido (incluyendo los que luego filtraremos)
+      const iconosPermitidos = [
+        "🐱",
+        "🐭",
+        "🐶",
+        "🦟",
+        "🦊",
+        "🦂",
+        "🦁",
+        "🐯",
+        "🐰",
+      ];
+
+      // 2. Pedimos al usuario que ingrese los animales
+      const entrada = prompt(
+        "Ingrese animales separados por espacios (Ej: 🐱 🐭 🦟):"
       );
-      while (entrada === null || !fauna.includes(entrada.trim())) {
-        entrada = prompt(
-          "Has introducido animales no permitidos. Itruduce de nuevo la fauna solo uasando" +
-            fauna.join(" ")
+
+      if (entrada) {
+        const listaIngresada = entrada.split(" ");
+
+        // 3. Validamos que TODO lo ingresado esté en la lista de permitidos
+        const sonValidos = listaIngresada.every((animal) =>
+          iconosPermitidos.includes(animal)
         );
+
+        if (!sonValidos) {
+          console.error(
+            "Error: Has introducido iconos no permitidos o texto inválido."
+          );
+          alert(
+            "Error: Has introducido iconos no permitidos o texto inválido."
+          );
+        } else {
+          // 4. Si son válidos, filtramos los mosquitos y alacranes
+          const resultado = listaIngresada.filter(
+            (animal) => animal !== "🦟" && animal !== "🦂"
+          );
+
+          console.log("Animales sin insectos:", resultado);
+          alert("Resultado: " + resultado.join(" "));
+        }
       }
-      alert(entrada);
     </script>
   </body>
 </html>
