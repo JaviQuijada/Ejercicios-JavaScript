@@ -21,8 +21,249 @@
         <p style="color: var(--secondary-color); margin-top: 0.5rem"></p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
-    <script src="../js/script.js"></script>
+    <script src="./js/script.js"></script>
+    <script>
+      // --- CLASES DEL SISTEMA ---
+
+      class Episodio {
+        #titulo;
+        #duracion;
+        #visto = false;
+
+        constructor(titulo, duracion) {
+          this.#titulo = titulo;
+          this.#duracion = duracion;
+        }
+
+        get titulo() {
+          return this.#titulo;
+        }
+        get visto() {
+          return this.#visto;
+        }
+
+        marcarVisto() {
+          this.#visto = true;
+        }
+
+        // Devolvemos copia de los datos
+        toObject() {
+          return {
+            titulo: this.#titulo,
+            duracion: this.#duracion,
+            visto: this.#visto,
+          };
+        }
+      }
+
+      class Serie {
+        #id;
+        #nombre;
+        #episodios = [];
+
+        constructor(nombre) {
+          // Generamos un ID corto para facilitar el uso en prompt
+          this.#id = Math.random().toString(36).substring(2, 6).toUpperCase();
+          this.#nombre = nombre;
+        }
+
+        get id() {
+          return this.#id;
+        }
+        get nombre() {
+          return this.#nombre;
+        }
+
+        agregarEpisodio(episodio) {
+          if (!(episodio instanceof Episodio))
+            throw new Error("Debe ser un Episodio válido.");
+          this.#episodios.push(episodio);
+        }
+
+        // Devuelve array de copias de los episodios
+        obtenerEpisodios() {
+          return this.#episodios.map((e) => e.toObject());
+        }
+
+        // Acceso interno para modificar la instancia real (marcar como visto)
+        get instanciasEpisodios() {
+          return this.#episodios;
+        }
+      }
+
+      class Usuario {
+        #nombre;
+        #historial = []; // Almacena IDs de series que ha interactuado
+
+        constructor(nombre) {
+          this.#nombre = nombre;
+        }
+
+        get nombre() {
+          return this.#nombre;
+        }
+
+        agregarAlHistorial(serieId) {
+          if (!this.#historial.includes(serieId)) {
+            this.#historial.push(serieId);
+          }
+        }
+
+        obtenerHistorial() {
+          return [...this.#historial]; // Copia del array
+        }
+      }
+
+      class Netflix {
+        #series = [];
+        #usuarios = [];
+
+        agregarSerie(serie) {
+          if (!(serie instanceof Serie))
+            throw new Error("Debe ser una Serie válida.");
+          this.#series.push(serie);
+        }
+
+        agregarUsuario(usuario) {
+          this.#usuarios.push(usuario);
+        }
+
+        obtenerCatalogo() {
+          // Retorna copias de la info básica de las series
+          return this.#series.map((s) => ({ id: s.id, nombre: s.nombre }));
+        }
+
+        buscarSerieReal(id) {
+          return this.#series.find((s) => s.id === id.toUpperCase());
+        }
+      }
+
+      // --- LÓGICA DE INTERACCIÓN (UNIFICADA) ---
+
+      // 1. Configuración inicial del sistema
+      const miNetflix = new Netflix();
+
+      // 2. Creación de contenido (Series y Episodios)
+      const breakingBad = new Serie("Breaking Bad");
+      breakingBad.agregarEpisodio(new Episodio("Pilot", 58));
+      breakingBad.agregarEpisodio(new Episodio("Cat's in the Bag...", 48));
+
+      const dark = new Serie("Dark");
+      dark.agregarEpisodio(new Episodio("Secretos", 52));
+      dark.agregarEpisodio(new Episodio("Mentiras", 45));
+
+      miNetflix.agregarSerie(breakingBad);
+      miNetflix.agregarSerie(dark);
+
+      // 3. Registro de Usuario
+      const nombreInput = prompt(
+        "🎬 ¡Bienvenido a Netflix! ¿Cuál es tu nombre de perfil?"
+      );
+      const miUsuario = new Usuario(nombreInput || "Espectador");
+      miNetflix.agregarUsuario(miUsuario);
+
+      // 4. Menú Interactivo
+      let ejecutando = true;
+
+      while (ejecutando) {
+        const catalogoActual = miNetflix
+          .obtenerCatalogo()
+          .map((s) => `🆔 [${s.id}] - ${s.nombre}`)
+          .join("\n");
+
+        const menu =
+          `📺 NETFLIX - Perfil: ${miUsuario.nombre}\n` +
+          `--------------------------------------\n` +
+          `CATÁLOGO DISPONIBLE:\n${catalogoActual}\n` +
+          `--------------------------------------\n` +
+          `1. Ver lista de episodios (usar ID)\n` +
+          `2. Reproducir un episodio\n` +
+          `3. Ver mi historial de series\n` +
+          `4. Salir`;
+
+        const opcion = prompt(menu);
+
+        try {
+          switch (opcion) {
+            case "1":
+              const idVer = prompt("Introduce el ID de la serie (ej: 4F2G):");
+              const sEncontrada = miNetflix.buscarSerieReal(idVer);
+
+              if (sEncontrada) {
+                const listaEps = sEncontrada
+                  .obtenerEpisodios()
+                  .map(
+                    (e, i) =>
+                      `${i}. ${e.titulo} (${e.duracion} min) [${
+                        e.visto ? "✅ Visto" : "👁️ Pendiente"
+                      }]`
+                  )
+                  .join("\n");
+                alert(
+                  `Serie: ${sEncontrada.nombre}\n\nEpisodios:\n${listaEps}`
+                );
+              } else {
+                alert("❌ ID de serie no encontrado.");
+              }
+              break;
+
+            case "2":
+              const idRepro = prompt("ID de la serie para reproducir:");
+              const sRepro = miNetflix.buscarSerieReal(idRepro);
+
+              if (sRepro) {
+                const listaEpsParaVer = sRepro
+                  .obtenerEpisodios()
+                  .map((e, i) => `${i}. ${e.titulo}`)
+                  .join("\n");
+                const numEp = parseInt(
+                  prompt(
+                    `¿Qué número de episodio quieres ver?\n\n${listaEpsParaVer}`
+                  )
+                );
+
+                const epReal = sRepro.instanciasEpisodios[numEp];
+
+                if (epReal) {
+                  epReal.marcarVisto();
+                  miUsuario.agregarAlHistorial(sRepro.nombre); // Guardamos el nombre para el historial
+                  alert(`🍿 Reproduciendo: "${epReal.titulo}"...`);
+                } else {
+                  alert("❌ Número de episodio inválido.");
+                }
+              } else {
+                alert("❌ ID de serie no encontrado.");
+              }
+              break;
+
+            case "3":
+              const historial = miUsuario.obtenerHistorial();
+              alert(
+                `📜 HISTORIAL DE SERIES EMPEZADAS:\n\n${
+                  historial.join("\n") || "No has visto nada todavía."
+                }`
+              );
+              break;
+
+            case "4":
+            case null:
+              ejecutando = false;
+              alert("Cerrando sesión... ¡Hasta luego!");
+              break;
+
+            default:
+              alert("Opción no válida.");
+          }
+        } catch (error) {
+          alert("⚠️ Error: " + error.message);
+        }
+      }
+    </script>
   </body>
 </html>

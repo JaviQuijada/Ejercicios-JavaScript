@@ -75,8 +75,216 @@
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
-    <script src="../js/script.js"></script>
+    <script src="./js/script.js"></script>
+    <script>
+      class Usuario {
+        #handle;
+        #siguiendo = [];
+
+        constructor(handle) {
+          this.#handle = handle.startsWith("@") ? handle : `@${handle}`;
+        }
+
+        get handle() {
+          return this.#handle;
+        }
+        get siguiendo() {
+          return this.#siguiendo.map((u) => u.handle);
+        }
+        get instanciasSeguidas() {
+          return this.#siguiendo;
+        }
+
+        seguir(usuario) {
+          if (!(usuario instanceof Usuario))
+            throw new Error("Debe ser un Usuario.");
+          if (usuario.handle === this.#handle)
+            throw new Error("No puedes seguirte a ti mismo.");
+          const yaSigue = this.#siguiendo.some(
+            (u) => u.handle === usuario.handle
+          );
+          if (!yaSigue) this.#siguiendo.push(usuario);
+        }
+      }
+
+      class Tweet {
+        #id;
+        #handle;
+        #texto;
+        #likes = [];
+        #retweets = [];
+        #fecha;
+
+        constructor(handle, texto) {
+          // Generamos un ID corto de 4 caracteres para que sea fácil de escribir
+          this.#id = Math.random().toString(36).substring(2, 6).toUpperCase();
+          this.#handle = handle;
+          this.#texto = texto;
+          this.#fecha = new Date();
+        }
+
+        get id() {
+          return this.#id;
+        }
+        get handle() {
+          return this.#handle;
+        }
+        get texto() {
+          return this.#texto;
+        }
+        get fecha() {
+          return this.#fecha;
+        }
+        get likes() {
+          return [...this.#likes];
+        }
+        get retweets() {
+          return [...this.#retweets];
+        }
+
+        #toggle(array, usuario) {
+          const index = array.findIndex((u) => u.handle === usuario.handle);
+          if (index === -1) array.push(usuario);
+          else array.splice(index, 1);
+        }
+
+        darLike(usuario) {
+          this.#toggle(this.#likes, usuario);
+        }
+        retweetear(usuario) {
+          this.#toggle(this.#retweets, usuario);
+        }
+
+        toObject() {
+          return {
+            id: this.#id,
+            handle: this.#handle,
+            texto: this.#texto,
+            likesCount: this.#likes.length,
+            rtCount: this.#retweets.length,
+            fecha: this.#fecha,
+          };
+        }
+      }
+
+      class Twitter {
+        #tweets = [];
+
+        twittear(tweet) {
+          this.#tweets.push(tweet);
+        }
+
+        buscarTweet(id) {
+          return this.#tweets.find((t) => t.id === id.toUpperCase());
+        }
+
+        obtenerTimeline(usuario) {
+          const seguidos = usuario.instanciasSeguidas;
+          // El timeline incluye: tweets de seguidos, o cosas que seguidos likearon/RT
+          const timeline = this.#tweets.filter((t) => {
+            const esDeSeguido = seguidos.some((s) => s.handle === t.handle);
+            const likeDeSeguido = seguidos.some((s) =>
+              t.likes.some((u) => u.handle === s.handle)
+            );
+            const rtDeSeguido = seguidos.some((s) =>
+              t.retweets.some((u) => u.handle === s.handle)
+            );
+            return esDeSeguido || likeDeSeguido || rtDeSeguido;
+          });
+
+          return timeline
+            .sort((a, b) => b.fecha - a.fecha)
+            .map((t) => t.toObject());
+        }
+      }
+
+      // --- INTERFAZ ---
+      const miApp = new Twitter();
+      const usersDB = [
+        new Usuario("@JS_Master"),
+        new Usuario("@WebDev"),
+        new Usuario("@OpenAI"),
+      ];
+
+      // Tweets iniciales
+      miApp.twittear(
+        new Tweet("@JS_Master", "Las clases privadas son geniales.")
+      );
+      miApp.twittear(
+        new Tweet("@WebDev", "Usa .map() para transformar arrays.")
+      );
+
+      const miUser = new Usuario(prompt("Tu nombre de usuario:") || "@anonimo");
+
+      let loop = true;
+      while (loop) {
+        const menu =
+          `🐦 TWITTER (${miUser.handle})\n` +
+          `------------------------\n` +
+          `1. Twittear algo\n` +
+          `2. VER TIMELINE (Aquí verás los IDs)\n` +
+          `3. Seguir usuarios\n` +
+          `4. Dar Like / RT (necesitas el ID)\n` +
+          `5. Salir`;
+
+        const op = prompt(menu);
+
+        switch (op) {
+          case "1":
+            const txt = prompt("¿Qué piensas?");
+            if (txt) miApp.twittear(new Tweet(miUser.handle, txt));
+            break;
+
+          case "2":
+            const tl = miApp.obtenerTimeline(miUser);
+            if (tl.length === 0) {
+              alert(
+                "Tu timeline está vacío. Sigue a alguien primero (Opción 3)."
+              );
+            } else {
+              const str = tl
+                .map(
+                  (t) =>
+                    `🆔 ID: ${t.id}\n👤 ${t.handle}: "${t.texto}"\n❤️ ${t.likesCount} | 🔁 ${t.rtCount}\n`
+                )
+                .join("----------\n");
+              alert("🏠 TU INICIO:\n\n" + str);
+            }
+            break;
+
+          case "3":
+            const lista = usersDB.map((u, i) => `${i}. ${u.handle}`).join("\n");
+            const idx = prompt("Elige a quién seguir:\n" + lista);
+            if (usersDB[idx]) {
+              miUser.seguir(usersDB[idx]);
+              alert("Ahora sigues a " + usersDB[idx].handle);
+            }
+            break;
+
+          case "4":
+            const idBusca = prompt("Escribe el ID del tweet (ej: A1B2):");
+            const tw = miApp.buscarTweet(idBusca);
+            if (tw) {
+              const accion = prompt("¿Qué quieres hacer?\n1. Like\n2. Retweet");
+              if (accion === "1") tw.darLike(miUser);
+              if (accion === "2") tw.retweetear(miUser);
+              alert("¡Hecho!");
+            } else {
+              alert("Ese ID no existe.");
+            }
+            break;
+
+          case "5":
+            loop = false;
+            break;
+        }
+      }
+    </script>
   </body>
 </html>

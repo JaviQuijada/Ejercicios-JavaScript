@@ -38,8 +38,184 @@
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
-    <script src="../js/script.js"></script>
+    <script src="./js/script.js"></script>
+    <script>
+      class Tarea {
+        #id;
+        #descripcion;
+        #categoria;
+        #vencimiento;
+        #finalizada = false;
+
+        constructor(descripcion, categoria, vencimiento) {
+          this.#id = crypto.randomUUID().slice(0, 5); // Genera un ID corto único
+          this.#descripcion = descripcion;
+          this.#categoria = categoria;
+          this.#vencimiento = new Date(vencimiento);
+        }
+
+        // Getters para acceder a la información
+        get id() {
+          return this.#id;
+        }
+        get categoria() {
+          return this.#categoria;
+        }
+        get vencimiento() {
+          return this.#vencimiento;
+        }
+        get finalizada() {
+          return this.#finalizada;
+        }
+
+        // Método para marcar como completada
+        completar() {
+          this.#finalizada = true;
+        }
+
+        // Devuelve una copia del objeto para proteger los datos originales
+        toObject() {
+          return {
+            id: this.#id,
+            descripcion: this.#descripcion,
+            categoria: this.#categoria,
+            vencimiento: new Date(this.#vencimiento), // Copia de la fecha
+            finalizada: this.#finalizada,
+          };
+        }
+      }
+
+      class GestorTareas {
+        #tareas = [];
+
+        agregar(tarea) {
+          if (!(tarea instanceof Tarea))
+            throw new Error("Debe ser una instancia de Tarea");
+          this.#tareas.push(tarea);
+        }
+
+        eliminar(id) {
+          const indice = this.#tareas.findIndex((t) => t.id === id);
+          if (indice === -1) throw new Error("ID no encontrado");
+          this.#tareas.splice(indice, 1);
+        }
+
+        finalizar(id) {
+          const tarea = this.#tareas.find((t) => t.id === id);
+          if (!tarea)
+            throw new Error("No se puede finalizar: Tarea inexistente");
+          tarea.completar();
+        }
+
+        obtener(id) {
+          const tarea = this.#tareas.find((t) => t.id === id);
+          return tarea ? tarea.toObject() : undefined;
+        }
+
+        obtenerTodas() {
+          // Retornamos un array de copias
+          return this.#tareas.map((t) => t.toObject());
+        }
+
+        filtrarActivas() {
+          return this.#tareas
+            .filter((t) => !t.finalizada)
+            .map((t) => t.toObject());
+        }
+
+        filtrarFinalizadas() {
+          return this.#tareas
+            .filter((t) => t.finalizada)
+            .map((t) => t.toObject());
+        }
+
+        filtrarPorCategoria(cat) {
+          return this.#tareas
+            .filter((t) => t.categoria.toLowerCase() === cat.toLowerCase())
+            .map((t) => t.toObject());
+        }
+
+        filtrarPorVencimiento(fecha) {
+          const fBusqueda = new Date(fecha).toDateString();
+          return this.#tareas
+            .filter((t) => t.vencimiento.toDateString() === fBusqueda)
+            .map((t) => t.toObject());
+        }
+      }
+
+      // --- Lógica de Interacción ---
+
+      const miGestor = new GestorTareas();
+
+      // Precarga de ejemplo
+      miGestor.agregar(new Tarea("Estudiar JS", "Estudio", "2026-02-25"));
+      miGestor.agregar(new Tarea("Ir a patinar", "Deporte", "2026-02-23"));
+
+      let ejecutando = true;
+      while (ejecutando) {
+        const lista = miGestor
+          .obtenerTodas()
+          .map(
+            (t) =>
+              `[${t.finalizada ? "X" : " "}] ID: ${t.id} | ${t.descripcion} (${
+                t.categoria
+              })`
+          )
+          .join("\n");
+
+        const menu =
+          `📝 MIS TAREAS\n${lista || "(Vacío)"}\n\n` +
+          `1. Nueva Tarea\n2. Finalizar Tarea (por ID)\n3. Eliminar Tarea\n` +
+          `4. Ver Activas\n5. Ver por Categoría\n6. Salir`;
+
+        const opcion = prompt(menu);
+
+        try {
+          switch (opcion) {
+            case "1":
+              const d = prompt("Descripción:");
+              const c = prompt("Categoría:");
+              const v = prompt("Fecha vencimiento (AAAA-MM-DD):");
+              miGestor.agregar(new Tarea(d, c, v));
+              break;
+            case "2":
+              const idFin = prompt("Introduce el ID de la tarea a finalizar:");
+              miGestor.finalizar(idFin);
+              break;
+            case "3":
+              const idElim = prompt("ID a eliminar:");
+              miGestor.eliminar(idElim);
+              break;
+            case "4":
+              const activas = miGestor
+                .filtrarActivas()
+                .map((t) => t.descripcion)
+                .join(", ");
+              alert("Pendientes: " + (activas || "Ninguna"));
+              break;
+            case "5":
+              const catBusq = prompt("¿Qué categoría buscas?");
+              const filtradas = miGestor
+                .filtrarPorCategoria(catBusq)
+                .map((t) => t.descripcion)
+                .join(", ");
+              alert(`Tareas de ${catBusq}: ` + (filtradas || "Ninguna"));
+              break;
+            case "6":
+            case null:
+              ejecutando = false;
+              break;
+          }
+        } catch (e) {
+          alert("⚠️ " + e.message);
+        }
+      }
+    </script>
   </body>
 </html>

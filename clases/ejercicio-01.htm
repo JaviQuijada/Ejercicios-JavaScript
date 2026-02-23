@@ -41,8 +41,107 @@
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
-    <script src="../js/script.js"></script>
+    <script src="./js/script.js"></script>
+    <script>
+      //Inicializamos el resultado a 0
+      class Calculadora {
+        #resultado = 0;
+
+        //Validamos que realmente sea un número
+        #validarNumero(numero) {
+          if (!Number.isFinite(numero)) {
+            throw new Error(
+              "El argumento ingresado debe ser un número válido."
+            );
+          }
+        }
+
+        sumar(numero) {
+          this.#validarNumero(numero);
+          this.#resultado += numero;
+        }
+
+        restar(numero) {
+          this.#validarNumero(numero);
+          this.#resultado -= numero;
+        }
+
+        multiplicar(numero) {
+          this.#validarNumero(numero);
+          this.#resultado *= numero;
+        }
+
+        dividir(numero) {
+          this.#validarNumero(numero);
+          if (numero === 0) throw new Error("No se puede dividir por cero.");
+          this.#resultado /= numero;
+        }
+
+        obtenerResultado() {
+          return this.#resultado;
+        }
+
+        reiniciar() {
+          this.#resultado = 0;
+        }
+      }
+
+      // --- Lógica de Interacción con el Usuario ---
+
+      const miCalc = new Calculadora();
+      let continuar = true;
+
+      while (continuar) {
+        let menu =
+          `Resultado actual: ${miCalc.obtenerResultado()}\n\n` +
+          `Elija una operación:\n` +
+          `1. Sumar\n2. Restar\n3. Multiplicar\n4. Dividir\n5. Reiniciar\n6. Salir`;
+
+        let opcion = prompt(menu);
+
+        if (opcion === "6" || opcion === null) {
+          continuar = false;
+          alert("Calculadora cerrada. ¡Adiós!");
+        } else if (opcion === "5") {
+          miCalc.reiniciar();
+          alert("Resultado reiniciado a 0");
+        } else if (["1", "2", "3", "4"].includes(opcion)) {
+          let num = parseFloat(
+            prompt("Introduce el número para la operación:")
+          );
+
+          try {
+            switch (opcion) {
+              case "1":
+                miCalc.sumar(num);
+                break;
+              case "2":
+                miCalc.restar(num);
+                break;
+              case "3":
+                miCalc.multiplicar(num);
+                break;
+              case "4":
+                miCalc.dividir(num);
+                break;
+            }
+
+            let mensaje = `Operación realizada con éxito.\nNuevo resultado: ${miCalc.obtenerResultado()}`;
+            console.log(mensaje);
+            alert(mensaje);
+          } catch (error) {
+            alert("⚠️ " + error.message);
+          }
+        } else {
+          alert("Opción no válida. Inténtalo de nuevo.");
+        }
+      }
+    </script>
   </body>
 </html>

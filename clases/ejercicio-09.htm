@@ -72,8 +72,226 @@
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
-    <script src="../js/script.js"></script>
+    <script src="./js/script.js"></script>
+    <script>
+      class Autor {
+        #nombre;
+        #nacionalidad;
+
+        constructor(nombre, nacionalidad) {
+          this.#nombre = nombre;
+          this.#nacionalidad = nacionalidad;
+        }
+
+        get nombre() {
+          return this.#nombre;
+        }
+        get nacionalidad() {
+          return this.#nacionalidad;
+        }
+
+        // Método para obtener copia de los datos
+        toObject() {
+          return { nombre: this.#nombre, nacionalidad: this.#nacionalidad };
+        }
+      }
+
+      class Libro {
+        #id;
+        #titulo;
+        #autor;
+        #precio;
+        #genero;
+        #stock;
+
+        constructor(titulo, autor, precio, genero, stock) {
+          this.#id = crypto.randomUUID().slice(0, 6);
+          this.#titulo = titulo;
+          this.#autor = autor; // Instancia de Autor
+          this.#precio = Math.max(0, precio);
+          this.#genero = genero;
+          this.#stock = Math.max(0, stock);
+        }
+
+        // Getters
+        get id() {
+          return this.#id;
+        }
+        get titulo() {
+          return this.#titulo;
+        }
+        get autor() {
+          return this.#autor;
+        }
+        get precio() {
+          return this.#precio;
+        }
+        get genero() {
+          return this.#genero;
+        }
+
+        // Setters
+        set precio(nuevoPrecio) {
+          this.#precio = Math.max(0, nuevoPrecio);
+        }
+        set stock(nuevoStock) {
+          this.#stock = Math.max(0, nuevoStock);
+        }
+
+        tieneStock() {
+          return this.#stock > 0;
+        }
+
+        // Método para devolver una copia segura del libro
+        toObject() {
+          return {
+            id: this.#id,
+            titulo: this.#titulo,
+            autor: this.#autor.toObject(),
+            precio: this.#precio,
+            genero: this.#genero,
+            stock: this.#stock, // Se incluye para información, pero protegida en la copia
+          };
+        }
+      }
+
+      class Libreria {
+        #libros = [];
+        #ganancias = 0;
+
+        agregar(libro) {
+          if (!(libro instanceof Libro))
+            throw new Error("Debe ser una instancia de Libro");
+          this.#libros.push(libro);
+        }
+
+        eliminar(id) {
+          const indice = this.#libros.findIndex((l) => l.id === id);
+          if (indice === -1) throw new Error("Libro no encontrado");
+          this.#libros.splice(indice, 1);
+        }
+
+        buscarPorId(id) {
+          const libro = this.#libros.find((l) => l.id === id);
+          return libro ? libro.toObject() : undefined;
+        }
+
+        buscarPorTitulo(titulo) {
+          const libro = this.#libros.find(
+            (l) => l.titulo.toLowerCase() === titulo.toLowerCase()
+          );
+          return libro ? libro.toObject() : undefined;
+        }
+
+        filtrarPorAutor(nombreAutor) {
+          return this.#libros
+            .filter(
+              (l) => l.autor.nombre.toLowerCase() === nombreAutor.toLowerCase()
+            )
+            .map((l) => l.toObject());
+        }
+
+        filtrarPorGenero(genero) {
+          return this.#libros
+            .filter((l) => l.genero.toLowerCase() === genero.toLowerCase())
+            .map((l) => l.toObject());
+        }
+
+        comprarLibros(idLibros) {
+          let totalCompra = 0;
+          idLibros.forEach((id) => {
+            const libro = this.#libros.find((l) => l.id === id);
+            if (libro && libro.tieneStock()) {
+              libro.stock -= 1; // Usamos el setter
+              totalCompra += libro.precio;
+            }
+          });
+          this.#ganancias += totalCompra;
+          return totalCompra;
+        }
+
+        obtenerGanancias() {
+          return this.#ganancias;
+        }
+
+        listarCatalogo() {
+          return this.#libros
+            .map(
+              (l) =>
+                `ID: ${l.id} | ${l.titulo} - ${l.autor.nombre} ($${
+                  l.precio
+                }) [Stock: ${l.tieneStock() ? "Disponible" : "Agotado"}]`
+            )
+            .join("\n");
+        }
+      }
+
+      // --- Interacción con el usuario ---
+
+      const miLibreria = new Libreria();
+
+      // Precarga de autores y libros
+      const autor1 = new Autor("Gabriel García Márquez", "Colombiana");
+      miLibreria.agregar(
+        new Libro("Cien años de soledad", autor1, 2500, "Novela", 5)
+      );
+      miLibreria.agregar(
+        new Libro("Crónica de una muerte anunciada", autor1, 1200, "Novela", 2)
+      );
+
+      let ejecutando = true;
+      while (ejecutando) {
+        const menu =
+          `📚 LIBRERÍA VIRTUAL\n` +
+          `Ganancias: $${miLibreria.obtenerGanancias()}\n\n` +
+          `${miLibreria.listarCatalogo() || "(Vacío)"}\n\n` +
+          `1. Buscar por Título\n2. Comprar (por ID)\n3. Filtrar por Autor\n4. Salir`;
+
+        const opcion = prompt(menu);
+
+        try {
+          switch (opcion) {
+            case "1":
+              const tBusq = prompt("Ingresa el título:");
+              const encontrado = miLibreria.buscarPorTitulo(tBusq);
+              alert(
+                encontrado
+                  ? `Libro: ${encontrado.titulo}\nAutor: ${encontrado.autor.nombre}\nPrecio: $${encontrado.precio}`
+                  : "No encontrado"
+              );
+              break;
+            case "2":
+              const idCompra = prompt(
+                "Introduce el ID del libro que quieres comprar:"
+              );
+              const gastado = miLibreria.comprarLibros([idCompra]);
+              if (gastado > 0) alert(`¡Compra exitosa! Pagaste $${gastado}`);
+              else
+                alert(
+                  "No se pudo realizar la compra (ID inválido o sin stock)"
+                );
+              break;
+            case "3":
+              const aBusq = prompt("Nombre del autor:");
+              const librosAutor = miLibreria.filtrarPorAutor(aBusq);
+              const lista = librosAutor.map((l) => l.titulo).join("\n");
+              alert(lista || "No hay libros de ese autor.");
+              break;
+            case "4":
+            case null:
+              ejecutando = false;
+              break;
+          }
+        } catch (e) {
+          alert("⚠️ " + e.message);
+        }
+      }
+    </script>
   </body>
 </html>

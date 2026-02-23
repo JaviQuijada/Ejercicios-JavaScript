@@ -63,8 +63,157 @@
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
-    <script src="../js/script.js"></script>
+    <script src="./js/script.js"></script>
+    <script>
+      class Televisor {
+        // Propiedades privadas
+        #encendido = false;
+        #canal = 0;
+        #canales; // Máximo de canales
+        #volumen = 0;
+        #marca;
+
+        constructor(marca, canales) {
+          this.#marca = marca;
+          this.#canales = canales;
+        }
+
+        // Método privado para validar si está encendido antes de operar
+        #verificarEncendido() {
+          if (!this.#encendido) {
+            throw new Error("El televisor está apagado. Préndelo primero.");
+          }
+        }
+
+        prender() {
+          this.#encendido = true;
+          console.log("📺 Televisor prendido.");
+        }
+
+        apagar() {
+          this.#encendido = false;
+          console.log("🔌 Televisor apagado.");
+        }
+
+        verCanalSiguiente() {
+          this.#verificarEncendido();
+          // Si es el último canal, vuelve al 0. Si no, suma 1.
+          this.#canal = this.#canal === this.#canales ? 0 : this.#canal + 1;
+        }
+
+        verCanalAnterior() {
+          this.#verificarEncendido();
+          // Si es el canal 0, va al último. Si no, resta 1.
+          this.#canal = this.#canal === 0 ? this.#canales : this.#canal - 1;
+        }
+
+        cambiarCanal(nuevoCanal) {
+          this.#verificarEncendido();
+          if (nuevoCanal >= 0 && nuevoCanal <= this.#canales) {
+            this.#canal = nuevoCanal;
+          } else {
+            throw new Error(
+              `El canal ${nuevoCanal} no existe. Rango: 0 - ${this.#canales}`
+            );
+          }
+        }
+
+        subirVolumen() {
+          this.#verificarEncendido();
+          if (this.#volumen < 100) {
+            this.#volumen++;
+          }
+        }
+
+        bajarVolumen() {
+          this.#verificarEncendido();
+          if (this.#volumen > 0) {
+            this.#volumen--;
+          }
+        }
+
+        obtenerDatos() {
+          // Retornamos una copia de las propiedades
+          return {
+            encendido: this.#encendido,
+            canal: this.#canal,
+            canales: this.#canales,
+            volumen: this.#volumen,
+            marca: this.#marca,
+          };
+        }
+
+        toString() {
+          return (
+            `Televisor ${this.#marca}\n` +
+            `- Canales: ${this.#canales}\n` +
+            `- Canal actual: ${this.#canal}\n` +
+            `- Volumen actual: ${this.#volumen}`
+          );
+        }
+      }
+
+      // --- Interacción con el usuario ---
+
+      const marcaTV = prompt("Introduce la marca del televisor:");
+      const totalCanales = parseInt(
+        prompt("Introduce el número máximo de canales:")
+      );
+
+      const miTV = new Televisor(marcaTV, totalCanales);
+
+      let ejecutando = true;
+      while (ejecutando) {
+        const info = miTV.obtenerDatos();
+        const menu =
+          `${miTV.toString()}\n\n` +
+          `Estado: ${info.encendido ? "ENCENDIDO" : "APAGADO"}\n` +
+          `1. Prender\n2. Apagar\n3. Canal Siguiente\n4. Canal Anterior\n` +
+          `5. Cambiar Canal\n6. Subir Volumen\n7. Bajar Volumen\n8. Salir`;
+
+        const opcion = prompt(menu);
+
+        try {
+          switch (opcion) {
+            case "1":
+              miTV.prender();
+              break;
+            case "2":
+              miTV.apagar();
+              break;
+            case "3":
+              miTV.verCanalSiguiente();
+              break;
+            case "4":
+              miTV.verCanalAnterior();
+              break;
+            case "5":
+              const c = parseInt(prompt("Número de canal:"));
+              miTV.cambiarCanal(c);
+              break;
+            case "6":
+              miTV.subirVolumen();
+              break;
+            case "7":
+              miTV.bajarVolumen();
+              break;
+            case "8":
+            case null:
+              ejecutando = false;
+              break;
+            default:
+              alert("Opción no válida");
+          }
+        } catch (e) {
+          alert("⚠️ " + e.message);
+        }
+      }
+    </script>
   </body>
 </html>

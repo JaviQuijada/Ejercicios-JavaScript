@@ -45,8 +45,131 @@
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
-    <script src="../js/script.js"></script>
+    <script src="./js/script.js"></script>
+    <script>
+      class Auto {
+        // Propiedades privadas
+        #encendido = false;
+        #velocidad = 0;
+        #marca;
+        #modelo;
+        #patente;
+
+        constructor(marca, modelo, patente) {
+          this.#marca = marca;
+          this.#modelo = modelo;
+          this.#patente = patente;
+        }
+
+        arrancar() {
+          this.#encendido = true;
+          alert("🚀 El auto ha arrancado.");
+        }
+
+        apagar() {
+          if (this.#velocidad > 0) {
+            throw new Error(
+              "No puedes apagar el auto mientras está en movimiento. ¡Frena primero!"
+            );
+          }
+          this.#encendido = false;
+          alert("💤 El auto se ha apagado.");
+        }
+
+        acelerar() {
+          if (!this.#encendido) {
+            throw new Error("El auto está apagado. No puedes acelerar.");
+          }
+          this.#velocidad += 10;
+          alert(`Acelerando... Velocidad actual: ${this.#velocidad} km/h`);
+        }
+
+        desacelerar() {
+          if (!this.#encendido) {
+            throw new Error("El auto está apagado.");
+          }
+
+          // La velocidad mínima es 0
+          if (this.#velocidad <= 0) {
+            this.#velocidad = 0;
+            alert("El auto ya está detenido.");
+          } else {
+            this.#velocidad -= 10;
+            alert(`Desacelerando... Velocidad actual: ${this.#velocidad} km/h`);
+          }
+        }
+
+        obtenerDatos() {
+          // Devolvemos una copia de los datos (aunque son strings/numbers y ya se copian por valor)
+          return {
+            marca: this.#marca,
+            modelo: this.#modelo,
+            patente: this.#patente,
+            velocidad: this.#velocidad,
+            encendido: this.#encendido,
+          };
+        }
+
+        toString() {
+          return `${this.#marca} ${this.#modelo}, patente ${this.#patente}`;
+        }
+      }
+
+      // --- Interacción con el usuario ---
+
+      // 1. Pedimos datos iniciales
+      const marca = prompt("Introduce la marca del auto:");
+      const modelo = prompt("Introduce el modelo (año):");
+      const patente = prompt("Introduce la patente (matrícula):");
+
+      const miAuto = new Auto(marca, modelo, patente);
+      console.log("Auto creado:", miAuto.toString());
+
+      let continuar = true;
+
+      while (continuar) {
+        const datos = miAuto.obtenerDatos();
+        const estado = datos.encendido ? "ENCENDIDO" : "APAGADO";
+
+        const opcion = prompt(
+          `Vehículo: ${miAuto.toString()}\n` +
+            `Estado: ${estado} | Velocidad: ${datos.velocidad} km/h\n\n` +
+            `¿Qué quieres hacer?\n` +
+            `1. Arrancar\n2. Acelerar\n3. Desacelerar\n4. Apagar\n5. Salir`
+        );
+
+        try {
+          switch (opcion) {
+            case "1":
+              miAuto.arrancar();
+              break;
+            case "2":
+              miAuto.acelerar();
+              break;
+            case "3":
+              miAuto.desacelerar();
+              break;
+            case "4":
+              miAuto.apagar();
+              break;
+            case "5":
+            case null:
+              continuar = false;
+              alert("Saliendo del simulador...");
+              break;
+            default:
+              alert("Opción no válida.");
+          }
+        } catch (error) {
+          alert("⚠️ " + error.message);
+        }
+      }
+    </script>
   </body>
 </html>

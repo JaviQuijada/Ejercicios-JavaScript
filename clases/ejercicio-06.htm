@@ -58,8 +58,160 @@
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
-    <script src="../js/script.js"></script>
+    <script src="./js/script.js"></script>
+    <script>
+      // --- CLASE BILLETERA VIRTUAL ---
+      class BilleteraVirtual {
+        #monto;
+        #operaciones = [];
+
+        constructor(montoInicial) {
+          this.#monto = Number(montoInicial) || 0;
+        }
+
+        #registrarOperacion(datos, tipo) {
+          const nuevaOperacion = {
+            ...datos,
+            tipo: tipo,
+            fecha: new Date(), // Usamos la fecha actual para simplificar al usuario
+          };
+          this.#operaciones.push(nuevaOperacion);
+          this.#monto =
+            tipo === "GASTO"
+              ? this.#monto - datos.cantidad
+              : this.#monto + datos.cantidad;
+        }
+
+        agregarGasto(gasto) {
+          this.#registrarOperacion(gasto, "GASTO");
+        }
+        agregarGanancia(ganancia) {
+          this.#registrarOperacion(ganancia, "GANANCIA");
+        }
+
+        #filtrarYLimpiar(tipo, criterioFn) {
+          return this.#operaciones
+            .filter((op) => op.tipo === tipo && criterioFn(op))
+            .map((op) => {
+              const { tipo, ...copiaSinTipo } = op;
+              return { ...copiaSinTipo };
+            });
+        }
+
+        obtenerGastosPorMes(mes) {
+          return this.#filtrarYLimpiar(
+            "GASTO",
+            (op) => op.fecha.getMonth() === mes
+          );
+        }
+        obtenerGanaciasPorMes(mes) {
+          return this.#filtrarYLimpiar(
+            "GANANCIA",
+            (op) => op.fecha.getMonth() === mes
+          );
+        }
+
+        obtenerMonto() {
+          return this.#monto;
+        }
+
+        listarTodo() {
+          if (this.#operaciones.length === 0) return "No hay movimientos.";
+          return this.#operaciones
+            .map(
+              (op) =>
+                `[${op.tipo}] ${op.descripcion}: $${op.cantidad} (${op.categoria})`
+            )
+            .join("\n");
+        }
+      }
+
+      // --- LÓGICA DE INTERFAZ (PROMPT / ALERT) ---
+
+      const montoInicial = parseFloat(
+        prompt("💰 Bienvenido. Introduce tu saldo inicial:")
+      );
+      const miBilletera = new BilleteraVirtual(montoInicial);
+
+      let ejecutando = true;
+
+      while (ejecutando) {
+        const menu =
+          `💵 SALDO ACTUAL: $${miBilletera.obtenerMonto()}\n\n` +
+          `1. Registrar GASTO\n` +
+          `2. Registrar GANANCIA\n` +
+          `3. Ver Historial Completo\n` +
+          `4. Ver Gastos del Mes Actual\n` +
+          `5. Salir`;
+
+        const opcion = prompt(menu);
+
+        try {
+          switch (opcion) {
+            case "1":
+            case "2":
+              const desc = prompt("Descripción del movimiento:");
+              const cant = parseFloat(prompt("Cantidad ($):"));
+              const cat = prompt("Categoría (ej: Comida, Sueldo, Ocio):");
+
+              if (isNaN(cant))
+                throw new Error("La cantidad debe ser un número.");
+
+              const datos = {
+                descripcion: desc,
+                cantidad: cant,
+                categoria: cat,
+                fecha: new Date(),
+              };
+
+              if (opcion === "1") {
+                miBilletera.agregarGasto(datos);
+                alert("🚫 Gasto registrado.");
+              } else {
+                miBilletera.agregarGanancia(datos);
+                alert("✅ Ganancia registrada.");
+              }
+              break;
+
+            case "3":
+              alert(
+                "📝 HISTORIAL DE MOVIMIENTOS:\n" + miBilletera.listarTodo()
+              );
+              break;
+
+            case "4":
+              const mesActual = new Date().getMonth(); // 0-11
+              const gastosMes = miBilletera.obtenerGastosPorMes(mesActual);
+
+              if (gastosMes.length === 0) {
+                alert("No hay gastos registrados en este mes.");
+              } else {
+                const lista = gastosMes
+                  .map((g) => `- ${g.descripcion}: $${g.cantidad}`)
+                  .join("\n");
+                alert(`📉 GASTOS DEL MES:\n${lista}`);
+              }
+              break;
+
+            case "5":
+            case null:
+              ejecutando = false;
+              alert("Cerrando billetera. ¡Cuida tu dinero!");
+              break;
+
+            default:
+              alert("Opción no válida.");
+          }
+        } catch (e) {
+          alert("⚠️ Error: " + e.message);
+        }
+      }
+    </script>
   </body>
 </html>

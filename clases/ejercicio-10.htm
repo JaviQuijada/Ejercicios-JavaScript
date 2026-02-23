@@ -71,8 +71,236 @@
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
-    <script src="../js/script.js"></script>
+    <script src="./js/script.js"></script>
+    <script>
+      class Usuario {
+        #id;
+        #nombre;
+
+        constructor(nombre) {
+          this.#id = crypto.randomUUID().slice(0, 8);
+          this.#nombre = nombre;
+        }
+
+        get id() {
+          return this.#id;
+        }
+        get nombre() {
+          return this.#nombre;
+        }
+
+        toObject() {
+          return { id: this.#id, nombre: this.#nombre };
+        }
+      }
+
+      class Mensaje {
+        #remitente;
+        #destinatario;
+        #texto;
+        #fecha;
+
+        constructor(remitente, destinatario, texto) {
+          this.#remitente = remitente;
+          this.#destinatario = destinatario;
+          this.#texto = texto;
+          this.#fecha = new Date();
+        }
+
+        get remitente() {
+          return this.#remitente;
+        }
+        get destinatario() {
+          return this.#destinatario;
+        }
+        get texto() {
+          return this.#texto;
+        }
+        get fecha() {
+          return this.#fecha;
+        }
+
+        toObject() {
+          return {
+            remitente: this.#remitente.toObject(),
+            destinatario: this.#destinatario.toObject(),
+            texto: this.#texto,
+            fecha: new Date(this.#fecha),
+          };
+        }
+      }
+
+      class Chat {
+        #usuario;
+        #contactos = [];
+        #mensajes = [];
+
+        constructor(usuario) {
+          this.#usuario = usuario;
+        }
+
+        agregarContacto(usuario) {
+          if (!(usuario instanceof Usuario))
+            throw new Error("Debe ser una instancia de Usuario");
+          this.#contactos.push(usuario);
+        }
+
+        // Para el menú: devuelve copias seguras
+        obtenerContactos() {
+          return this.#contactos.map((c) => c.toObject());
+        }
+
+        // Para la lógica interna: permite acceder a las instancias reales para crear Mensajes
+        obtenerContactosOriginales() {
+          return this.#contactos;
+        }
+
+        obtenerMensajes() {
+          return this.#mensajes.map((m) => m.toObject());
+        }
+
+        mandarMensaje(mensaje) {
+          if (!(mensaje instanceof Mensaje))
+            throw new Error("El mensaje no es válido.");
+
+          const esContacto = this.#contactos.some(
+            (c) => c.id === mensaje.destinatario.id
+          );
+          if (!esContacto) {
+            throw new Error(
+              "No puedes enviar mensajes a alguien que no está en tus contactos."
+            );
+          }
+
+          if (!this.#mensajes.includes(mensaje)) {
+            this.#mensajes.push(mensaje);
+          }
+        }
+
+        filtrarPorContacto(id) {
+          return this.#mensajes
+            .filter((m) => m.destinatario.id === id)
+            .map((m) => m.toObject());
+        }
+
+        filtrarPorFecha(fecha) {
+          const f = new Date(fecha);
+          return this.#mensajes
+            .filter(
+              (m) =>
+                m.fecha.getDate() === f.getDate() &&
+                m.fecha.getMonth() === f.getMonth() &&
+                m.fecha.getFullYear() === f.getFullYear()
+            )
+            .map((m) => m.toObject());
+        }
+      }
+
+      // --- LÓGICA DE INTERACCIÓN ---
+
+      const miNombre = prompt("📱 Bienvenido al Chat. Introduce tu nombre:");
+      const yo = new Usuario(miNombre || "Usuario");
+      const miChat = new Chat(yo);
+
+      let ejecutando = true;
+
+      while (ejecutando) {
+        const menu =
+          `💬 CHAT DE: ${yo.nombre}\n\n` +
+          `1. Agregar Contacto\n` +
+          `2. Ver Contactos\n` +
+          `3. Enviar Mensaje\n` +
+          `4. Ver Mensajes Recibidos/Enviados\n` +
+          `5. Salir`;
+
+        const opcion = prompt(menu);
+
+        try {
+          switch (opcion) {
+            case "1":
+              const nombreC = prompt("Nombre del nuevo contacto:");
+              if (nombreC) {
+                miChat.agregarContacto(new Usuario(nombreC));
+                alert("👤 Contacto agregado.");
+              }
+              break;
+
+            case "2":
+              const contactos = miChat.obtenerContactos();
+              const listaC = contactos
+                .map((c) => `- ${c.nombre} (ID: ${c.id})`)
+                .join("\n");
+              alert(
+                "📖 TUS CONTACTOS:\n" + (listaC || "No tienes contactos aún.")
+              );
+              break;
+
+            case "3":
+              const listaOriginal = miChat.obtenerContactosOriginales();
+              if (listaOriginal.length === 0) {
+                alert("⚠️ Primero debes agregar un contacto.");
+              } else {
+                const menuEleccion = listaOriginal
+                  .map((c, i) => `${i}. ${c.nombre}`)
+                  .join("\n");
+                const indice = parseInt(
+                  prompt("Elige el número del destinatario:\n" + menuEleccion)
+                );
+
+                if (listaOriginal[indice]) {
+                  const texto = prompt(
+                    `Mensaje para ${listaOriginal[indice].nombre}:`
+                  );
+                  if (texto) {
+                    const nuevoMsj = new Mensaje(
+                      yo,
+                      listaOriginal[indice],
+                      texto
+                    );
+                    miChat.mandarMensaje(nuevoMsj);
+                    alert("📤 Mensaje enviado correctamente.");
+                  }
+                } else {
+                  alert("Índice no válido.");
+                }
+              }
+              break;
+
+            case "4":
+              const historial = miChat.obtenerMensajes();
+              const textoHistorial = historial
+                .map(
+                  (m) =>
+                    `[${m.fecha.toLocaleTimeString()}] ${
+                      m.remitente.nombre
+                    } ➡️ ${m.destinatario.nombre}: ${m.texto}`
+                )
+                .join("\n");
+              alert(
+                "💬 HISTORIAL DE MENSAJES:\n" +
+                  (textoHistorial || "No hay mensajes en el chat.")
+              );
+              break;
+
+            case "5":
+            case null:
+              ejecutando = false;
+              alert("Saliendo del chat...");
+              break;
+
+            default:
+              alert("Opción no reconocida.");
+          }
+        } catch (error) {
+          alert("⚠️ Error: " + error.message);
+        }
+      }
+    </script>
   </body>
 </html>

@@ -64,8 +64,202 @@
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
-    <script src="../js/script.js"></script>
+    <script src="./js/script.js"></script>
+    <script>
+      class Producto {
+        // Propiedades privadas
+        #id;
+        #nombre;
+        #precio;
+        #cantidad;
+        #tieneImpuesto;
+
+        constructor(nombre, precio, cantidad, tieneImpuesto) {
+          if (precio < 0) throw new Error("El precio no puede ser menor a 0");
+          if (cantidad <= 0) throw new Error("La cantidad debe ser mayor a 0");
+
+          this.#id = crypto.randomUUID().slice(0, 8); // Genera ID automático corto
+          this.#nombre = nombre;
+          this.#precio = precio;
+          this.#cantidad = cantidad;
+          this.#tieneImpuesto = tieneImpuesto;
+        }
+
+        // Getters
+        get id() {
+          return this.#id;
+        }
+        get nombre() {
+          return this.#nombre;
+        }
+        get precio() {
+          return this.#precio;
+        }
+        get cantidad() {
+          return this.#cantidad;
+        }
+        get tieneImpuesto() {
+          return this.#tieneImpuesto;
+        }
+
+        // Setter para cantidad
+        set cantidad(nuevaCantidad) {
+          if (nuevaCantidad <= 0)
+            throw new Error("La cantidad debe ser mayor a 0");
+          this.#cantidad = nuevaCantidad;
+        }
+
+        // Método para obtener una copia del objeto de datos del producto
+        obtenerDatos() {
+          return {
+            id: this.#id,
+            nombre: this.#nombre,
+            precio: this.#precio,
+            cantidad: this.#cantidad,
+            tieneImpuesto: this.#tieneImpuesto,
+          };
+        }
+      }
+
+      class Carrito {
+        #productos = [];
+        #IVA = 0.1; // 10% de impuesto
+
+        agregarProducto(producto) {
+          if (!(producto instanceof Producto)) {
+            throw new Error(
+              "Solo se pueden agregar instancias de la clase Producto"
+            );
+          }
+          this.#productos.push(producto);
+        }
+
+        actualizarCantidadProducto(id, cantidad) {
+          const producto = this.#productos.find((p) => p.id === id);
+          if (!producto) throw new Error("Producto no encontrado");
+          producto.cantidad = cantidad; // Usa el setter de la clase Producto
+        }
+
+        eliminarProducto(id) {
+          const indice = this.#productos.findIndex((p) => p.id === id);
+          if (indice === -1) throw new Error("ID no encontrado en el carrito");
+          this.#productos.splice(indice, 1);
+        }
+
+        calcularImpuestoTotal() {
+          return this.#productos.reduce((total, p) => {
+            if (p.tieneImpuesto) {
+              return total + p.precio * this.#IVA * p.cantidad;
+            }
+            return total;
+          }, 0);
+        }
+
+        calcularTotal() {
+          const subtotal = this.#productos.reduce(
+            (total, p) => total + p.precio * p.cantidad,
+            0
+          );
+          return subtotal + this.calcularImpuestoTotal();
+        }
+
+        obtenerCantidadTotal() {
+          return this.#productos.reduce((total, p) => total + p.cantidad, 0);
+        }
+
+        toString() {
+          if (this.#productos.length === 0) return "El carrito está vacío.";
+
+          let lista = "🛒 DETALLE DEL CARRITO:\n----------------------\n";
+          let subtotalSinImpuesto = 0;
+
+          this.#productos.forEach((p) => {
+            const sub = p.precio * p.cantidad;
+            subtotalSinImpuesto += sub;
+            lista += `- ${p.nombre} (ID: ${p.id}): $${p.precio} x ${p.cantidad} = $${sub}\n`;
+          });
+
+          const impuestoTotal = this.calcularImpuestoTotal();
+
+          lista += `----------------------\n`;
+          lista += `Subtotal sin impuestos: $${subtotalSinImpuesto.toFixed(
+            2
+          )}\n`;
+          lista += `Total Impuestos (10%): $${impuestoTotal.toFixed(2)}\n`;
+          lista += `TOTAL FINAL: $${(
+            subtotalSinImpuesto + impuestoTotal
+          ).toFixed(2)}`;
+
+          return lista;
+        }
+      }
+
+      // --- Interacción con el usuario ---
+
+      const miCarrito = new Carrito();
+
+      function ejecutarTienda() {
+        let ejecutando = true;
+        while (ejecutando) {
+          const menu =
+            `🛍️ MI TIENDA\n\n` +
+            `1. Agregar Producto\n` +
+            `2. Ver Carrito\n` +
+            `3. Actualizar Cantidad\n` +
+            `4. Eliminar Producto\n` +
+            `5. Salir`;
+
+          const opcion = prompt(menu);
+
+          try {
+            switch (opcion) {
+              case "1":
+                const nom = prompt("Nombre del producto:");
+                const pre = parseFloat(prompt("Precio:"));
+                const can = parseInt(prompt("Cantidad:"));
+                const imp = confirm("¿Lleva impuesto del 10%?");
+
+                const nuevoProd = new Producto(nom, pre, can, imp);
+                miCarrito.agregarProducto(nuevoProd);
+                alert("✅ Producto añadido.");
+                break;
+
+              case "2":
+                alert(miCarrito.toString());
+                console.log(miCarrito.toString());
+                break;
+
+              case "3":
+                const idAct = prompt("Introduce el ID del producto:");
+                const nuevaCan = parseInt(prompt("Nueva cantidad:"));
+                miCarrito.actualizarCantidadProducto(idAct, nuevaCan);
+                alert("🔄 Cantidad actualizada.");
+                break;
+
+              case "4":
+                const idElim = prompt("Introduce el ID a eliminar:");
+                miCarrito.eliminarProducto(idElim);
+                alert("🗑️ Producto eliminado.");
+                break;
+
+              case "5":
+              case null:
+                ejecutando = false;
+                break;
+            }
+          } catch (e) {
+            alert("⚠️ " + e.message);
+          }
+        }
+      }
+
+      ejecutarTienda();
+    </script>
   </body>
 </html>

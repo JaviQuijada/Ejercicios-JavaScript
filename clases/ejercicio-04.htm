@@ -49,8 +49,127 @@
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
-    <script src="../js/script.js"></script>
+    <script src="./js/script.js"></script>
+    <script>
+      class Anotador {
+        // Propiedades privadas
+        #titulo;
+        #notas = [];
+
+        constructor(titulo) {
+          this.#titulo = titulo;
+        }
+
+        // Agrega una nota al final
+        agregarNota(nota) {
+          if (typeof nota === "string" && nota.trim() !== "") {
+            this.#notas.push(nota);
+          } else {
+            throw new Error("La nota debe ser un texto válido.");
+          }
+        }
+
+        // Actualiza una nota por su índice
+        actualizarNota(id, nota) {
+          if (this.#notas[id] !== undefined) {
+            this.#notas[id] = nota;
+          } else {
+            throw new Error("El ID de la nota no existe.");
+          }
+        }
+
+        // Devuelve una nota específica (al ser string, ya es una copia)
+        obtenerNota(id) {
+          if (this.#notas[id] !== undefined) {
+            return this.#notas[id];
+          }
+          throw new Error("Nota no encontrada.");
+        }
+
+        // Elimina una nota específica usando splice
+        eliminarNota(id) {
+          if (this.#notas[id] !== undefined) {
+            this.#notas.splice(id, 1);
+          } else {
+            throw new Error("No se pudo eliminar: ID inexistente.");
+          }
+        }
+
+        // Borra todo el contenido
+        eliminarNotas() {
+          this.#notas = [];
+        }
+
+        // Devuelve un string formateado con los IDs (empezando en 1 para el usuario)
+        listarNotas() {
+          if (this.#notas.length === 0)
+            return `${this.#titulo}\n------------------------\n(No hay notas)`;
+
+          let lista = `${this.#titulo}\n------------------------\n`;
+          this.#notas.forEach((nota, index) => {
+            lista += `${index + 1}. ${nota}\n`;
+          });
+          return lista;
+        }
+
+        // Método extra para cumplir con la consigna de "devolver copias de arrays"
+        obtenerTodasLasNotas() {
+          return [...this.#notas]; // Devolvemos una copia exacta
+        }
+      }
+
+      // --- Interacción con el usuario ---
+
+      const tituloAnotador = prompt(
+        "Introduce el título de tu anotador (ej: Compras):"
+      );
+      const miAnotador = new Anotador(tituloAnotador || "Mi Anotador");
+
+      let ejecutando = true;
+      while (ejecutando) {
+        const menu =
+          miAnotador.listarNotas() +
+          `\n\n¿Qué deseas hacer?\n` +
+          `1. Agregar Nota\n2. Actualizar Nota\n3. Eliminar Nota\n4. Borrar Todo\n5. Salir`;
+
+        const opcion = prompt(menu);
+
+        try {
+          switch (opcion) {
+            case "1":
+              const nuevaNota = prompt("Escribe la nota:");
+              if (nuevaNota) miAnotador.agregarNota(nuevaNota);
+              break;
+            case "2":
+              const idAct = parseInt(prompt("ID de la nota a cambiar:")) - 1;
+              const textoAct = prompt("Nuevo texto de la nota:");
+              miAnotador.actualizarNota(idAct, textoAct);
+              break;
+            case "3":
+              const idElim = parseInt(prompt("ID de la nota a eliminar:")) - 1;
+              miAnotador.eliminarNota(idElim);
+              break;
+            case "4":
+              if (confirm("¿Estás seguro de borrar todas las notas?"))
+                miAnotador.eliminarNotas();
+              break;
+            case "5":
+            case null:
+              ejecutando = false;
+              break;
+            default:
+              alert("Opción no válida.");
+          }
+        } catch (e) {
+          alert("⚠️ " + e.message);
+        }
+      }
+    </script>
   </body>
 </html>

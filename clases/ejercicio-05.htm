@@ -47,8 +47,166 @@
         </p>
       </header>
 
-      <main></main>
+      <main>
+        <button type="button" class="btn-refresh" onclick="location.reload()">
+          <span class="icon">↻</span> Actualizar Página
+        </button>
+      </main>
     </div>
-    <script src="../js/script.js"></script>
+    <script src="./js/script.js"></script>
+    <script>
+      class Celular {
+        // Propiedades privadas
+        #contactos = []; // Array de objetos {nombre, numero}
+        #llamadas = []; // Array de strings
+
+        // MÉTODO: Agregar contacto con validación de duplicados
+        agregarContacto(contacto) {
+          const { nombre, numero } = contacto;
+
+          // Validación de existencia previa (Observaciones)
+          const existe = this.#contactos.some(
+            (c) =>
+              c.nombre.toLowerCase() === nombre.toLowerCase() ||
+              c.numero === numero
+          );
+
+          if (existe) {
+            throw new Error("Ya existe un contacto con ese nombre o número.");
+          }
+
+          // Guardamos una copia del objeto para evitar mutaciones externas
+          this.#contactos.push({ ...contacto });
+        }
+
+        // MÉTODO: Buscar por nombre
+        buscarPorNombre(nombre) {
+          const contacto = this.#contactos.find(
+            (c) => c.nombre.toLowerCase() === nombre.toLowerCase()
+          );
+          // Devolvemos una copia si existe, o undefined
+          return contacto ? { ...contacto } : undefined;
+        }
+
+        // MÉTODO: Buscar por número
+        buscarPorNumero(numero) {
+          const contacto = this.#contactos.find((c) => c.numero === numero);
+          return contacto ? { ...contacto } : undefined;
+        }
+
+        // MÉTODO: Eliminar contacto
+        eliminarContacto(nombre) {
+          const indice = this.#contactos.findIndex(
+            (c) => c.nombre.toLowerCase() === nombre.toLowerCase()
+          );
+
+          if (indice !== -1) {
+            this.#contactos.splice(indice, 1);
+          } else {
+            throw new Error("Contacto no encontrado.");
+          }
+        }
+
+        // MÉTODO: Realizar llamada
+        llamar(nombre) {
+          const contacto = this.buscarPorNombre(nombre);
+
+          if (contacto) {
+            const registro = `Llamada a ${contacto.nombre} con número ${contacto.numero} realizada`;
+            this.#llamadas.push(registro);
+            alert(`📞 Marcando a ${contacto.nombre}...`);
+          } else {
+            throw new Error("No se puede llamar: el contacto no existe.");
+          }
+        }
+
+        // MÉTODO: Listar contactos (devuelve string)
+        verContactos() {
+          if (this.#contactos.length === 0) return "Agenda vacía.";
+
+          return this.#contactos
+            .map((c) => `- ${c.nombre}: ${c.numero}`)
+            .join("\n");
+        }
+
+        // MÉTODO: Ver historial (devuelve string)
+        verHistorial() {
+          if (this.#llamadas.length === 0) return "No hay llamadas recientes.";
+
+          return this.#llamadas.join("\n");
+        }
+
+        // Método extra para devolver copia del array de objetos (Consigna)
+        obtenerCopiaContactos() {
+          return this.#contactos.map((c) => ({ ...c }));
+        }
+      }
+
+      // --- Lógica de Interacción ---
+
+      const miCelular = new Celular();
+
+      // Pequeña precarga de ejemplo
+      try {
+        miCelular.agregarContacto({ nombre: "Mama", numero: "123456" });
+        miCelular.agregarContacto({ nombre: "Trabajo", numero: "987654" });
+      } catch (e) {}
+
+      let ejecutando = true;
+      while (ejecutando) {
+        const menu =
+          `📱 MI CELULAR\n\n` +
+          `1. Agregar Contacto\n` +
+          `2. Ver Contactos\n` +
+          `3. Buscar por Nombre\n` +
+          `4. Llamar\n` +
+          `5. Ver Historial\n` +
+          `6. Eliminar Contacto\n` +
+          `7. Salir`;
+
+        const opcion = prompt(menu);
+
+        try {
+          switch (opcion) {
+            case "1":
+              const nom = prompt("Nombre:");
+              const num = prompt("Número:");
+              if (nom && num)
+                miCelular.agregarContacto({ nombre: nom, numero: num });
+              break;
+            case "2":
+              alert("📖 CONTACTOS:\n" + miCelular.verContactos());
+              break;
+            case "3":
+              const busq = prompt("Nombre a buscar:");
+              const encontrado = miCelular.buscarPorNombre(busq);
+              alert(
+                encontrado
+                  ? `Encontrado: ${encontrado.nombre} (${encontrado.numero})`
+                  : "No existe."
+              );
+              break;
+            case "4":
+              const destino = prompt("¿A quién quieres llamar?");
+              miCelular.llamar(destino);
+              break;
+            case "5":
+              alert("🕒 HISTORIAL:\n" + miCelular.verHistorial());
+              break;
+            case "6":
+              const eliminar = prompt("Nombre del contacto a borrar:");
+              miCelular.eliminarContacto(eliminar);
+              alert("Contacto eliminado.");
+              break;
+            case "7":
+            case null:
+              ejecutando = false;
+              break;
+          }
+        } catch (e) {
+          alert("⚠️ " + e.message);
+        }
+      }
+    </script>
   </body>
 </html>
