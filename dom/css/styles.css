@@ -169,3 +169,8 @@ header {
   /* Opcional: una sombra muy sutil para que resalte un poco */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+
+.ejercico_resuelto {
+  display: flex;
+  justify-content: space-around;
+}
