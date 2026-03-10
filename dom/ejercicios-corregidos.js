@@ -47,13 +47,29 @@
 // debugger;
 
 //      10. Selecciona el siguiente elemento hermano del primer p
-let primerP = document.getElementsByTagName("p")[0];
-let siguenteHermano = primerP.nextElementSibling;
-debugger;
+// let primerP = document.getElementsByTagName("p")[0];
+// let siguenteHermano = primerP.nextElementSibling;
+// debugger;
+
 //      11. Borra el último elemento de body
+// let ultimoElemento = document.body.lastElementChild;
+// ultimoElemento.remove();
+// debugger;
+
 //      12. Modifica el valor del atributo de todas las imágenes cuyo src sea cambiame <img src="cambiame"> a "cambiado"
+// let imagenes = document.getElementsByTagName("img");
+// for (let i of imagenes) {
+//   if (i.getAttribute("src") === "cambiame") {
+//     i.setAttribute("src", "cambiado");
+//   }
+// }
+
 //      13. Dale la clase "claseejemplo" al primer p
+// let primerP = document.getElementsByTagName("p")[0];
+// primerP.setAttribute("class", "claseEjemplo");
+
 //      14. Para cada ul que tenga únicamente 2 li, añade un tercer li con contenido "tercer elemento"
+
 //      15. Selecciona el padre del primer p
 //      16. Selecciona el hermano anterior del primer p
 //      17. Selecciona el primer div con clase "container" y modifica su background-color a red
