@@ -98,10 +98,13 @@
 // debugger;
 
 //      17. Selecciona el primer div con clase "container" y modifica su background-color a red
-let primerDivConClase = querySelector("div.container");
-primerDivConClase.style.backgroundColor = "red";
+    // let primerDivConClase = document.querySelector("div.container");
+    // primerDivConClase.style.backgroundColor = "red";
 
 //      18. Selecciona el p con id "text" y cambia su contenido poniendole un enlace que apunte a Google
+let pConId = document.getElementById('text');
+pConId.innerHTML - '<a herf="www.google.com">Google</a>';
+
 //      19. Selecciona los div con clase "eustakio"
 //      20. Selecciona el párrafos que un ID con valor "paisa"
 //      21. Selecciona el primer párrafo hijo de un div
