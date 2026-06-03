@@ -98,14 +98,23 @@
 // debugger;
 
 //      17. Selecciona el primer div con clase "container" y modifica su background-color a red
-    // let primerDivConClase = document.querySelector("div.container");
-    // primerDivConClase.style.backgroundColor = "red";
+// let primerDivConClase = document.querySelector("div.container");
+// primerDivConClase.style.backgroundColor = "red";
 
 //      18. Selecciona el p con id "text" y cambia su contenido poniendole un enlace que apunte a Google
-let pConId = document.getElementById('text');
-pConId.innerHTML - '<a herf="www.google.com">Google</a>';
+// let pConId = document.getElementById("text");
+// pConId.innerHTML = '<a href="www.google.com">Google</a>';
 
 //      19. Selecciona los div con clase "eustakio"
+// let divs = document.querySelectorAll('div.estakio');
+
 //      20. Selecciona el párrafos que un ID con valor "paisa"
+// let parrafo = document.getElementById("paisa");
+
 //      21. Selecciona el primer párrafo hijo de un div
+// let primerP = document.querySelector('div > p:first-child');
+
 //      22. Selecciona el penúltimo enlace de las página.
+    // let enlaces = document.getElementsByTagName("a");
+    // let penultimoEnlace = enlaces[enlaces.length - 2];
+    // debugger;
