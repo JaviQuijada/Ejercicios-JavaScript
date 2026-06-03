@@ -22,6 +22,7 @@
 // let newH3 = document.createElement("H3");
 // newH3.textContent = "Hola soy un  uevo H3";
 // document.body.append(newH3);
+
 //      6. Selecciona el elemento h3 que acabas de crear y añádele un span con el texto "Soy nuevo"
 // let newSpan = document.createElement("span");
 // newSpan.textContent = " soy nuevo";
@@ -68,9 +69,29 @@
 // let primerP = document.getElementsByTagName("p")[0];
 // primerP.setAttribute("class", "claseEjemplo");
 
-//      14. Para cada ul que tenga únicamente 2 li, añade un tercer li con contenido "tercer elemento"
+// 14. Para cada ul que tenga únicamente 2 li, añade un tercer li con contenido "tercer elemento"
+// Seleccionamos todos los elementos <ul> de la página
+// const listas = document.querySelectorAll('ul');
+
+// listas.forEach(ul => {
+//     // Comprobamos si el número de hijos directos (li) es exactamente 2
+//     if (ul.children.length === 2) {
+//         // Creamos el nuevo elemento de lista
+//         const nuevoLi = document.createElement('li');
+
+//         // Asignamos el contenido de texto solicitado
+//         nuevoLi.textContent = "tercer elemento";
+
+//         // Lo añadimos al final del ul actual
+//         ul.appendChild(nuevoLi);
+//     }
+// });
 
 //      15. Selecciona el padre del primer p
+    let primerP = document.getElementsByTagName("p")[0];
+    let padre = primerP.parentElement;
+    debugger
+
 //      16. Selecciona el hermano anterior del primer p
 //      17. Selecciona el primer div con clase "container" y modifica su background-color a red
 //      18. Selecciona el p con id "text" y cambia su contenido poniendole un enlace que apunte a Google
