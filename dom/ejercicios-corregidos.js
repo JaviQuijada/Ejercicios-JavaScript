@@ -88,12 +88,19 @@
 // });
 
 //      15. Selecciona el padre del primer p
-    let primerP = document.getElementsByTagName("p")[0];
-    let padre = primerP.parentElement;
-    debugger
+// let primerP = document.getElementsByTagName("p")[0];
+// let padre = primerP.parentElement;
+// debugger;
 
 //      16. Selecciona el hermano anterior del primer p
+// let primerP = document.getElementsByTagName("p")[0];
+// let hermanoAnterior = primerP.previousElementSibling;
+// debugger;
+
 //      17. Selecciona el primer div con clase "container" y modifica su background-color a red
+let primerDivConClase = querySelector("div.container");
+primerDivConClase.style.backgroundColor = "red";
+
 //      18. Selecciona el p con id "text" y cambia su contenido poniendole un enlace que apunte a Google
 //      19. Selecciona los div con clase "eustakio"
 //      20. Selecciona el párrafos que un ID con valor "paisa"
