@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicios con tipos eventos. Practica</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <h1>Clases 27 Javascript - Validación de edad</h1>
+
+    <form action="http://google.com" method="get">
+      <p class="error"></p>
+      <p>
+        <label for="age">Introduzca su edad</label>
+        <input type="number" id="edad" name="edad" />
+      </p>
+
+      <button>Enviar</button>
+    </form>
+    <script>
+      let primerForm = document.forms[0];
+
+      primerForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        console.log("Enviando formulario");
+        let edad = document.getElementById("edad").value;
+        if (edad >= 18 && edad <= 30) {
+          primerForm.submit();
+        } else {
+          primerForm.querySelector(".error").textContent =
+            "Debe de introducir una edad entre 18 y 30 años";
+          primerForm.querySelector(".error").style.color = "red";
+        }
+      });
+
+      edadElement.addEventListener("change", () => {
+        console.log("El elemento ha cambiado");
+      });
+    </script>
+  </body>
+</html>
