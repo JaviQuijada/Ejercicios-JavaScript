@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Efecto de colores aleatorios</title>
+    <style>
+      .caja {
+        width: 100px;
+        height: 100px;
+        border: 2px solid black;
+        display: inline-block;
+        margin: 10px;
+        background-color: white; /* Color inicial */
+        transition: background-color 0.3s; /* Para que el cambio sea suave */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caja"></div>
+    <div class="caja"></div>
+    <div class="caja"></div>
+    <div class="caja"></div>
+
+    <script src="cambioColor.js"></script>
+    <script>
+      // Añadimos un escuchador de eventos al documento completo (document)
+      // El evento 'contextmenu' se dispara al hacer clic derecho
+      document.addEventListener("contextmenu", (event) => {
+        // preventDefault() detiene la acción por defecto del navegador,
+        // que en este caso es abrir el menú contextual.
+        event.preventDefault();
+
+        // Opcional: Puedes añadir un mensaje en consola para confirmar
+        console.log("El menú contextual ha sido bloqueado.");
+      });
+    </script>
+  </body>
+</html>
